@@ -2,15 +2,15 @@
 
 ## 概要
 
-[microservices-backend](https://github.com/hiroki-it/microservices-backend) のインフラ領域を管理するリポジトリです．
+マイクロサービスアーキテクチャのアプリケーションのインフラ領域を管理するリポジトリ．
+
+バックエンド領域は **[microservices-backendリポジトリ](https://github.com/hiroki-it/microservices-backend)** で管理しています．
 
 ## 使用技術
 
 ### 一覧
 
 インフラを構成する使用技術の一覧です．
-
-ソースコードは **[別のリポジトリ](https://github.com/hiroki-it/microservices-infrastructure)** で管理しています
 
 | 役割              | ツール                 | 導入の状況          |
 |-----------------|---------------------|----------------|
