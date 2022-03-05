@@ -44,17 +44,17 @@ deploy:
 
 # NOTE: すでにポートが使用中の場合は，+1されたポート番号が自動的に使用される．
 portForward:
-  - namespace: microservices-with-k8s
+  - namespace: microservices
     resourceType: pod
     resourceName: account-db-pod-0
     localPort: 3301
     port: 3306
-  - namespace: microservices-with-k8s
+  - namespace: microservices
     resourceType: pod
     resourceName: customer-db-pod-0
     localPort: 3302
     port: 3306
-  - namespace: microservices-with-k8s
+  - namespace: microservices
     resourceType: pod
     resourceName: order-db-pod-0
     localPort: 3303
