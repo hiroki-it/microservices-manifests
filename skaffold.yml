@@ -47,15 +47,15 @@ portForward:
   - namespace: microservices-with-k8s
     resourceType: pod
     resourceName: account-db-pod-0
-    localPort: 3309
+    localPort: 3301
     port: 3306
   - namespace: microservices-with-k8s
     resourceType: pod
     resourceName: customer-db-pod-0
-    localPort: 3308
+    localPort: 3302
     port: 3306
   - namespace: microservices-with-k8s
     resourceType: pod
     resourceName: order-db-pod-0
-    localPort: 3307
+    localPort: 3303
     port: 3306
