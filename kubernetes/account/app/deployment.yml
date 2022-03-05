@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: microservices
+  name: account-app-pod
+  labels:
+    app: account
+    component: app
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 100%
+      maxUnavailable: 0%
+  selector:
+    matchLabels:
+      app: account
+      component: app
+  template:
+    metadata:
+      labels:
+        app: account
+        component: app
+    spec:
+      hostname: account-app-pod
+      containers:
+        # Ginコンテナ
+        - name: gin
+          image: account-gin:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: account-app-persistent-volume
+              mountPath: /go/src
+      volumes:
+        - name: account-app-persistent-volume
+          persistentVolumeClaim:
+            claimName: account-app-host-path-persistent-volume-claim

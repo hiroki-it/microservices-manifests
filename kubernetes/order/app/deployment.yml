@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: microservices
+  name: order-app-pod
+  labels: 
+    app: order
+    component: app
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 100%
+      maxUnavailable: 0%
+  selector:
+    matchLabels:
+      app: order
+      component: app
+  template:
+    metadata:
+      labels:
+        app: order
+        component: app
+    spec:
+      hostname: order-app-pod
+      containers:
+        # Lumenコンテナ
+        - name: lumen
+          image: order-lumen:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9000
+          volumeMounts:
+            - name: order-app-persistent-volume
+              mountPath: /var/www/order
+        - name: nginx
+          image: order-nginx:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: order-app-persistent-volume
+              mountPath: /var/www/order
+      volumes:
+        - name: order-app-persistent-volume
+          persistentVolumeClaim:
+            claimName: order-app-host-path-persistent-volume-claim

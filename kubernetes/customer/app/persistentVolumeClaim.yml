@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: microservices
+  name: customer-app-host-path-persistent-volume-claim
+  labels:
+    app: customer
+    component: app
+spec:
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+  selector:
+    matchLabels:
+      app: customer
+      component: app
+      type: hostPath

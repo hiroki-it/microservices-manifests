@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: microservices
+  name: orchestrator-pod
+  labels: 
+    app: orchestrator
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 100%
+      maxUnavailable: 0%
+  selector:
+    matchLabels:
+      app: orchestrator
+  template:
+    metadata:
+      labels:
+        app: orchestrator
+    spec:
+      hostname: orchestrator-pod
+      containers:
+        # FastAPIコンテナ
+        - name: fastapi
+          image: orchestrator-fastapi:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          volumeMounts:
+            - name: orchestrator-persistent-volume
+              mountPath: /var/www/orchestrator
+      volumes:
+        - name: orchestrator-persistent-volume
+          persistentVolumeClaim:
+            claimName: orchestrator-host-path-persistent-volume-claim
