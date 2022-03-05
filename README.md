@@ -65,3 +65,11 @@ $ make apply-k8s
 ```bash
 $ make apply-istio
 ```
+
+## 参考
+
+Kubernetesマニフェスト：
+<br>https://hiroki-it.github.io/tech-notebook-mkdocs/infrastructure_as_code/infrastructure_as_code_container_kubernetes_manifest_yml.html
+
+Istioマニフェスト：
+<br>https://hiroki-it.github.io/tech-notebook-mkdocs/infrastructure_as_code/infrastructure_as_code_container_istio_manifest_yml.html
