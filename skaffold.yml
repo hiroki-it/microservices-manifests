@@ -1,0 +1,61 @@
+apiVersion: skaffold/v2beta26
+kind: Config
+build:
+  artifacts:
+    # accountサービス
+    - image: account-gin
+      context: ./src/account
+      docker:
+        dockerfile: ./docker/gin/Dockerfile
+    # customerサービス
+    - image: customer-fastapi
+      context: ./src/customer
+      docker:
+        dockerfile: ./docker/fastapi/Dockerfile
+        target: development
+    # orderサービス
+    - image: order-lumen
+      context: ./src/order
+      docker:
+        dockerfile: ./docker/lumen/Dockerfile
+        target: development
+    - image: order-nginx
+      context: ./src/order
+      docker:
+        dockerfile: ./docker/nginx/Dockerfile
+        target: development
+    # orchestratorサービス
+    - image: orchestrator-fastapi
+      context: ./src/orchestrator
+      docker:
+        dockerfile: ./docker/fastapi/Dockerfile
+        target: development
+  tagPolicy:
+    sha256: {}
+  local:
+    useBuildkit: true
+
+deploy:
+  kubectl:
+    manifests:
+      - ./kubernetes/**.yml
+      - ./kubernetes/**/**.yml
+      - ./kubernetes/**/**/**.yml
+
+# NOTE: すでにポートが使用中の場合は，+1されたポート番号が自動的に使用される．
+portForward:
+  - namespace: microservices-with-k8s
+    resourceType: pod
+    resourceName: account-db-pod-0
+    localPort: 3309
+    port: 3306
+  - namespace: microservices-with-k8s
+    resourceType: pod
+    resourceName: customer-db-pod-0
+    localPort: 3308
+    port: 3306
+  - namespace: microservices-with-k8s
+    resourceType: pod
+    resourceName: order-db-pod-0
+    localPort: 3307
+    port: 3306
