@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   namespace: microservices
   name: order-app-pod
-  labels: 
+  labels:
     app: order
     component: app
 spec:
