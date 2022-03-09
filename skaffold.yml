@@ -4,29 +4,29 @@ build:
   artifacts:
     # accountサービス
     - image: account-gin
-      context: ./src/account
+      context: ../microservices-backend/src/account
       docker:
         dockerfile: ./docker/gin/Dockerfile
     # customerサービス
     - image: customer-fastapi
-      context: ./src/customer
+      context: ../microservices-backend/src/customer
       docker:
         dockerfile: ./docker/fastapi/Dockerfile
         target: development
     # orderサービス
     - image: order-lumen
-      context: ./src/order
+      context: ../microservices-backend/src/order
       docker:
         dockerfile: ./docker/lumen/Dockerfile
         target: development
     - image: order-nginx
-      context: ./src/order
+      context: ../microservices-backend/src/order
       docker:
         dockerfile: ./docker/nginx/Dockerfile
         target: development
     # orchestratorサービス
     - image: orchestrator-fastapi
-      context: ./src/orchestrator
+      context: ../microservices-backend/src/orchestrator
       docker:
         dockerfile: ./docker/fastapi/Dockerfile
         target: development
