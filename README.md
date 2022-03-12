@@ -4,7 +4,7 @@
 
 マイクロサービスアーキテクチャのアプリケーションのインフラ領域を管理するリポジトリ．
 
-バックエンド領域は **[microservices-backendリポジトリ](https://github.com/hiroki-it/microservices-backend)** で管理しています．
+GitOpsの [ベストプラクティス](https://blog.argoproj.io/5-gitops-best-practices-d95cb0cbe9ff) に則って，バックエンド領域は **[microservices-backendリポジトリ](https://github.com/hiroki-it/microservices-backend)** で管理しています．
 
 ## 使用技術
 
