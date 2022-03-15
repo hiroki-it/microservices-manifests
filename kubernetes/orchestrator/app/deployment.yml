@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   namespace: microservices
   name: orchestrator-pod
-  labels: 
+  labels:
     app: orchestrator
 spec:
   replicas: 1
@@ -25,7 +25,7 @@ spec:
       containers:
         # FastAPIコンテナ
         - name: fastapi
-          image: orchestrator-fastapi:latest
+          image: ${SERVICE_NAME}-${VENDOR_NAME}:${CIRCLE_SHA1:0:7}
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
