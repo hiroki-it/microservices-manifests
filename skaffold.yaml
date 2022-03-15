@@ -12,24 +12,24 @@ build:
       context: ../microservices-backend/src/customer
       docker:
         dockerfile: ./docker/fastapi/Dockerfile
-        target: development
+        target: prd
     # orderサービス
     - image: order-lumen
       context: ../microservices-backend/src/order
       docker:
         dockerfile: ./docker/lumen/Dockerfile
-        target: development
+        target: prd
     - image: order-nginx
       context: ../microservices-backend/src/order
       docker:
         dockerfile: ./docker/nginx/Dockerfile
-        target: development
+        target: prd
     # orchestratorサービス
     - image: orchestrator-fastapi
       context: ../microservices-backend/src/orchestrator
       docker:
         dockerfile: ./docker/fastapi/Dockerfile
-        target: development
+        target: prd
   tagPolicy:
     sha256: {}
   local:
