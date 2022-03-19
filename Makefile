@@ -1,3 +1,6 @@
+KUBERNETES_VERSION=1.23.0
+ISTIO_VERSION=1.12
+
 start-minikube:
 	# Istioを使用するために必要な最低限のスペック
 	minikube config set cpus 4
@@ -29,7 +32,6 @@ apply-istio:
 	minikube kubectl -- apply -f ./istio/apply -R
 	istioctl verify-install
 
-ISTIO_VERSION=1.12
 apply-istio-dashboard:
 	minikube kubectl -- apply -f https://raw.githubusercontent.com/istio/istio/release-${ISTIO_VERSION}/samples/addons/jaeger.yaml
 	minikube kubectl -- apply -f https://raw.githubusercontent.com/istio/istio/release-${ISTIO_VERSION}/samples/addons/kiali.yaml
