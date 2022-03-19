@@ -15,7 +15,7 @@ start-minikube:
 	# eval $(minikube -p minikube docker-env)
 
 kubectl-proxy:
-	kubectl proxy --address=0.0.0.0 --accept-hosts='.*' 
+	minikube kubectl -- proxy --address=0.0.0.0 --accept-hosts='.*' 
 
 apply-k8s:
 	skaffold run --force --no-prune=false --cache-artifacts=false
@@ -26,21 +26,21 @@ apply-k8s-with-pf:
 apply-istio:
 	istioctl operator init
 	istioctl install -y -f ./istio/install/operator.yml
-	kubectl apply -f ./istio/apply -R
+	minikube kubectl -- apply -f ./istio/apply -R
 	istioctl verify-install
 
 ISTIO_VERSION=1.12
 apply-istio-dashboard:
-	kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-${ISTIO_VERSION}/samples/addons/jaeger.yaml
-	kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-${ISTIO_VERSION}/samples/addons/kiali.yaml
-	kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-${ISTIO_VERSION}/samples/addons/prometheus.yaml
+	minikube kubectl -- apply -f https://raw.githubusercontent.com/istio/istio/release-${ISTIO_VERSION}/samples/addons/jaeger.yaml
+	minikube kubectl -- apply -f https://raw.githubusercontent.com/istio/istio/release-${ISTIO_VERSION}/samples/addons/kiali.yaml
+	minikube kubectl -- apply -f https://raw.githubusercontent.com/istio/istio/release-${ISTIO_VERSION}/samples/addons/prometheus.yaml
 
 destroy-istio:
 	istioctl x uninstall --purge -y
 
 # 同時に，make kubectl-proxy を実行しておくこと．
 # @see https://github.com/fortio/fortio#command-line-arguments
-ISTIO_LB_IP=$(shell kubectl get service/istio-ingressgateway --namespace=istio-system -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
+ISTIO_LB_IP=$(shell minikube kubectl -- get service/istio-ingressgateway --namespace=istio-system -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
 load-test-account:
 	docker run fortio/fortio load -c 1 -n 100 http://${ISTIO_LB_IP}/account/
 load-test-customer:
