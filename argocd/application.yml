@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  namespace: argocd
+  name: argocd-application
+spec:
+  project: microservices-manifests
+  source:
+    repoURL: https://github.com/hiroki-it/microservices-manifests.git
+    targetRevision: main
+  destination:
+    server: https://kubernetes.microservices.svc
+    namespace: microservices
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
