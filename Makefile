@@ -2,16 +2,16 @@ KUBERNETES_VERSION=1.23.0
 ISTIO_VERSION=1.12
 
 start-minikube:
-	# Istioを使用するために必要な最低限のスペック
-	minikube config set cpus 4
-	minikube config set memory 16384
-	# ノードの構築
 	minikube delete
+	# ノードの構築
 	minikube start \
 	  --driver=hyperkit \
 	  --mount=true \
 	  --mount-string="${HOME}/projects/hiroki-it/microservices-backend:/data" \
-	  --kubernetes-version=v${KUBERNETES_VERSION}
+	  --kubernetes-version=v${KUBERNETES_VERSION} \
+	  # Istioを使用するために必要な最低限のスペック
+	  --cpus=4 \
+	  --memory=16384
 	# イングレスの有効化
 	# minikube addons enable ingress
 	# メトリクスの有効化
