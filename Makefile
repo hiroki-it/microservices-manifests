@@ -59,6 +59,11 @@ apply-argocd:
 	minikube kubectl -- patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
 	minikube kubectl -- apply -f ./argocd/apply -R
 
+# ArgoCDを削除します．
+destroy-argocd:
+	minikube kubectl -- delete -f ./argocd/apply -R
+	minikube kubectl -- delete -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v${ARGOCD_VERSION}/manifests/install.yaml
+
 # ロードテストを実行します．同時に，make kubectl-proxy を実行しておく必要があります．
 # @see https://github.com/fortio/fortio#command-line-arguments
 ISTIO_LB_IP = $(shell minikube kubectl -- get service/istio-ingressgateway --namespace=istio-system -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
