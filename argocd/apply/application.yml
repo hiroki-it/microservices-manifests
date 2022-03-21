@@ -8,6 +8,9 @@ spec:
   source:
     repoURL: https://github.com/hiroki-it/microservices-manifests.git
     targetRevision: main
+    path: kubernetes
+    directory:
+      recurse: true
   destination:
     server: https://kubernetes.microservices.svc
     namespace: microservices
