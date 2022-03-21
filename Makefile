@@ -49,6 +49,7 @@ apply-istio-dashboard:
 
 # Istioを削除します．
 destroy-istio:
+	minikube kubectl -- delete -f ./istio/apply -R
 	istioctl x uninstall --purge -y
 
 # ArgoCDをデプロイします．
