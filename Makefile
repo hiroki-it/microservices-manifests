@@ -1,5 +1,5 @@
 KUBERNETES_VERSION := 1.23.0
-ISTIO_VERSION := 1.12
+ISTIO_ADDON_VERSION := 1.12
 ARGOCD_VERSION := 2.3.1
 
 start-minikube:
@@ -38,9 +38,9 @@ apply-istio:
 	istioctl verify-install
 
 apply-istio-dashboard:
-	minikube kubectl -- apply -f https://raw.githubusercontent.com/istio/istio/release-${ISTIO_VERSION}/samples/addons/jaeger.yaml
-	minikube kubectl -- apply -f https://raw.githubusercontent.com/istio/istio/release-${ISTIO_VERSION}/samples/addons/kiali.yaml
-	minikube kubectl -- apply -f https://raw.githubusercontent.com/istio/istio/release-${ISTIO_VERSION}/samples/addons/prometheus.yaml
+	minikube kubectl -- apply -f https://raw.githubusercontent.com/istio/istio/release-${ISTIO_ADDON_VERSION}/samples/addons/jaeger.yaml
+	minikube kubectl -- apply -f https://raw.githubusercontent.com/istio/istio/release-${ISTIO_ADDON_VERSION}/samples/addons/kiali.yaml
+	minikube kubectl -- apply -f https://raw.githubusercontent.com/istio/istio/release-${ISTIO_ADDON_VERSION}/samples/addons/prometheus.yaml
 
 apply-argocd:
 	minikube kubectl -- apply -f ./argocd/install -R
