@@ -61,3 +61,6 @@ load-test-customer:
 	docker run fortio/fortio load -c 1 -n 100 http://${ISTIO_LB_IP}/customers/
 load-test-order:
 	docker run fortio/fortio load -c 1 -n 100 http://${ISTIO_LB_IP}/orders/
+
+clean:
+	minikube delete
