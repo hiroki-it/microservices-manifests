@@ -14,11 +14,9 @@ init: clean
 		--kubernetes-version=v${KUBERNETES_VERSION} \
 		# Istioを使用するために必要な最低限のスペック
 		--cpus=4 \
-		--memory=16384
-	# イングレスの有効化
-	# minikube addons enable ingress
-	# メトリクスの有効化
-	minikube addons enable metrics-server
+		--memory=16384 \
+		# 拡張機能の有効化（メトリクスの有効化）
+		--addons metrics-server
 	# dockerクライアントの向き先の変更
 	minikube docker-env
 	# 手動で実行 
