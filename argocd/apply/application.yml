@@ -4,7 +4,7 @@ metadata:
   namespace: argocd
   name: argocd-application
 spec:
-  project: microservices-manifests
+  project: default
   source:
     repoURL: https://github.com/hiroki-it/microservices-manifests.git
     targetRevision: main
@@ -12,7 +12,7 @@ spec:
     directory:
       recurse: true
   destination:
-    server: https://kubernetes.microservices.svc
+    server: https://kubernetes.default.svc
     namespace: microservices
   syncPolicy:
     automated:
