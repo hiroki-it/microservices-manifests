@@ -41,6 +41,12 @@ apply-istio-dashboard:
 	minikube kubectl -- apply -f https://raw.githubusercontent.com/istio/istio/release-${ISTIO_VERSION}/samples/addons/kiali.yaml
 	minikube kubectl -- apply -f https://raw.githubusercontent.com/istio/istio/release-${ISTIO_VERSION}/samples/addons/prometheus.yaml
 
+apply-argocd:
+	minikube kubectl -- apply -f ./argocd/install -R
+	kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+	kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+	minikube kubectl -- apply -f ./argocd/apply -R
+
 destroy-istio:
 	istioctl x uninstall --purge -y
 
