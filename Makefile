@@ -3,8 +3,7 @@ KUBERNETES_VERSION := 1.23.0
 ISTIO_ADDON_VERSION := 1.12
 ARGOCD_VERSION := 2.3.1
 
-start-minikube:
-	minikube delete
+init: clean
 	# ノードの構築
 	minikube start \
 		--driver=hyperkit \
