@@ -1,5 +1,6 @@
 KUBERNETES_VERSION=1.23.0
 ISTIO_VERSION=1.12
+ARGOCD_VERSION=2.3.1
 
 start-minikube:
 	minikube delete
@@ -43,7 +44,7 @@ apply-istio-dashboard:
 
 apply-argocd:
 	minikube kubectl -- apply -f ./argocd/install -R
-	kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+	kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v${ARGOCD_VERSION}/manifests/install.yaml
 	kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
 	minikube kubectl -- apply -f ./argocd/apply -R
 
