@@ -44,8 +44,8 @@ apply-istio-dashboard:
 
 apply-argocd:
 	minikube kubectl -- apply -f ./argocd/install -R
-	kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v${ARGOCD_VERSION}/manifests/install.yaml
-	kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+	minikube kubectl -- apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v${ARGOCD_VERSION}/manifests/install.yaml
+	minikube kubectl -- patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
 	minikube kubectl -- apply -f ./argocd/apply -R
 
 destroy-istio:
