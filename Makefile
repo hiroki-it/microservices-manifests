@@ -4,7 +4,7 @@ ISTIO_ADDON_VERSION := 1.12
 ARGOCD_VERSION := 2.3.1
 
 # Minikubeを初期化します．
-init: clean
+init:
 	minikube start \
 		--driver=hyperkit \
 		# ホストPCのディレクトリをワーカーノードにマウント
