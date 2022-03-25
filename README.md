@@ -16,10 +16,10 @@ GitOpsの **[ベストプラクティス](https://blog.argoproj.io/5-gitops-best
 
 | 役割              | ツール                 | 導入の状況          |
 |-----------------|---------------------|----------------|
-| 仮想化             | Docker              | ◯              |
-| コンテナオーケストレーション  | Kubernetes          | ◯              |
-| マイクロサービス間通信の管理  | Istio，IstioOperator | ◯              |
-| プロキシコンテナ        | Envoy，Nginx         | ◯              |
+| 仮想化             | Docker              | ⭕              |
+| コンテナオーケストレーション  | Kubernetes          | ⭕              |
+| マイクロサービス間通信の管理  | Istio，IstioOperator | ⭕              |
+| プロキシコンテナ        | Envoy，Nginx         | ⭕              |
 | テンプレート管理        | Helm                | coming soon... |
 | API Gateway     | AWS API Gateway     | coming soon... |
 | Kubernetesの実行環境 | AWS EKS             | coming soon... |
@@ -42,8 +42,8 @@ CI/CDを構成するツールの一覧です．
 
 | 役割          | ツール      | 導入の状況          |
 |-------------|----------|----------------|
-| CI/CD（開発環境） | Skaffold | ◯              |
-| CD（本番環境）    | ArgoCD   | coming soon... |
+| CI/CD（開発環境） | Skaffold | ⭕              |
+| CD（本番環境）    | ArgoCD   | ⭕ |
 
 ## 環境構築
 
