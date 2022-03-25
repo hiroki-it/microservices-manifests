@@ -59,6 +59,11 @@ apply-argocd:
 	minikube kubectl -- patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
 	minikube kubectl -- apply -f ./argocd/apply -R
 
+# ArgoCDにログインできるようにします．同時に，make kubectl-proxy を実行し，ロードバランサーを構築しておく必要があります．
+expose-argocd:
+	minikube kubectl -- get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 -d; echo
+	minikube kubectl -- port-forward svc/argocd-server -n argocd 8080:443
+
 # ArgoCDを削除します．
 destroy-argocd:
 	minikube kubectl -- delete -f ./argocd/apply -R
