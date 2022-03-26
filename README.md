@@ -32,7 +32,9 @@ GitOpsの **[ベストプラクティス](https://blog.argoproj.io/5-gitops-best
 | CI（本番環境） | CircleCI | **[microservices-backendリポジトリ](https://github.com/hiroki-it/microservices-backend)** を参照              |
 | CD（本番環境）    | ArgoCD   | ⭕ |
 
-### マイクロサービス間通信の管理
+### 補足
+
+#### マイクロサービス間通信の管理
 
 マイクロサービス間通信の管理方法は，リクエストリプライ方式に基づくサービスメッシュを実現するIstioを採用します．
 
