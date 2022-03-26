@@ -10,7 +10,7 @@ GitOpsの **[ベストプラクティス](https://blog.argoproj.io/5-gitops-best
 
 ## 使用技術
 
-### 一覧
+### インフラ
 
 インフラ領域を構成する使用技術の一覧です．
 
@@ -24,6 +24,14 @@ GitOpsの **[ベストプラクティス](https://blog.argoproj.io/5-gitops-best
 | API Gateway     | AWS API Gateway     | coming soon... |
 | Kubernetesの実行環境 | AWS EKS             | coming soon... |
 
+### CI/CD
+
+| 役割              | ツール                 | 導入の状況          |
+|-----------------|---------------------|----------------|
+| CI/CD（開発環境） | Skaffold | ⭕              |
+| CI（本番環境） | CircleCI | **[microservices-backendリポジトリ](https://github.com/hiroki-it/microservices-backend)** を参照              |
+| CD（本番環境）    | ArgoCD   | ⭕ |
+
 ### マイクロサービス間通信の管理
 
 マイクロサービス間通信の管理方法は，リクエストリプライ方式に基づくサービスメッシュを実現するIstioを採用します．
@@ -35,15 +43,6 @@ GitOpsの **[ベストプラクティス](https://blog.argoproj.io/5-gitops-best
 ちなみに，イベント駆動方式を採用している場合は，イベントメッシュになります．
 
 参考：https://www.redhat.com/ja/topics/integration/what-is-an-event-mesh
-
-### CI/CD
-
-CI/CDを構成するツールの一覧です．
-
-| 役割          | ツール      | 導入の状況          |
-|-------------|----------|----------------|
-| CI/CD（開発環境） | Skaffold | ⭕              |
-| CD（本番環境）    | ArgoCD   | ⭕ |
 
 ## 環境構築
 
