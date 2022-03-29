@@ -16,8 +16,8 @@ spec:
     namespace: microservices
   syncPolicy:
     automated:
+      allowEmpty: true
       prune: true
       selfHeal: true
-      allowEmpty: true
     syncOptions:
       - CreateNamespace=true
