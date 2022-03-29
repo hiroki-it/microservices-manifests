@@ -34,6 +34,7 @@ build:
     sha256: {}
   local:
     useBuildkit: true
+    push: false
 
 deploy:
   kubectl:
