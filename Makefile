@@ -54,10 +54,9 @@ destroy-istio:
 
 # ArgoCDをデプロイします．
 apply-argocd:
-	minikube kubectl -- apply -f ./argocd/install -R
 	minikube kubectl -- apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v${ARGOCD_VERSION}/manifests/install.yaml
 	minikube kubectl -- patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
-	minikube kubectl -- apply -f ./argocd/apply -R
+	minikube kubectl -- apply -f ./argocd -R
 
 # ArgoCDにログインできるようにします．同時に，make kubectl-proxy を実行し，ロードバランサーを構築しておく必要があります．
 expose-argocd:
