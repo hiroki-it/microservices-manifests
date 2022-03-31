@@ -14,15 +14,16 @@ GitOpsの **[ベストプラクティス](https://blog.argoproj.io/5-gitops-best
 
 インフラ領域を構成する使用技術の一覧です．
 
-| 役割              | ツール                 | 導入の状況          |
-|-----------------|---------------------|----------------|
-| 仮想化             | Docker              | ⭕              |
-| コンテナオーケストレーション  | Kubernetes          | ⭕              |
-| マイクロサービス間通信の管理  | Istio，IstioOperator | ⭕              |
-| プロキシコンテナ        | Envoy，Nginx         | ⭕              |
-| テンプレート管理        | Helm                | coming soon... |
-| API Gateway     | AWS API Gateway     | coming soon... |
-| Kubernetesの実行環境 | AWS EKS             | coming soon... |
+| 役割                | ツール                 | 導入の状況          |
+|-------------------|---------------------|----------------|
+| 仮想化               | Docker              | ⭕              |
+| コンテナオーケストレーション    | Kubernetes          | ⭕              |
+| マイクロサービス間通信の管理    | Istio，IstioOperator | ⭕              |
+| プロキシコンテナ          | Envoy，Nginx         | ⭕              |
+| テンプレート管理          | Helm                | coming soon... |
+| SagaパターンのためのQueue | AWS SQS             | coming soon... |
+| API Gateway       | AWS API Gateway     | coming soon... |
+| Kubernetesの実行環境   | AWS EKS             | coming soon... |
 
 ### CI/CD
 
