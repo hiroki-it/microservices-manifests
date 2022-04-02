@@ -6,6 +6,7 @@ image:
       gin: latest
     customer:
       fastapi: latest
+      '""': 60963c5
     orchestrator:
       fastapi: latest
     order:
