@@ -20,7 +20,7 @@ GitOpsの **[ベストプラクティス](https://blog.argoproj.io/5-gitops-best
 | コンテナオーケストレーション    | Kubernetes          | ⭕              |
 | マイクロサービス間通信の管理    | Istio，IstioOperator | ⭕              |
 | プロキシコンテナ          | Envoy，Nginx         | ⭕              |
-| テンプレート管理          | Helm                | coming soon... |
+| テンプレート管理          | Helm                | ⭕              |
 | SagaパターンのためのQueue | AWS SQS             | coming soon... |
 | API Gateway       | AWS API Gateway     | coming soon... |
 | Kubernetesの実行環境   | AWS EKS             | coming soon... |
