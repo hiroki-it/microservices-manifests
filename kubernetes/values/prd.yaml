@@ -1,6 +1,5 @@
 labels:
   env: prd
-
 image:
   tag:
     account:
