@@ -5,6 +5,7 @@ metadata:
   name: orchestrator-service
   labels:
     app: orchestrator
+    env: {{ .Values.labels.env }}
 spec:
   type: ClusterIP
   selector:

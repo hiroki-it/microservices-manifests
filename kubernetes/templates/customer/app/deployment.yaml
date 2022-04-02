@@ -6,6 +6,7 @@ metadata:
   labels:
     app: customer
     component: app
+    env: {{ .Values.labels.env }}
 spec:
   replicas: 1
   revisionHistoryLimit: 5
@@ -18,24 +19,12 @@ spec:
     matchLabels:
       app: customer
       component: app
+      env: {{ .Values.labels.env }}
   template:
     metadata:
       labels:
         app: customer
         component: app
+        env: {{ .Values.labels.env }}
     spec:
-      hostname: customer-app-pod
-      containers:
-        # FastAPIコンテナ
-        - name: fastapi
-          image: customer-fastapi:e35fcc6
-          imagePullPolicy: IfNotPresent
-          ports:
-            - containerPort: 8000
-          volumeMounts:
-            - name: customer-app-persistent-volume
-              mountPath: /var/www/customer
-      volumes:
-        - name: customer-app-persistent-volume
-          persistentVolumeClaim:
-            claimName: customer-app-host-path-persistent-volume-claim
+{{- include "customer.app.deployment" . }}

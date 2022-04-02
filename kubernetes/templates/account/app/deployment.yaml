@@ -6,6 +6,7 @@ metadata:
   labels:
     app: account
     component: app
+    env: {{ .Values.labels.env }}
 spec:
   replicas: 1
   revisionHistoryLimit: 5
@@ -18,24 +19,12 @@ spec:
     matchLabels:
       app: account
       component: app
+      env: {{ .Values.labels.env }}
   template:
     metadata:
       labels:
         app: account
         component: app
+        env: {{ .Values.labels.env }}
     spec:
-      hostname: account-app-pod
-      containers:
-        # Ginコンテナ
-        - name: gin
-          image: account-gin:latest
-          imagePullPolicy: IfNotPresent
-          ports:
-            - containerPort: 8080
-          volumeMounts:
-            - name: account-app-persistent-volume
-              mountPath: /go/src
-      volumes:
-        - name: account-app-persistent-volume
-          persistentVolumeClaim:
-            claimName: account-app-host-path-persistent-volume-claim
+{{- include "account.app.deployment" . }}

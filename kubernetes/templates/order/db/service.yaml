@@ -1,18 +1,1 @@
-apiVersion: v1
-kind: Service
-metadata:
-  namespace: microservices
-  name: order-db-service
-  labels:
-    app: order
-    component: db
-spec:
-  clusterIP: None
-  selector:
-    app: order
-    component: db
-  ports:
-    - name: tcp-order
-      appProtocol: tcp
-      port: 3306
-      targetPort: 3306
+{{- include "order.db.service" . }}

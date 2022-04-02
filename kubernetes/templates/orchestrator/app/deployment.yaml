@@ -5,6 +5,7 @@ metadata:
   name: orchestrator-pod
   labels: 
     app: orchestrator
+    env: {{ .Values.labels.env }}
 spec:
   replicas: 1
   revisionHistoryLimit: 5
@@ -16,23 +17,11 @@ spec:
   selector:
     matchLabels:
       app: orchestrator
+      env: {{ .Values.labels.env }}
   template:
     metadata:
       labels:
         app: orchestrator
+        env: {{ .Values.labels.env }}
     spec:
-      hostname: orchestrator-pod
-      containers:
-        # FastAPIコンテナ
-        - name: fastapi
-          image: orchestrator-fastapi:latest
-          imagePullPolicy: IfNotPresent
-          ports:
-            - containerPort: 8000
-          volumeMounts:
-            - name: orchestrator-persistent-volume
-              mountPath: /var/www/orchestrator
-      volumes:
-        - name: orchestrator-persistent-volume
-          persistentVolumeClaim:
-            claimName: orchestrator-host-path-persistent-volume-claim
+{{- include "orchestrator.app.deployment" . }}
