@@ -24,4 +24,6 @@ spec:
         app: orchestrator
         env: {{ .Values.labels.env }}
     spec:
-{{- include "orchestrator.app.deployment" . }}
+{{- if eq .Values.labels.env "dev" }}
+  {{- include "dev.orchestrator.app.deployment" . }}
+{{- end }}

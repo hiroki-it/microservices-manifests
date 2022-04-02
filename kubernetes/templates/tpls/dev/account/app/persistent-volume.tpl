@@ -1,4 +1,4 @@
-{{- define "account.app.persistent-volume" }}
+{{- define "dev.account.app.persistent-volume" }}
 apiVersion: v1
 kind: PersistentVolume
 metadata:

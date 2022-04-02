@@ -1,4 +1,4 @@
-{{- define "order.app.deployment" }}
+{{- define "dev.order.app.deployment" }}
       hostname: order-app-pod
       containers:
         # Lumenコンテナ

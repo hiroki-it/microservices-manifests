@@ -1,1 +1,3 @@
-{{- include "customer.app.persistent-volume-claim" . }}
+{{- if eq .Values.labels.env "dev" }}
+  {{- include "dev.customer.app.persistent-volume-claim" . }}
+{{- end }}

@@ -1,4 +1,4 @@
-{{- define "customer.db.stateful-set" }}
+{{- define "dev.customer.db.stateful-set" }}
 apiVersion: apps/v1
 kind:  StatefulSet
 metadata:

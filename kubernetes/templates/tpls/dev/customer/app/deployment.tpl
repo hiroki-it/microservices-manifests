@@ -1,4 +1,4 @@
-{{- define "customer.app.deployment" }}
+{{- define "dev.customer.app.deployment" }}
       hostname: customer-app-pod
       containers:
         # FastAPIコンテナ

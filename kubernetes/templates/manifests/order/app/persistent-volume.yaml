@@ -1,1 +1,3 @@
-{{- include "order.app.persistent-volume" . }}
+{{- if eq .Values.labels.env "dev" }}
+  {{- include "dev.order.app.persistent-volume" . }}
+{{- end }}

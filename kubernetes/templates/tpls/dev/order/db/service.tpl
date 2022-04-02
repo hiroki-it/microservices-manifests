@@ -1,4 +1,4 @@
-{{- define "order.db.service" }}
+{{- define "dev.order.db.service" }}
 apiVersion: v1
 kind: Service
 metadata:

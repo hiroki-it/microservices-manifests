@@ -1,4 +1,4 @@
-{{- define "account.db.service" }}
+{{- define "dev.account.db.service" }}
 apiVersion: v1
 kind: Service
 metadata:

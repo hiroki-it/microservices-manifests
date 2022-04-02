@@ -1,4 +1,4 @@
-{{- define "orchestrator.app.persistent-volume" }}
+{{- define "dev.orchestrator.app.persistent-volume" }}
 apiVersion: v1
 kind: PersistentVolume
 metadata:

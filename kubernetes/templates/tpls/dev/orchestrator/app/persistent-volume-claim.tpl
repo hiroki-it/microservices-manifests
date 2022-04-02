@@ -1,4 +1,4 @@
-{{- define "orchestrator.app.persistent-volume-claim" }}
+{{- define "dev.orchestrator.app.persistent-volume-claim" }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:

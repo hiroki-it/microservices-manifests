@@ -1,1 +1,3 @@
-{{- include "orchestrator.app.persistent-volume" . }}
+{{- if eq .Values.labels.env "dev" }}
+  {{- include "dev.orchestrator.app.persistent-volume" . }}
+{{- end }}

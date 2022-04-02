@@ -1,1 +1,3 @@
-{{- include "customer.db.stateful-set" . }}
+{{- if eq .Values.labels.env "dev" }}
+  {{- include "dev.customer.db.stateful-set" . }}
+{{- end }}

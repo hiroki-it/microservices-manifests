@@ -1,1 +1,3 @@
-{{- include "order.db.service" . }}
+{{- if eq .Values.labels.env "dev" }}
+  {{- include "dev.order.db.service" . }}
+{{- end }}

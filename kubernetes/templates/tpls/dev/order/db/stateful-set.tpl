@@ -1,4 +1,4 @@
-{{- define "order.db.stateful-set" }}
+{{- define "dev.order.db.stateful-set" }}
 apiVersion: apps/v1
 kind:  StatefulSet
 metadata:

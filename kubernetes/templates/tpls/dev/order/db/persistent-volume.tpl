@@ -1,4 +1,4 @@
-{{- define "order.db.persistent-volume" }}
+{{- define "dev.order.db.persistent-volume" }}
 apiVersion: v1
 kind: PersistentVolume
 metadata:

@@ -1,4 +1,4 @@
-{{- define "account.app.deployment" }}
+{{- define "dev.account.app.deployment" }}
       hostname: account-app-pod
       containers:
         # Ginコンテナ

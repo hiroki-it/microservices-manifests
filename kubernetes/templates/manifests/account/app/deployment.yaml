@@ -27,4 +27,6 @@ spec:
         component: app
         env: {{ .Values.labels.env }}
     spec:
-{{- include "account.app.deployment" . }}
+{{- if eq .Values.labels.env "dev" }}
+  {{- include "dev.account.app.deployment" . }}
+{{- end }}

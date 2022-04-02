@@ -1,4 +1,4 @@
-{{- define "order.app.persistent-volume-claim" }}
+{{- define "dev.order.app.persistent-volume-claim" }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:

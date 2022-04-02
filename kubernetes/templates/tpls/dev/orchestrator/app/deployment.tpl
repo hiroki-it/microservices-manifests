@@ -1,4 +1,4 @@
-{{- define "orchestrator.app.deployment" }}
+{{- define "dev.orchestrator.app.deployment" }}
       hostname: orchestrator-pod
       containers:
         # FastAPIコンテナ
