@@ -30,3 +30,6 @@ spec:
 {{- if eq .Values.labels.env "dev" }}
   {{- include "dev.customer.app.deployment" . }}
 {{- end }}
+{{- if eq .Values.labels.env "prd" }}
+  {{- include "prd.customer.app.deployment" . }}
+{{- end }}

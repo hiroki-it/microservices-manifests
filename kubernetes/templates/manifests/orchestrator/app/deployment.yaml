@@ -27,3 +27,6 @@ spec:
 {{- if eq .Values.labels.env "dev" }}
   {{- include "dev.orchestrator.app.deployment" . }}
 {{- end }}
+{{- if eq .Values.labels.env "prd" }}
+  {{- include "prd.orchestrator.app.deployment" . }}
+{{- end }}
