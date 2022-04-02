@@ -3,8 +3,8 @@
       containers:
         # FastAPIコンテナ
         - name: fastapi
-          image: customer-fastapi:e35fcc6
-          imagePullPolicy: IfNotPresent
+          image: customer-fastapi:{{ .Values.image.tag.customer.fastapi }}
+          imagePullPolicy: Always
           ports:
             - containerPort: 8000
 {{- end }}

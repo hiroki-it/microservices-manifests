@@ -1,2 +1,14 @@
 labels:
   env: prd
+
+image:
+  tag:
+    account:
+      gin: latest
+    customer:
+      fastapi: latest
+    orchestrator:
+      fastapi: latest
+    order:
+      lumen: latest
+      nginx: latest

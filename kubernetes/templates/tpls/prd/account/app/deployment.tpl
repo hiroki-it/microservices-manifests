@@ -3,8 +3,8 @@
       containers:
         # Ginコンテナ
         - name: gin
-          image: account-gin:latest
-          imagePullPolicy: IfNotPresent
+          image: account-gin:{{ .Values.image.tag.account.gin }}
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
 {{- end }}
