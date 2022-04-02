@@ -3,7 +3,7 @@
       containers:
         # FastAPIコンテナ
         - name: fastapi
-          image: customer-fastapi:e35fcc6
+          image: customer-fastapi:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
