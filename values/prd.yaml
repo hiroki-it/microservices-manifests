@@ -1,5 +1,11 @@
+#============
+# General
+#============
 labels:
   env: prd
+#============
+# Kubernetes
+#============
 image:
   tag:
     account:
