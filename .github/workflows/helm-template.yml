@@ -1,0 +1,45 @@
+name: helm-template
+
+on:
+  push:
+    branches:
+      - release/**
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup git
+        run: |
+          git config --local user.email "hasegawafeedshop@gmail.com"
+          git config --local user.name "github-actions"
+          git config pull.rebase false
+      - name: Setup Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: v3.8.1
+      - name: Helm package
+        run: |
+          helm package kubernetes
+          helm package istio
+          helm package argocd
+          helm package eks
+      - name: Helm template
+        run: |
+          helm template release microservices-manifests-kubernetes-*.tgz -f values/prd.yaml >| ./release/kubernetes.yaml
+          helm template release microservices-manifests-istio-*.tgz -f values/prd.yaml >| ./release/istio.yaml
+          helm template release microservices-manifests-argocd-*.tgz -f values/prd.yaml >| ./release/argocd.yaml
+          helm template release microservices-manifests-eks-*.tgz -f values/prd.yaml >| ./release/eks.yaml
+      - name: Commit & Push
+        run: |
+          diff=`git diff | wc -l`
+          if [ $diff -eq 0 ]; then
+            echo "マニフェストファイルに差分がないため，GitHub Actionsを終了しました．"
+            exit 0
+          fi
+          git add .
+          git commit -m "helm templateを実行しました．"
+          git pull
+          git push origin HEAD
