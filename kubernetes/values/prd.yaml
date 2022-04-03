@@ -5,7 +5,7 @@ image:
     account:
       gin: latest
     customer:
-      fastapi: latest
+      fastapi: "0431585"
     orchestrator:
       fastapi: latest
     order:
