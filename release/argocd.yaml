@@ -1,0 +1,26 @@
+---
+# Source: microservices-manifests-argocd/templates/application.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  namespace: argocd
+  name: argocd-application
+  metadata:
+    labels:
+      env: prd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/hiroki-it/microservices-manifests.git
+    targetRevision: main
+    path: kubernetes
+    directory:
+      recurse: true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: microservices
+  syncPolicy:
+    automated:
+      allowEmpty: true
+      prune: true
+      selfHeal: true

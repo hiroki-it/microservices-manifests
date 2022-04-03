@@ -1,0 +1,238 @@
+---
+# Source: microservices-manifests-istio/templates/apply/account/destination-rule.yaml
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  namespace: istio-system
+  name: account-app-destination-rule
+  metadata:
+    labels:
+      env: prd
+spec:
+  exportTo:
+    - "*"
+  host: account-app-service.microservices.svc.cluster.local
+  trafficPolicy:
+    loadBalancer:
+      simple: ROUND_ROBIN
+    tls:
+      mode: DISABLE
+---
+# Source: microservices-manifests-istio/templates/apply/customer/destination-rule.yaml
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  namespace: istio-system
+  name: customer-app-destination-rule
+  metadata:
+    labels:
+      env: prd
+spec:
+  exportTo:
+    - "*"
+  host: customer-app-service.microservices.svc.cluster.local
+  trafficPolicy:
+    loadBalancer:
+      simple: ROUND_ROBIN
+    tls:
+      mode: DISABLE
+---
+# Source: microservices-manifests-istio/templates/apply/orchestrator/destination-rule.yaml
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  namespace: istio-system
+  name: orchestrator-destination-rule
+  metadata:
+    labels:
+      env: prd
+spec:
+  exportTo:
+    - "*"
+  host: orchestrator-service.microservices.svc.cluster.local
+  trafficPolicy:
+    loadBalancer:
+      simple: ROUND_ROBIN
+    tls:
+      mode: DISABLE
+---
+# Source: microservices-manifests-istio/templates/apply/order/destination-rule.yaml
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  namespace: istio-system
+  name: order-app-destination-rule
+  metadata:
+    labels:
+      env: prd
+spec:
+  exportTo:
+    - "*"
+  host: order-app-service.microservices.svc.cluster.local
+  trafficPolicy:
+    loadBalancer:
+      simple: ROUND_ROBIN
+    tls:
+      mode: DISABLE
+---
+# Source: microservices-manifests-istio/templates/apply/gateway.yaml
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  namespace: istio-system
+  name: gateway
+  metadata:
+    labels:
+      env: prd
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        name: http
+        protocol: HTTP
+        number: 80
+      hosts:
+        - "*"
+---
+# Source: microservices-manifests-istio/templates/install/operator.yaml
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+metadata:
+  namespace: istio-system
+  name: istio-operator
+  metadata:
+    labels:
+      env: prd
+spec:
+  profile: default
+  tag: 1.12.1
+  meshConfig:
+    accessLogFile: /dev/stdout
+    enableTracing: true
+    rootNamespace: istio-system
+  components:
+    ingressGateways:
+      - name: istio-ingressgateway
+        enabled: true
+---
+# Source: microservices-manifests-istio/templates/apply/peer-authentication.yaml
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  namespace: istio-system
+  name: peer-authentication
+  metadata:
+    labels:
+      env: prd
+spec:
+  mtls:
+    mode: DISABLE
+---
+# Source: microservices-manifests-istio/templates/apply/account/virtual-service.yaml
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  namespace: istio-system
+  name: account-virtual-service
+  metadata:
+    labels:
+      env: prd
+spec:
+  exportTo:
+    - "*"
+  hosts:
+    - "*"
+  gateways:
+    - gateway
+  http:
+    - name: account-route
+      match:
+        - uri:
+            prefix: /account/
+      route:
+        - destination:
+            host: account-app-service.microservices.svc.cluster.local
+            port:
+              number: 80
+---
+# Source: microservices-manifests-istio/templates/apply/customer/virtual-service.yaml
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  namespace: istio-system
+  name: customer-virtual-service
+  metadata:
+    labels:
+      env: prd
+spec:
+  exportTo:
+    - "*"
+  hosts:
+    - "*"
+  gateways:
+    - gateway
+  http:
+    - name: customer-route
+      match:
+        - uri:
+            prefix: /customers/
+      route:
+        - destination:
+            host: customer-app-service.microservices.svc.cluster.local
+            port:
+              number: 80
+---
+# Source: microservices-manifests-istio/templates/apply/orchestrator/virtual-service.yaml
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  namespace: istio-system
+  name: orchestrator-virtual-service
+  metadata:
+    labels:
+      env: prd
+spec:
+  exportTo:
+    - "*"
+  hosts:
+    - "*"
+  gateways:
+    - gateway
+  http:
+    - name: checkout-route
+      match:
+        - uri:
+            prefix: /checkout/
+      route:
+        - destination:
+            host: orchestrator-service.microservices.svc.cluster.local
+            port:
+              number: 80
+---
+# Source: microservices-manifests-istio/templates/apply/order/virtual-service.yaml
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  namespace: istio-system
+  name: order-virtual-service
+  metadata:
+    labels:
+      env: prd
+spec:
+  exportTo:
+    - "*"
+  hosts:
+    - "*"
+  gateways:
+    - gateway
+  http:
+    - name: order-route
+      match:
+        - uri:
+            prefix: /orders/
+      route:
+        - destination:
+            host: order-app-service.microservices.svc.cluster.local
+            port:
+              number: 80
