@@ -4,3 +4,4 @@ metadata:
   name: aws-observability
   labels:
     aws-observability: enabled
+    env: {{ .Values.labels.env }}

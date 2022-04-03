@@ -3,6 +3,8 @@ apiVersion: v1
 metadata:
   name: eks-fluent-bit-config-map
   namespace: aws-observability
+  labels:
+    env: {{ .Values.labels.env }}
 data:
   output.conf: |
     [OUTPUT]
