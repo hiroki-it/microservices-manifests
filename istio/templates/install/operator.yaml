@@ -3,6 +3,9 @@ kind: IstioOperator
 metadata:
   namespace: istio-system
   name: istio-operator
+  metadata:
+    labels:
+      env: {{ .Values.labels.env }}
 spec:
   profile: default
   tag: 1.12.1

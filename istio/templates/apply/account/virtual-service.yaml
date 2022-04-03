@@ -2,7 +2,10 @@ apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   namespace: istio-system
-  name: order-virtual-service
+  name: account-virtual-service
+  metadata:
+    labels:
+      env: {{ .Values.labels.env }}
 spec:
   exportTo:
     - "*"
@@ -11,12 +14,12 @@ spec:
   gateways:
     - gateway
   http:
-    - name: order-route
+    - name: account-route
       match:
         - uri:
-            prefix: /orders/
+            prefix: /account/
       route:
         - destination:
-            host: order-app-service.microservices.svc.cluster.local
+            host: account-app-service.microservices.svc.cluster.local
             port:
               number: 80

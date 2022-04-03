@@ -3,6 +3,9 @@ kind: PeerAuthentication
 metadata:
   namespace: istio-system
   name: peer-authentication
+  metadata:
+    labels:
+      env: {{ .Values.labels.env }}
 spec:
   mtls:
     mode: DISABLE

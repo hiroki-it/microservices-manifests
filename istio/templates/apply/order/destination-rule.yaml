@@ -3,6 +3,9 @@ kind: DestinationRule
 metadata:
   namespace: istio-system
   name: order-app-destination-rule
+  metadata:
+    labels:
+      env: {{ .Values.labels.env }}
 spec:
   exportTo:
     - "*"

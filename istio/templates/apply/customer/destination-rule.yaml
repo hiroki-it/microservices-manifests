@@ -2,11 +2,14 @@ apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
   namespace: istio-system
-  name: orchestrator-destination-rule
+  name: customer-app-destination-rule
+  metadata:
+    labels:
+      env: {{ .Values.labels.env }}
 spec:
   exportTo:
     - "*"
-  host: orchestrator-service.microservices.svc.cluster.local
+  host: customer-app-service.microservices.svc.cluster.local
   trafficPolicy:
     loadBalancer:
       simple: ROUND_ROBIN

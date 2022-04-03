@@ -3,6 +3,9 @@ kind: VirtualService
 metadata:
   namespace: istio-system
   name: orchestrator-virtual-service
+  metadata:
+    labels:
+      env: {{ .Values.labels.env }}
 spec:
   exportTo:
     - "*"

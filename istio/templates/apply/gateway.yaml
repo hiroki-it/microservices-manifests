@@ -3,6 +3,9 @@ kind: Gateway
 metadata:
   namespace: istio-system
   name: gateway
+  metadata:
+    labels:
+      env: {{ .Values.labels.env }}
 spec:
   selector:
     istio: ingressgateway
