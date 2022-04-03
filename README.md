@@ -27,11 +27,11 @@ GitOpsの **[ベストプラクティス](https://blog.argoproj.io/5-gitops-best
 
 ### CI/CD
 
-| 役割              | ツール                 | 導入の状況          |
-|-----------------|---------------------|----------------|
-| CI/CD（開発環境） | Skaffold | ⭕              |
-| CI（本番環境） | CircleCI | **[microservices-backendリポジトリ](https://github.com/hiroki-it/microservices-backend)** を参照              |
-| CD（本番環境）    | ArgoCD   | ⭕ |
+| 役割          | ツール                   | 導入の状況          |
+|-------------|-----------------------|----------------|
+| CI/CD（開発環境） | Skaffold              | ⭕              |
+| CI（本番環境）    | GitHub Actions & Helm | coming soon... |
+| CD（本番環境）    | ArgoCD                | ⭕              |
 
 ### 補足
 
