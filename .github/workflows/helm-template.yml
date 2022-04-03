@@ -34,12 +34,7 @@ jobs:
           helm template release microservices-manifests-eks-*.tgz -f values/prd.yaml >| ./release/eks.yaml
       - name: Commit & Push
         run: |
-          diff=`git diff | wc -l`
-          if [ $diff -eq 0 ]; then
-            echo "マニフェストファイルに差分がないため，GitHub Actionsを終了しました．"
-            exit 0
-          fi
-          git add .
+          git add ./release
           git commit -m "helm templateを実行しました．"
           git pull
           git push origin HEAD
