@@ -3,12 +3,12 @@
       containers:
         # Lumenコンテナ
         - name: lumen
-          image: order-lumen:{{ .Values.image.tag.order.lumen }}
+          image: order-lumen:{{ .Values.kubernetes.image.order.lumen }}
           imagePullPolicy: Always
           ports:
             - containerPort: 9000
         - name: nginx
-          image: order-nginx:{{ .Values.image.tag.order.nginx }}
+          image: order-nginx:{{ .Values.kubernetes.image.order.nginx }}
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

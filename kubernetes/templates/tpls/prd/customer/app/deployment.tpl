@@ -3,7 +3,7 @@
       containers:
         # FastAPIコンテナ
         - name: fastapi
-          image: customer-fastapi:{{ .Values.image.tag.customer.fastapi }}
+          image: customer-fastapi:{{ .Values.kubernetes.image.customer.fastapi }}
           imagePullPolicy: Always
           ports:
             - containerPort: 8000

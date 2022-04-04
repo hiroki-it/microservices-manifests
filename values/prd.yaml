@@ -6,8 +6,8 @@ general:
 #============
 # Kubernetes
 #============
-image:
-  tag:
+kubernetes:
+  image:
     account:
       gin: latest
     customer:
