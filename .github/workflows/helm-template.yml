@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Setup git
+      - name: Git config
         run: |
           git config --local user.email "hasegawafeedshop@gmail.com"
           git config --local user.name "github-actions"
@@ -32,7 +32,7 @@ jobs:
           helm template release microservices-manifests-istio-*.tgz -f values/prd.yaml >| ./release/istio.yaml
           helm template release microservices-manifests-argocd-*.tgz -f values/prd.yaml >| ./release/argocd.yaml
           helm template release microservices-manifests-eks-*.tgz -f values/prd.yaml >| ./release/eks.yaml
-      - name: Commit & Push
+      - name: Git commit & push
         run: |
           git add ./release
           git commit -m "helm templateを実行し，マニフェストファイルを自動生成しました．"
