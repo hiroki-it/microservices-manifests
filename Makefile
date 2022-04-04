@@ -68,6 +68,17 @@ destroy-argocd:
 	minikube kubectl -- delete -f ./argocd/apply -R
 	minikube kubectl -- delete -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v${ARGOCD_VERSION}/manifests/install.yaml
 
+# マニフェストファイルを生成します．
+helm-template:
+	helm package kubernetes
+	helm package istio
+	helm package argocd
+	helm package eks
+	helm template release microservices-manifests-kubernetes-*.tgz -f values/dev.yaml >| ./release/dev/kubernetes.yaml
+	helm template release microservices-manifests-istio-*.tgz -f values/dev.yaml >| ./release/dev/istio.yaml
+	helm template release microservices-manifests-argocd-*.tgz -f values/dev.yaml >| ./release/dev/argocd.yaml
+	helm template release microservices-manifests-eks-*.tgz -f values/dev.yaml >| ./release/dev/eks.yaml
+
 # ロードテストを実行します．同時に，make kubectl-proxy を実行し，ロードバランサーを構築しておく必要があります．
 # @see https://github.com/fortio/fortio#command-line-arguments
 ISTIO_LB_IP = $(shell minikube kubectl -- get service/istio-ingressgateway --namespace=istio-system -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
