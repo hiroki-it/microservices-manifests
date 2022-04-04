@@ -6,7 +6,7 @@ on:
       - release/**
 
 jobs:
-  build:
+  helm-template:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
