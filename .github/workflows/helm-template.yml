@@ -28,10 +28,10 @@ jobs:
           helm package eks
       - name: Helm template
         run: |
-          helm template release microservices-manifests-kubernetes-*.tgz -f values/prd.yaml >| ./release/kubernetes.yaml
-          helm template release microservices-manifests-istio-*.tgz -f values/prd.yaml >| ./release/istio.yaml
-          helm template release microservices-manifests-argocd-*.tgz -f values/prd.yaml >| ./release/argocd.yaml
-          helm template release microservices-manifests-eks-*.tgz -f values/prd.yaml >| ./release/eks.yaml
+          helm template release microservices-manifests-kubernetes-*.tgz -f values/prd.yaml >| ./release/prd/kubernetes.yaml
+          helm template release microservices-manifests-istio-*.tgz -f values/prd.yaml >| ./release/prd/istio.yaml
+          helm template release microservices-manifests-argocd-*.tgz -f values/prd.yaml >| ./release/prd/argocd.yaml
+          helm template release microservices-manifests-eks-*.tgz -f values/prd.yaml >| ./release/prd/eks.yaml
       - name: Git commit & push
         run: |
           git add ./release
