@@ -6,7 +6,7 @@ metadata:
   name: orchestrator-persistent-volume
   labels:
     app: orchestrator
-    env: {{ .Values.labels.env }}
+    env: {{ .Values.general.env }}
     type: hostPath
 spec:
   storageClassName: standard

@@ -7,7 +7,7 @@ metadata:
   labels:
     app: customer
     component: app
-    env: {{ .Values.labels.env }}
+    env: {{ .Values.general.env }}
 spec:
   storageClassName: standard
   accessModes:
@@ -19,6 +19,6 @@ spec:
     matchLabels:
       app: customer
       component: app
-      env: {{ .Values.labels.env }}
+      env: {{ .Values.general.env }}
       type: hostPath
 {{- end }}

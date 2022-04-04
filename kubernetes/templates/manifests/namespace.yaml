@@ -3,7 +3,7 @@ kind: Namespace
 metadata:
   name: microservices
   labels:
-    env: {{ .Values.labels.env }}
+    env: {{ .Values.general.env }}
     istio-injection: enabled
 ---
 apiVersion: v1
@@ -11,4 +11,4 @@ kind: Namespace
 metadata:
   name: argocd
   labels:
-    env: {{ .Values.labels.env }}
+    env: {{ .Values.general.env }}

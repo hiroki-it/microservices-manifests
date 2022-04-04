@@ -5,7 +5,7 @@ metadata:
   name: account-app-destination-rule
   metadata:
     labels:
-      env: {{ .Values.labels.env }}
+      env: {{ .Values.general.env }}
 spec:
   exportTo:
     - "*"

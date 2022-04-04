@@ -7,7 +7,7 @@ metadata:
   labels:
     app: order
     component: app
-    env: {{ .Values.labels.env }}
+    env: {{ .Values.general.env }}
     type: hostPath
 spec:
   storageClassName: standard

@@ -5,13 +5,13 @@ metadata:
   name: argocd-application
   metadata:
     labels:
-      env: {{ .Values.labels.env }}
+      env: {{ .Values.general.env }}
 spec:
   project: default
   source:
     repoURL: https://github.com/hiroki-it/microservices-manifests.git
     targetRevision: main
-    path: release/{{ .Values.labels.env }}
+    path: release/{{ .Values.general.env }}
     directory:
       recurse: true
   destination:

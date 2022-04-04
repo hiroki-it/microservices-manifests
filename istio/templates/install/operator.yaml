@@ -5,7 +5,7 @@ metadata:
   name: istio-operator
   metadata:
     labels:
-      env: {{ .Values.labels.env }}
+      env: {{ .Values.general.env }}
 spec:
   profile: default
   tag: 1.12.1

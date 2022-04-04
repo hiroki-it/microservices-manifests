@@ -5,7 +5,7 @@ metadata:
   name: customer-virtual-service
   metadata:
     labels:
-      env: {{ .Values.labels.env }}
+      env: {{ .Values.general.env }}
 spec:
   exportTo:
     - "*"

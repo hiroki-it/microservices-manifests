@@ -4,7 +4,7 @@ metadata:
   name: eks-fluent-bit-config-map
   namespace: aws-observability
   labels:
-    env: {{ .Values.labels.env }}
+    env: {{ .Values.general.env }}
 data:
   output.conf: |
     [OUTPUT]

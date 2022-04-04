@@ -7,7 +7,7 @@ metadata:
   labels:
     app: customer
     component: db
-    env: {{ .Values.labels.env }}
+    env: {{ .Values.general.env }}
 spec:
   clusterIP: None
   selector:

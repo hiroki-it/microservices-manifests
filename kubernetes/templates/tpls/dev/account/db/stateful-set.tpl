@@ -7,7 +7,7 @@ metadata:
   labels:
     app: account
     component: db
-    env: {{ .Values.labels.env }}
+    env: {{ .Values.general.env }}
 spec:
   replicas: 1
   selector:
@@ -20,7 +20,7 @@ spec:
       labels:
         app: account
         component: db
-        env: {{ .Values.labels.env }}
+        env: {{ .Values.general.env }}
     spec:
       containers:
         # MySQLコンテナ（開発環境のみ）
@@ -50,7 +50,7 @@ spec:
         labels:
           app: account
           component: db
-          env: {{ .Values.labels.env }}
+          env: {{ .Values.general.env }}
       spec:
         storageClassName: standard
         accessModes:
@@ -61,6 +61,6 @@ spec:
         selector:
           matchLabels:
             component: db
-            env: {{ .Values.labels.env }}
+            env: {{ .Values.general.env }}
             type: hostPath
 {{- end }}

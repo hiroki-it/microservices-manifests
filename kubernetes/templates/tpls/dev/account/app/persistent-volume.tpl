@@ -7,7 +7,7 @@ metadata:
   labels:
     app: account
     component: app
-    env: {{ .Values.labels.env }}
+    env: {{ .Values.general.env }}
     type: hostPath
 spec:
   storageClassName: standard

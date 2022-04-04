@@ -6,7 +6,7 @@ metadata:
   name: orchestrator-host-path-persistent-volume-claim
   labels:
     app: orchestrator
-    env: {{ .Values.labels.env }}
+    env: {{ .Values.general.env }}
 spec:
   storageClassName: standard
   accessModes:
@@ -17,6 +17,6 @@ spec:
   selector:
     matchLabels:
       app: orchestrator
-      env: {{ .Values.labels.env }}
+      env: {{ .Values.general.env }}
       type: hostPath
 {{- end }}

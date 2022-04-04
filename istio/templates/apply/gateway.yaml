@@ -5,7 +5,7 @@ metadata:
   name: gateway
   metadata:
     labels:
-      env: {{ .Values.labels.env }}
+      env: {{ .Values.general.env }}
 spec:
   selector:
     istio: ingressgateway

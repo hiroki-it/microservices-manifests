@@ -5,7 +5,7 @@ metadata:
   name: orchestrator-pod
   labels: 
     app: orchestrator
-    env: {{ .Values.labels.env }}
+    env: {{ .Values.general.env }}
 spec:
   replicas: 1
   revisionHistoryLimit: 5
@@ -17,16 +17,16 @@ spec:
   selector:
     matchLabels:
       app: orchestrator
-      env: {{ .Values.labels.env }}
+      env: {{ .Values.general.env }}
   template:
     metadata:
       labels:
         app: orchestrator
-        env: {{ .Values.labels.env }}
+        env: {{ .Values.general.env }}
     spec:
-{{- if eq .Values.labels.env "dev" }}
+{{- if eq .Values.general.env "dev" }}
   {{- include "dev.orchestrator.app.deployment" . }}
 {{- end }}
-{{- if eq .Values.labels.env "prd" }}
+{{- if eq .Values.general.env "prd" }}
   {{- include "prd.orchestrator.app.deployment" . }}
 {{- end }}
