@@ -13,7 +13,7 @@ spec:
   source:
     repoURL: https://github.com/hiroki-it/microservices-manifests.git
     targetRevision: main
-    path: kubernetes
+    path: release
     directory:
       recurse: true
   destination:
