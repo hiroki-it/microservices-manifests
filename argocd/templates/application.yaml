@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: https://github.com/hiroki-it/microservices-manifests.git
     targetRevision: main
-    path: kubernetes
+    path: release/{{ .Values.labels.env }}
     directory:
       recurse: true
   destination:
