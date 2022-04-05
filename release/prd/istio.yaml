@@ -1,5 +1,5 @@
 ---
-# Source: microservices-manifests-istio/templates/apply/account/destination-rule.yaml
+# Source: microservices-manifests-istio/templates/account/destination-rule.yaml
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
@@ -18,7 +18,7 @@ spec:
     tls:
       mode: DISABLE
 ---
-# Source: microservices-manifests-istio/templates/apply/customer/destination-rule.yaml
+# Source: microservices-manifests-istio/templates/customer/destination-rule.yaml
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
@@ -37,7 +37,7 @@ spec:
     tls:
       mode: DISABLE
 ---
-# Source: microservices-manifests-istio/templates/apply/orchestrator/destination-rule.yaml
+# Source: microservices-manifests-istio/templates/orchestrator/destination-rule.yaml
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
@@ -56,7 +56,7 @@ spec:
     tls:
       mode: DISABLE
 ---
-# Source: microservices-manifests-istio/templates/apply/order/destination-rule.yaml
+# Source: microservices-manifests-istio/templates/order/destination-rule.yaml
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
@@ -75,7 +75,7 @@ spec:
     tls:
       mode: DISABLE
 ---
-# Source: microservices-manifests-istio/templates/apply/gateway.yaml
+# Source: microservices-manifests-istio/templates/gateway.yaml
 apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
@@ -95,28 +95,7 @@ spec:
       hosts:
         - "*"
 ---
-# Source: microservices-manifests-istio/templates/install/operator.yaml
-apiVersion: install.istio.io/v1alpha1
-kind: IstioOperator
-metadata:
-  namespace: istio-system
-  name: istio-operator
-  metadata:
-    labels:
-      env: prd
-spec:
-  profile: default
-  tag: 1.12.1
-  meshConfig:
-    accessLogFile: /dev/stdout
-    enableTracing: true
-    rootNamespace: istio-system
-  components:
-    ingressGateways:
-      - name: istio-ingressgateway
-        enabled: true
----
-# Source: microservices-manifests-istio/templates/apply/peer-authentication.yaml
+# Source: microservices-manifests-istio/templates/peer-authentication.yaml
 apiVersion: security.istio.io/v1beta1
 kind: PeerAuthentication
 metadata:
@@ -129,7 +108,7 @@ spec:
   mtls:
     mode: DISABLE
 ---
-# Source: microservices-manifests-istio/templates/apply/account/virtual-service.yaml
+# Source: microservices-manifests-istio/templates/account/virtual-service.yaml
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
@@ -156,7 +135,7 @@ spec:
             port:
               number: 80
 ---
-# Source: microservices-manifests-istio/templates/apply/customer/virtual-service.yaml
+# Source: microservices-manifests-istio/templates/customer/virtual-service.yaml
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
@@ -183,7 +162,7 @@ spec:
             port:
               number: 80
 ---
-# Source: microservices-manifests-istio/templates/apply/orchestrator/virtual-service.yaml
+# Source: microservices-manifests-istio/templates/orchestrator/virtual-service.yaml
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
@@ -210,7 +189,7 @@ spec:
             port:
               number: 80
 ---
-# Source: microservices-manifests-istio/templates/apply/order/virtual-service.yaml
+# Source: microservices-manifests-istio/templates/order/virtual-service.yaml
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
