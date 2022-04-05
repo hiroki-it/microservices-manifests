@@ -10,17 +10,17 @@ PROJECT_DIR := $(shell dirname $(shell pwd))
 init:
 	minikube start \
 		--driver=hyperkit \
-		# ホストPCのディレクトリをワーカーノードにマウント
+		# ホストPCのディレクトリをワーカーノードにマウント \
 		--mount=true \
 		--mount-string="${PROJECT_DIR}/microservices-backend:/data" \
 		# Kubernetesのバージョンを指定する． \
 		--kubernetes-version=v${KUBERNETES_VERSION} \
-		# Istioを使用するために必要な最低限のスペック
+		# Istioを使用するために必要な最低限のスペック \
 		--cpus=4 \
 		--memory=16384 \
-		# 拡張機能の有効化（メトリクスの有効化）
+		# 拡張機能の有効化（メトリクスの有効化） \
 		--addons=metrics-server
-	# dockerクライアントの向き先の変更
+		# dockerクライアントの向き先の変更 \
 	minikube docker-env
 	# 手動で実行 
 	# eval $(minikube -p minikube docker-env)
