@@ -37,8 +37,8 @@ apply-k8s-with-pf: helm-template
 # Istioをデプロイします．
 apply-istio:
 	istioctl operator init
-	istioctl install -y -f ./istio/install/operator.yml
-	minikube kubectl -- apply -f ./istio/apply -R
+	istioctl install -y -f ./release/dev/istio-operator.yaml
+	minikube kubectl -- apply -f ./release/dev/istio -R
 	istioctl verify-install
 
 # Istioのダッシュボードをデプロイします．
@@ -49,14 +49,14 @@ apply-istio-dashboard:
 
 # Istioを削除します．
 destroy-istio:
-	minikube kubectl -- delete -f ./istio/apply -R
+	minikube kubectl -- delete -f ./release/dev/istio -R
 	istioctl x uninstall --purge -y
 
 # ArgoCDをデプロイします．
 apply-argocd:
 	minikube kubectl -- apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v${ARGOCD_VERSION}/manifests/install.yaml
 	minikube kubectl -- patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
-	minikube kubectl -- apply -f ./argocd -R
+	minikube kubectl -- apply -f -f ./release/dev/argocd -R
 
 # ArgoCDにログインできるようにします．同時に，make kubectl-proxy を実行し，ロードバランサーを構築しておく必要があります．
 expose-argocd:
@@ -65,15 +65,15 @@ expose-argocd:
 
 # ArgoCDを削除します．
 destroy-argocd:
-	minikube kubectl -- delete -f ./argocd/apply -R
+	minikube kubectl -- delete -f -f ./release/dev/argocd -R
 	minikube kubectl -- delete -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v${ARGOCD_VERSION}/manifests/install.yaml
 
 # マニフェストファイルを生成します．
 helm-template:
-	helm package kubernetes
-	helm package istio
-	helm package argocd
-	helm package eks
+	helm package ./kubernetes
+	helm package ./istio
+	helm package ./argocd
+	helm package ./eks
 	helm template release microservices-manifests-kubernetes-*.tgz -f values/dev.yaml >| ./release/dev/kubernetes.yaml
 	helm template release microservices-manifests-istio-*.tgz -f values/dev.yaml >| ./release/dev/istio.yaml
 	helm template release microservices-manifests-argocd-*.tgz -f values/dev.yaml >| ./release/dev/argocd.yaml
