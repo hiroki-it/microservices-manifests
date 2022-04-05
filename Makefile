@@ -60,7 +60,7 @@ expose-argocd:
 
 # ArgoCDを削除します．
 destroy-argocd:
-	minikube kubectl -- delete -f -f ./release/dev/argocd.yaml
+	minikube kubectl -- delete -f ./release/dev/argocd.yaml
 	minikube kubectl -- delete -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v${ARGOCD_VERSION}/manifests/install.yaml
 
 # マニフェストファイルを生成します．
