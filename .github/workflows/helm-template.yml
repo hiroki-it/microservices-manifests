@@ -29,6 +29,7 @@ jobs:
           helm template release microservices-manifests-istio-*.tgz -f values/prd.yaml >| ./release/prd/istio.yaml
           helm template release microservices-manifests-argocd-*.tgz -f values/prd.yaml >| ./release/prd/argocd.yaml
           helm template release microservices-manifests-eks-*.tgz -f values/prd.yaml >| ./release/prd/eks.yaml
+          helm template release microservices-manifests-operator-istio-*.tgz -f values/dev.yaml >| ./release/prd/istio-operator.yaml
       - name: Git commit & push
         run: |
           git add ./release
