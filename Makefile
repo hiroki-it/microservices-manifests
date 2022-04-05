@@ -3,14 +3,17 @@ KUBERNETES_VERSION := 1.23.5
 ISTIO_ADDON_VERSION := 1.12
 ARGOCD_VERSION := 2.3.1
 
+# パス
+PROJECT_DIR := $(shell dirname $(shell pwd))
+
 # Minikubeを初期化します．
 init:
 	minikube start \
 		--driver=hyperkit \
 		# ホストPCのディレクトリをワーカーノードにマウント
 		--mount=true \
-		--mount-string="${HOME}/projects/hiroki-it/microservices-backend:/data" \
-		# Kubernetesのバージョンを指定する．
+		--mount-string="${PROJECT_DIR}/microservices-backend:/data" \
+		# Kubernetesのバージョンを指定する． \
 		--kubernetes-version=v${KUBERNETES_VERSION} \
 		# Istioを使用するために必要な最低限のスペック
 		--cpus=4 \
