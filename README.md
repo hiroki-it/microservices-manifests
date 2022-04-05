@@ -59,6 +59,12 @@ $ make minikube-start
 $ eval $(minikube -p minikube docker-env)
 ```
 
+### Helm
+
+```bash
+make helm-template
+````
+
 ### Kubernetes
 
 ```bash
