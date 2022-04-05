@@ -27,11 +27,11 @@ kubectl-proxy:
 	minikube kubectl -- proxy --address=0.0.0.0 --accept-hosts='.*' 
 
 # K8sをデプロイします．
-apply-k8s: helm-template
+apply-k8s:
 	skaffold run --force --no-prune=false --cache-artifacts=false
 
 # K8sをデプロイします．また，ポートフォワードを実行します．
-apply-k8s-with-pf: helm-template
+apply-k8s-with-pf:
 	skaffold run --force --no-prune=false --cache-artifacts=false --port-forward
 
 # Istioをデプロイします．
