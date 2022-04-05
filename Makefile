@@ -38,7 +38,7 @@ apply-k8s-with-pf:
 apply-istio:
 	istioctl operator init
 	istioctl install -y -f ./release/dev/istio-operator.yaml
-	minikube kubectl -- apply -f ./release/dev/istio -R
+	minikube kubectl -- apply -f ./release/dev/istio.yaml
 	istioctl verify-install
 
 # Istioのダッシュボードをデプロイします．
