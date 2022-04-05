@@ -16,7 +16,7 @@ init:
 		--cpus=4 \
 		--memory=16384 \
 		# 拡張機能の有効化（メトリクスの有効化）
-		--addons metrics-server
+		--addons=metrics-server
 	# dockerクライアントの向き先の変更
 	minikube docker-env
 	# 手動で実行 
