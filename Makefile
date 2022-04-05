@@ -79,6 +79,11 @@ helm-template:
 	helm template release microservices-manifests-argocd-*.tgz -f values/dev.yaml >| ./release/dev/argocd.yaml
 	helm template release microservices-manifests-eks-*.tgz -f values/dev.yaml >| ./release/dev/eks.yaml
 
+# Operatorのマニフェストファイルを作成します．
+helm-template-operator:
+	helm package ./operator/istio
+	helm template release microservices-manifests-istio-operator-*.tgz -f values/dev.yaml >| ./release/dev/istio-operator.yaml
+
 # ロードテストを実行します．同時に，make kubectl-proxy を実行し，ロードバランサーを構築しておく必要があります．
 # @see https://github.com/fortio/fortio#command-line-arguments
 ISTIO_LB_IP = $(shell minikube kubectl -- get service/istio-ingressgateway --namespace=istio-system -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
