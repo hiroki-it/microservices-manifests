@@ -70,18 +70,11 @@ destroy-argocd:
 
 # マニフェストファイルを生成します．
 helm-template:
-	helm package ./kubernetes
-	helm package ./istio
-	helm package ./argocd
-	helm package ./eks
+	helm package ./kubernetes ./istio ./argocd ./eks
 	helm template release microservices-manifests-kubernetes-*.tgz -f values/dev.yaml >| ./release/dev/kubernetes.yaml
 	helm template release microservices-manifests-istio-*.tgz -f values/dev.yaml >| ./release/dev/istio.yaml
 	helm template release microservices-manifests-argocd-*.tgz -f values/dev.yaml >| ./release/dev/argocd.yaml
 	helm template release microservices-manifests-eks-*.tgz -f values/dev.yaml >| ./release/dev/eks.yaml
-
-# Operatorのマニフェストファイルを作成します．
-helm-template-operator:
-	helm package ./operator/istio
 	helm template release microservices-manifests-operator-istio-*.tgz -f values/dev.yaml >| ./release/dev/istio-operator.yaml
 
 # ロードテストを実行します．同時に，make kubectl-proxy を実行し，ロードバランサーを構築しておく必要があります．
