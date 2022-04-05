@@ -22,10 +22,10 @@ jobs:
           version: v3.8.1
       - name: Helm package
         run: |
-          helm package kubernetes
-          helm package istio
-          helm package argocd
-          helm package eks
+          helm package ./kubernetes
+          helm package ./istio
+          helm package ./argocd
+          helm package ./eks
       - name: Helm template
         run: |
           helm template release microservices-manifests-kubernetes-*.tgz -f values/prd.yaml >| ./release/prd/kubernetes.yaml
