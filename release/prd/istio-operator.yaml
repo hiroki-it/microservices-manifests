@@ -1,0 +1,21 @@
+---
+# Source: microservices-manifests-operator-istio/templates/istio-operator.yaml
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+metadata:
+  namespace: istio-system
+  name: istio-operator
+  metadata:
+    labels:
+      env: dev
+spec:
+  profile: default
+  tag: 1.12.1
+  meshConfig:
+    accessLogFile: /dev/stdout
+    enableTracing: true
+    rootNamespace: istio-system
+  components:
+    ingressGateways:
+      - name: istio-ingressgateway
+        enabled: true
