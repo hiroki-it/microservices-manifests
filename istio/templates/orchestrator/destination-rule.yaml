@@ -3,9 +3,8 @@ kind: DestinationRule
 metadata:
   namespace: istio-system
   name: orchestrator-destination-rule
-  metadata:
-    labels:
-      env: {{ .Values.general.env }}
+  labels:
+    env: {{ .Values.general.env }}
 spec:
   exportTo:
     - "*"

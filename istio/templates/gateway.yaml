@@ -3,8 +3,7 @@ kind: Gateway
 metadata:
   namespace: istio-system
   name: gateway
-  metadata:
-    labels:
+  labels:
       env: {{ .Values.general.env }}
 spec:
   selector:

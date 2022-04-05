@@ -3,8 +3,7 @@ kind: Application
 metadata:
   namespace: argocd
   name: argocd-application
-  metadata:
-    labels:
+  labels:
       env: {{ .Values.general.env }}
 spec:
   project: default

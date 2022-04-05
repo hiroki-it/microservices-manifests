@@ -3,8 +3,7 @@ kind: PeerAuthentication
 metadata:
   namespace: istio-system
   name: peer-authentication
-  metadata:
-    labels:
+  labels:
       env: {{ .Values.general.env }}
 spec:
   mtls:

@@ -3,8 +3,7 @@ kind: VirtualService
 metadata:
   namespace: istio-system
   name: customer-virtual-service
-  metadata:
-    labels:
+  labels:
       env: {{ .Values.general.env }}
 spec:
   exportTo:
