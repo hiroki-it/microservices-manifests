@@ -70,7 +70,7 @@ destroy-argocd:
 
 # マニフェストファイルを生成します．
 helm-template:
-	helm package ./kubernetes ./istio ./argocd ./eks
+	helm package ./kubernetes ./istio ./argocd ./eks ./operator/istio
 	helm template release microservices-manifests-kubernetes-*.tgz -f values/dev.yaml >| ./release/dev/kubernetes.yaml
 	helm template release microservices-manifests-istio-*.tgz -f values/dev.yaml >| ./release/dev/istio.yaml
 	helm template release microservices-manifests-argocd-*.tgz -f values/dev.yaml >| ./release/dev/argocd.yaml
