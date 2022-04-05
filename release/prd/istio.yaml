@@ -5,9 +5,8 @@ kind: DestinationRule
 metadata:
   namespace: istio-system
   name: account-app-destination-rule
-  metadata:
-    labels:
-      env: prd
+  labels:
+    env: prd
 spec:
   exportTo:
     - "*"
@@ -24,9 +23,8 @@ kind: DestinationRule
 metadata:
   namespace: istio-system
   name: customer-app-destination-rule
-  metadata:
-    labels:
-      env: prd
+  labels:
+    env: prd
 spec:
   exportTo:
     - "*"
@@ -43,9 +41,8 @@ kind: DestinationRule
 metadata:
   namespace: istio-system
   name: orchestrator-destination-rule
-  metadata:
-    labels:
-      env: prd
+  labels:
+    env: prd
 spec:
   exportTo:
     - "*"
@@ -62,9 +59,8 @@ kind: DestinationRule
 metadata:
   namespace: istio-system
   name: order-app-destination-rule
-  metadata:
-    labels:
-      env: prd
+  labels:
+    env: prd
 spec:
   exportTo:
     - "*"
@@ -81,8 +77,7 @@ kind: Gateway
 metadata:
   namespace: istio-system
   name: gateway
-  metadata:
-    labels:
+  labels:
       env: prd
 spec:
   selector:
@@ -101,8 +96,7 @@ kind: PeerAuthentication
 metadata:
   namespace: istio-system
   name: peer-authentication
-  metadata:
-    labels:
+  labels:
       env: prd
 spec:
   mtls:
@@ -114,8 +108,7 @@ kind: VirtualService
 metadata:
   namespace: istio-system
   name: account-virtual-service
-  metadata:
-    labels:
+  labels:
       env: prd
 spec:
   exportTo:
@@ -141,8 +134,7 @@ kind: VirtualService
 metadata:
   namespace: istio-system
   name: customer-virtual-service
-  metadata:
-    labels:
+  labels:
       env: prd
 spec:
   exportTo:
@@ -168,8 +160,7 @@ kind: VirtualService
 metadata:
   namespace: istio-system
   name: orchestrator-virtual-service
-  metadata:
-    labels:
+  labels:
       env: prd
 spec:
   exportTo:
@@ -195,8 +186,7 @@ kind: VirtualService
 metadata:
   namespace: istio-system
   name: order-virtual-service
-  metadata:
-    labels:
+  labels:
       env: prd
 spec:
   exportTo:

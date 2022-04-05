@@ -5,8 +5,7 @@ kind: Application
 metadata:
   namespace: argocd
   name: argocd-application
-  metadata:
-    labels:
+  labels:
       env: prd
 spec:
   project: default
