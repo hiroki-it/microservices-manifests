@@ -82,7 +82,7 @@ helm-template:
 # Operatorのマニフェストファイルを作成します．
 helm-template-operator:
 	helm package ./operator/istio
-	helm template release microservices-manifests-istio-operator-*.tgz -f values/dev.yaml >| ./release/dev/istio-operator.yaml
+	helm template release microservices-manifests-operator-istio-*.tgz -f values/dev.yaml >| ./release/dev/istio-operator.yaml
 
 # ロードテストを実行します．同時に，make kubectl-proxy を実行し，ロードバランサーを構築しておく必要があります．
 # @see https://github.com/fortio/fortio#command-line-arguments
