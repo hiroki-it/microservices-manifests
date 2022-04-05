@@ -49,14 +49,14 @@ apply-istio-dashboard:
 
 # Istioを削除します．
 destroy-istio:
-	minikube kubectl -- delete -f ./release/dev/istio -R
+	minikube kubectl -- delete -f ./release/dev/istio.yaml
 	istioctl x uninstall --purge -y
 
 # ArgoCDをデプロイします．
 apply-argocd:
 	minikube kubectl -- apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v${ARGOCD_VERSION}/manifests/install.yaml
 	minikube kubectl -- patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
-	minikube kubectl -- apply -f -f ./release/dev/argocd -R
+	minikube kubectl -- apply -f -f ./release/dev/argocd.yaml
 
 # ArgoCDにログインできるようにします．同時に，make kubectl-proxy を実行し，ロードバランサーを構築しておく必要があります．
 expose-argocd:
@@ -65,7 +65,7 @@ expose-argocd:
 
 # ArgoCDを削除します．
 destroy-argocd:
-	minikube kubectl -- delete -f -f ./release/dev/argocd -R
+	minikube kubectl -- delete -f -f ./release/dev/argocd.yaml
 	minikube kubectl -- delete -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v${ARGOCD_VERSION}/manifests/install.yaml
 
 # マニフェストファイルを生成します．
