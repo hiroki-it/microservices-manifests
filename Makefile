@@ -21,9 +21,6 @@ init:
 		# 拡張機能の有効化（メトリクスの有効化） \
 		--addons=metrics-server
 		# dockerクライアントの向き先の変更 \
-	minikube docker-env
-	# 手動で実行 
-	# eval $(minikube -p minikube docker-env)
 
 # ポート8001番で，ローカルPCからワーカーノードにポートフォワードを実行します．
 kubectl-proxy:
