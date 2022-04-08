@@ -132,7 +132,7 @@ spec:
       containers:
         # Ginコンテナ
         - name: gin
-          image: account-gin:latest
+          image: account-gin:d74ac1c
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
