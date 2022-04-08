@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/hiroki-it/microservices-manifests.git
     targetRevision: main
-    path: release/{{ .Values.general.env }}
+    path: ./release/{{ .Values.general.env }}
     directory:
       include: kubernetes.yaml
   destination:
