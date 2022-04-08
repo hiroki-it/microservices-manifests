@@ -132,7 +132,7 @@ spec:
       containers:
         # Ginコンテナ
         - name: gin
-          image: account-gin:latest
+          image: account-gin:d74ac1c
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -171,7 +171,7 @@ spec:
       containers:
         # FastAPIコンテナ
         - name: fastapi
-          image: customer-fastapi:27942bb
+          image: customer-fastapi:933cfde
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
@@ -207,7 +207,7 @@ spec:
       containers:
         # FastAPIコンテナ
         - name: fastapi
-          image: orchestrator-fastapi:latest
+          image: orchestrator-fastapi:00690e9
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
@@ -246,12 +246,12 @@ spec:
       containers:
         # Lumenコンテナ
         - name: lumen
-          image: order-lumen:latest
+          image: order-lumen:b5d0574
           imagePullPolicy: Always
           ports:
             - containerPort: 9000
         - name: nginx
-          image: order-nginx:latest
+          image: order-nginx:b5d0574
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

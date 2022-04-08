@@ -9,11 +9,11 @@ general:
 kubernetes:
   image:
     account:
-      gin: latest
+      gin: d74ac1c
     customer:
-      fastapi: "27942bb"
+      fastapi: "933cfde"
     orchestrator:
-      fastapi: latest
+      fastapi: "00690e9"
     order:
-      lumen: latest
-      nginx: latest
+      lumen: b5d0574
+      nginx: b5d0574
