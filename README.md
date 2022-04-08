@@ -27,7 +27,8 @@ project/
 ├── operator/ # 各リソースのOperator
 │
 ├── release/ # Helmによって出力されたマニフェストファイル
-│
+│   ├── dev
+│   └── prd
 ├── skaffold.yaml
 │
 └── values/ # HelmのValuesファイル
