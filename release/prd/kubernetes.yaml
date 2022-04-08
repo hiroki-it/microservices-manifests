@@ -171,7 +171,7 @@ spec:
       containers:
         # FastAPIコンテナ
         - name: fastapi
-          image: customer-fastapi:a0e4ba5
+          image: customer-fastapi:27942bb
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
