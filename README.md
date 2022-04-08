@@ -8,6 +8,31 @@ GitOpsの **[ベストプラクティス](https://blog.argoproj.io/5-gitops-best
 
 現状，フロントエンド領域のリポジトリは用意しておりません．
 
+## ディレクトリ構成
+
+```bash
+project/
+├── Makefile
+│
+├── README.md
+│
+├── argocd/ # ArgoCDのチャート
+│
+├── eks/ # EKSのチャート
+│
+├── istio/ # Istioのチャート
+│
+├── kubernetes/ # Kubernetesのチャート
+│
+├── operator/ # 各リソースのOperator
+│
+├── release/ # Helmによって出力されたマニフェストファイル
+│
+├── skaffold.yaml
+│
+└── values/ # HelmのValuesファイル
+```
+
 ## 使用技術
 
 ### インフラ
