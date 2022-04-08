@@ -246,7 +246,7 @@ spec:
       containers:
         # Lumenコンテナ
         - name: lumen
-          image: order-lumen:latest
+          image: order-lumen:b5d0574
           imagePullPolicy: Always
           ports:
             - containerPort: 9000
