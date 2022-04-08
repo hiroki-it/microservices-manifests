@@ -14,7 +14,7 @@ spec:
     targetRevision: main
     path: release/prd
     directory:
-      recurse: true
+      include: kubernetes.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: microservices
