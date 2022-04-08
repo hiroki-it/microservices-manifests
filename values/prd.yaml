@@ -13,7 +13,7 @@ kubernetes:
     customer:
       fastapi: "933cfde"
     orchestrator:
-      fastapi: latest
+      fastapi: "00690e9"
     order:
       lumen: b5d0574
       nginx: b5d0574

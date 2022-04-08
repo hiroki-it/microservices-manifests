@@ -207,7 +207,7 @@ spec:
       containers:
         # FastAPIコンテナ
         - name: fastapi
-          image: orchestrator-fastapi:latest
+          image: orchestrator-fastapi:00690e9
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
