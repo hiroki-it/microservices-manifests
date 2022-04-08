@@ -12,7 +12,7 @@ spec:
     targetRevision: main
     path: release/{{ .Values.general.env }}
     directory:
-      recurse: true
+      include: kubernetes.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: microservices
