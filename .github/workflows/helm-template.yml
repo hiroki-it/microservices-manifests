@@ -33,6 +33,10 @@ jobs:
       - name: Git commit & push
         run: |
           git add ./release
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "マニフェストファイルに変更点がないため，GitHub Actionは終了しました．"
+            exit 0
+          fi
           git commit -m "helm templateを実行し，マニフェストファイルを自動生成しました．"
           git pull
           git push origin HEAD
