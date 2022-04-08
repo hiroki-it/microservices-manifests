@@ -251,7 +251,7 @@ spec:
           ports:
             - containerPort: 9000
         - name: nginx
-          image: order-nginx:latest
+          image: order-nginx:b5d0574
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
