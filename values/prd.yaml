@@ -15,5 +15,5 @@ kubernetes:
     orchestrator:
       fastapi: latest
     order:
-      lumen: latest
+      lumen: b5d0574
       nginx: latest
