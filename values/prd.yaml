@@ -9,7 +9,7 @@ general:
 kubernetes:
   image:
     account:
-      gin: latest
+      gin: d74ac1c
     customer:
       fastapi: "a0e4ba5"
     orchestrator:
