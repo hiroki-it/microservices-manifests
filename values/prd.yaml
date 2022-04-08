@@ -11,7 +11,7 @@ kubernetes:
     account:
       gin: d74ac1c
     customer:
-      fastapi: "933cfde"
+      fastapi: 27942bb
     orchestrator:
       fastapi: "00690e9"
     order:
