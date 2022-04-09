@@ -68,8 +68,6 @@ project/
 | CI（本番環境）    | GitHub Actions & Helm | ⭕     |
 | CD（本番環境）    | ArgoCD                | ⭕     |
 
-GitOpsの流れについては，**[microservices-backendリポジトリ](https://github.com/hiroki-it/microservices-backend)** を参照．
-
 ### 補足
 
 #### ▼ マイクロサービス間通信の管理
