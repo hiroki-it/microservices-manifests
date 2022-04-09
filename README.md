@@ -25,6 +25,8 @@ SREチームが以下のようなシナリオで開発運用していること�
 - ArgoCD: https://hiroki-it.github.io/tech-notebook-mkdocs/devops/devops_argocd.html
 - Skaffold: https://hiroki-it.github.io/tech-notebook-mkdocs/infrastructure_as_code/infrastructure_as_code_container_skaffold_yaml.html
 
+<br>
+
 ## ディレクトリ構成
 
 ```bash
@@ -42,6 +44,9 @@ project/
 ├── skaffold.yaml
 └── values/ # HelmのValuesファイル
 ```
+
+<br>
+
 
 ## 使用技術
 
@@ -82,6 +87,8 @@ project/
 ちなみに，イベント駆動方式を採用している場合は，イベントメッシュになります．
 
 参考：https://www.redhat.com/ja/topics/integration/what-is-an-event-mesh
+
+<br>
 
 ## 環境構築
 
