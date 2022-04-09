@@ -11,11 +11,19 @@ GitOpsの **[ベストプラクティス](https://blog.argoproj.io/5-gitops-best
 SREチームが以下のようなシナリオで開発運用していること，を想定しながら練習しております．
 
 1. SREチームは，いくつの境界付けられたコンテキストが存在しているかを知らなくても良い．ただし，各マイクロサービスのコンテナがいずれのイメージレジストリで管理されているか，またインバウンド通信を受け付けるポート番号は知っておく必要がある．
-2. SREチームは，本番環境のEKS上でKubernetesを稼働させる前に，Minikube上で挙動を検証する．DBとして，本番環境ではAWS RDS(Aurora)を用いるが，開発環境ではMySQLコンテナを用いる．
+2. SREチームは，本番環境のEKS上でKubernetesを稼働させる前に，Skaffoldを用いてMinikube上でKubernetesの挙動を検証する．DBとして，本番環境ではAWS RDS(Aurora)を用いるが，開発環境ではMySQLコンテナを用いる．
 3. SREチームは，マニフェストファイルのソースコードを変更し，プルリクを作成する．またGitFlowを経て変更がreleaseブランチにマージされる．
 4. 本リポジトリ上のGitHub Actionsは，releaseブランチのプッシュを検知する．Helmが，Valuesファイルを基にしてマニフェストファイルを自動生成する．また．これをプルリク上にプッシュする．
 5. SREチームのリリース責任者が，プルリクをmainブランチにマージする．
 6. AWS EKS上で稼働するArgoCDがmainブランチの変更を検知し，マニフェストの状態をプルする．
+
+参考：
+
+- Kubernetesマニフェスト: https://hiroki-it.github.io/tech-notebook-mkdocs/infrastructure_as_code/infrastructure_as_code_container_kubernetes_manifest_yaml.html
+- Istioマニフェスト: https://hiroki-it.github.io/tech-notebook-mkdocs/infrastructure_as_code/infrastructure_as_code_container_istio_manifest_yaml.html
+- Helmチャート: https://hiroki-it.github.io/tech-notebook-mkdocs/infrastructure_as_code/infrastructure_as_code_container_helm_chart.html
+- ArgoCD: https://hiroki-it.github.io/tech-notebook-mkdocs/devops/devops_argocd.html
+- Skaffold: https://hiroki-it.github.io/tech-notebook-mkdocs/infrastructure_as_code/infrastructure_as_code_container_skaffold_yaml.html
 
 ## ディレクトリ構成
 
@@ -68,6 +76,7 @@ project/
 | CI（本番環境）    | GitHub Actions & Helm | ⭕     |
 | CD（本番環境）    | ArgoCD                | ⭕     |
 
+
 ### 補足
 
 #### ▼ マイクロサービス間通信の管理
@@ -109,11 +118,3 @@ $ make apply-k8s
 ```bash
 $ make apply-istio
 ```
-
-## 参考
-
-Kubernetesマニフェスト：
-<br>https://hiroki-it.github.io/tech-notebook-mkdocs/infrastructure_as_code/infrastructure_as_code_container_kubernetes_manifest_yml.html
-
-Istioマニフェスト：
-<br>https://hiroki-it.github.io/tech-notebook-mkdocs/infrastructure_as_code/infrastructure_as_code_container_istio_manifest_yml.html
