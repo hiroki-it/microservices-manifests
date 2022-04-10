@@ -2,6 +2,9 @@
 # General
 #============
 general:
+  aws:
+    accountKeyId: dummy
+    region: dummy
   env: prd
 #============
 # Kubernetes
