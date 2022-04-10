@@ -44,8 +44,8 @@ project/
 ├── kubernetes/ # Kubernetesのチャート
 ├── operator/ # 各リソースのOperator
 ├── release/ # Helmによって出力されたマニフェストファイル
-│   ├── dev # バージョン管理されないことに注意
-│   └── prd
+│   ├── dev/ # 開発環境のマニフェストファイル．バージョン管理されないことに注意
+│   └── prd/ # 本番環境のマニフェストファイル
 ├── skaffold.yaml
 └── values/ # HelmのValuesファイル
 ```
