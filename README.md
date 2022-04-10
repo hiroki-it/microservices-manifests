@@ -43,7 +43,7 @@ project/
 ├── istio/ # Istioのチャート
 ├── kubernetes/ # Kubernetesのチャート
 ├── operator/ # 各リソースのOperator
-├── release/ # Helmによって出力されたマニフェストファイル
+├── release/ # Helmによって自動生成されたマニフェストファイル
 │   ├── dev/ # 開発環境のマニフェストファイル．バージョン管理されないことに注意
 │   └── prd/ # 本番環境のマニフェストファイル
 ├── skaffold.yaml
