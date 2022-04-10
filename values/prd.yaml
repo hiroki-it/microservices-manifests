@@ -3,8 +3,8 @@
 #============
 general:
   aws:
-    accountKeyId: dummy
-    region: dummy
+    accountKeyId: null
+    region: null
   env: prd
 #============
 # Kubernetes
