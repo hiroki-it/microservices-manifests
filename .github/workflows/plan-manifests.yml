@@ -28,14 +28,14 @@ jobs:
           helm package ./kubernetes ./istio ./argocd ./eks ./operator/istio
       - name: Helm template
         run: |
-          helm template release microservices-manifests-kubernetes-*.tgz -f values/prd.yaml >| ./release/prd/kubernetes.yaml
-          helm template release microservices-manifests-istio-*.tgz -f values/prd.yaml >| ./release/prd/istio.yaml
-          helm template release microservices-manifests-argocd-*.tgz -f values/prd.yaml >| ./release/prd/argocd.yaml
-          helm template release microservices-manifests-eks-*.tgz -f values/prd.yaml >| ./release/prd/eks.yaml
-          helm template release microservices-manifests-operator-istio-*.tgz -f values/dev.yaml >| ./release/prd/istio-operator.yaml
+          helm template release microservices-manifests-kubernetes-*.tgz -f values/prd.yaml >| ./release-plan/prd/kubernetes.yaml
+          helm template release microservices-manifests-istio-*.tgz -f values/prd.yaml >| ./release-plan/prd/istio.yaml
+          helm template release microservices-manifests-argocd-*.tgz -f values/prd.yaml >| ./release-plan/prd/argocd.yaml
+          helm template release microservices-manifests-eks-*.tgz -f values/prd.yaml >| ./release-plan/prd/eks.yaml
+          helm template release microservices-manifests-operator-istio-*.tgz -f values/dev.yaml >| ./release-plan/prd/istio-operator.yaml
       - name: Git commit & push
         run: |
-          git add ./release
+          git add ./release-plan
           if [ -z "$(git status --porcelain)" ]; then
             echo "マニフェストファイルに変更点がないため，GitHub Actionは終了しました．"
             exit 0
