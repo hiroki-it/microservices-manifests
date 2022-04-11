@@ -17,12 +17,12 @@ jobs:
           version: v3.8.1
       - name: Helm package
         run: |
-          helm package ./kubernetes ./istio ./argocd ./eks ./operator/istio
+          helm package ./kubernetes ./istio ./argocd ./eks ./operator/istio -d ./archives
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
           name: artifact
-          path: .
+          path: ./archives
 
   push-kubernetes-chart:
     needs: package-charts
