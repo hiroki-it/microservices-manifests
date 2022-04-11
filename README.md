@@ -108,7 +108,7 @@ $ eval $(minikube -p minikube docker-env)
 ### Helm
 
 ```bash
-make helm-template
+make plan-manifests
 ````
 
 ### Kubernetes

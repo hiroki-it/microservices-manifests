@@ -55,8 +55,8 @@ destroy-istio:
 	istioctl x uninstall --purge -y
 
 # マニフェストファイルを生成します．
-.PHONY: helm-template
-helm-template:
+.PHONY: plan-manifests
+plan-manifests:
 	helm package ./kubernetes ./istio ./argocd ./eks ./operator/istio
 	helm template release microservices-manifests-kubernetes-*.tgz -f values/dev.yaml >| ./release-plan/dev/kubernetes.yaml
 	helm template release microservices-manifests-istio-*.tgz -f values/dev.yaml >| ./release-plan/dev/istio.yaml
