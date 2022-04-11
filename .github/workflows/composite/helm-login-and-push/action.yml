@@ -18,4 +18,4 @@ runs:
         aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | Helm registry login --username AWS --password-stdin ${AWS_ECR_ACCOUNT_URL}
     - name: Helm push
       run: |
-        helm push microservices-manifests-$(inputs.target)-*.tgz oci://${AWS_ECR_ACCOUNT_URL}/
+        helm push  ./archives/microservices-manifests-$(inputs.target)-*.tgz oci://${AWS_ECR_ACCOUNT_URL}/
