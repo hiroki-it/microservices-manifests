@@ -1,0 +1,21 @@
+inputs:
+  target:
+    description: The target of resource
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Download artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: artifact
+    - name: Export envs
+      run: |
+        echo "AWS_ECR_ACCOUNT_URL=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com" >> $GITHUB_ENV
+    - name: Helm registry login
+      run: |
+        aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | Helm registry login --username AWS --password-stdin ${AWS_ECR_ACCOUNT_URL}
+    - name: Helm push
+      run: |
+        helm push microservices-manifests-$(inputs.target)-*.tgz oci://${AWS_ECR_ACCOUNT_URL}/

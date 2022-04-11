@@ -1,0 +1,68 @@
+name: push-charts
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  package-charts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: v3.8.1
+      - name: Helm package
+        run: |
+          helm package ./kubernetes ./istio ./argocd ./eks ./operator/istio
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: artifact
+          path: .
+
+  push-kubernetes-chart:
+    needs: package-charts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Helm login & push
+        uses: ./.github/workflows/composite/helm-login-and-push
+        with:
+          target: kubernetes
+
+  push-istio-chart:
+    needs: package-charts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Helm login & push
+        uses: ./.github/workflows/composite/helm-login-and-push
+        with:
+          target: istio
+
+  push-argocd-chart:
+    needs: package-charts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Helm login & push
+        uses: ./.github/workflows/composite/helm-login-and-push
+        with:
+          target: argocd
+
+  push-eks-chart:
+    needs: package-charts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Helm login & push
+        uses: ./.github/workflows/composite/helm-login-and-push
+        with:
+          target: eks
+
+  push-operator-istio-chart:
+    needs: package-charts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Helm login & push
+        uses: ./.github/workflows/composite/helm-login-and-push
+        with:
+          target: operator-istio
