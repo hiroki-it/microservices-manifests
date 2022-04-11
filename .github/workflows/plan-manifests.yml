@@ -1,4 +1,4 @@
-name: helm-template
+name: plan-manifests
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - release/**
 
 jobs:
-  helm-template:
+  plan-manifests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
