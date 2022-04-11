@@ -28,6 +28,8 @@ jobs:
     needs: package-charts
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Helm login & push
         uses: ./.github/workflows/composite/helm-login-and-push
         with:
@@ -37,6 +39,8 @@ jobs:
     needs: package-charts
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Helm login & push
         uses: ./.github/workflows/composite/helm-login-and-push
         with:
@@ -46,6 +50,8 @@ jobs:
     needs: package-charts
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Helm login & push
         uses: ./.github/workflows/composite/helm-login-and-push
         with:
@@ -55,6 +61,8 @@ jobs:
     needs: package-charts
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Helm login & push
         uses: ./.github/workflows/composite/helm-login-and-push
         with:
@@ -64,6 +72,8 @@ jobs:
     needs: package-charts
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Helm login & push
         uses: ./.github/workflows/composite/helm-login-and-push
         with:
