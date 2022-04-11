@@ -31,7 +31,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Helm login & push
-        uses: ./.github/workflows/composite/helm-login-and-push
+        uses: .github/workflows/composite/helm-login-and-push
         with:
           target: kubernetes
 
@@ -42,7 +42,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Helm login & push
-        uses: ./.github/workflows/composite/helm-login-and-push
+        uses: .github/workflows/composite/helm-login-and-push
         with:
           target: istio
 
@@ -53,7 +53,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Helm login & push
-        uses: ./.github/workflows/composite/helm-login-and-push
+        uses: .github/workflows/composite/helm-login-and-push
         with:
           target: argocd
 
@@ -64,7 +64,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Helm login & push
-        uses: ./.github/workflows/composite/helm-login-and-push
+        uses: .github/workflows/composite/helm-login-and-push
         with:
           target: eks
 
@@ -75,6 +75,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Helm login & push
-        uses: ./.github/workflows/composite/helm-login-and-push
+        uses: .github/workflows/composite/helm-login-and-push
         with:
           target: operator-istio
