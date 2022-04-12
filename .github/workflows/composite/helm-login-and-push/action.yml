@@ -24,12 +24,12 @@ runs:
     - name: Export envs
       shell: bash
       run: |
-        echo "AWS_ECR_ACCOUNT_URL=${{ inputs.aws_account_id }}.dkr.ecr.${{ inputs.aws_default_region }}.amazonaws.com" >> $GITHUB_ENV
+        echo "AWS_ECR_ACCOUNT_URL=::add-mask::${{ inputs.aws_account_id }}.dkr.ecr.::add-mask::${{ inputs.aws_default_region }}.amazonaws.com" >> $GITHUB_ENV
     - name: Helm registry login
       shell: bash
       run: |
-        aws ecr get-login-password --region ${{ inputs.aws_default_region }} | helm registry login --username AWS --password-stdin ${AWS_ECR_ACCOUNT_URL}
+        aws ecr get-login-password --region ::add-mask::${{ inputs.aws_default_region }} | helm registry login --username AWS --password-stdin ::add-mask::${AWS_ECR_ACCOUNT_URL}
     - name: Helm push
       shell: bash
       run: |
-        helm push ./archives/microservices-manifests-${{ inputs.target }}-*.tgz oci://${AWS_ECR_ACCOUNT_URL}/
+        helm push ./archives/microservices-manifests-${{ inputs.target }}-*.tgz oci://::add-mask::${AWS_ECR_ACCOUNT_URL}/
