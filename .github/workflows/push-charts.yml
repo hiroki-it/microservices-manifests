@@ -18,6 +18,7 @@ jobs:
       - name: Helm package
         run: |
           helm package ./kubernetes ./istio ./argocd ./eks ./operator/istio -d ./archives
+          echo ${{ secrets.AWS_DEFAULT_REGION }}
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
