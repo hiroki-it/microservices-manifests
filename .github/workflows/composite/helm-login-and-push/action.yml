@@ -16,11 +16,6 @@ runs:
       uses: actions/download-artifact@v2
       with:
         name: artifact
-    - name: Setup AWSCLI
-      id: install-aws-cli
-      uses: unfor19/install-aws-cli-action@v1.0.2
-      with:
-        version: 2
     - name: Export envs
       shell: bash
       run: |
