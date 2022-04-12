@@ -2,6 +2,12 @@ inputs:
   target:
     description: The target of resource
     required: true
+  aws_account_id:
+    description: AWS account id
+    required: true
+  aws_default_region:
+    description: AWS region
+    required: true
 
 runs:
   using: "composite"
@@ -18,11 +24,11 @@ runs:
     - name: Export envs
       shell: bash
       run: |
-        echo "AWS_ECR_ACCOUNT_URL=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_DEFAULT_REGION }}.amazonaws.com" >> $GITHUB_ENV
+        echo "AWS_ECR_ACCOUNT_URL=${{ inputs.aws_account_id }}.dkr.ecr.${{ inputs.aws_default_region }}.amazonaws.com" >> $GITHUB_ENV
     - name: Helm registry login
       shell: bash
       run: |
-        aws ecr get-login-password --region ${{ secrets.AWS_DEFAULT_REGION }} | helm registry login --username AWS --password-stdin ${AWS_ECR_ACCOUNT_URL}
+        aws ecr get-login-password --region ${{ inputs.aws_default_region }} | helm registry login --username AWS --password-stdin ${AWS_ECR_ACCOUNT_URL}
     - name: Helm push
       shell: bash
       run: |

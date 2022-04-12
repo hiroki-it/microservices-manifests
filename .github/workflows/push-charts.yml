@@ -34,6 +34,8 @@ jobs:
         uses: ./.github/workflows/composite/helm-login-and-push
         with:
           target: kubernetes
+          aws_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
+          aws_default_region: ${{ secrets.AWS_DEFAULT_REGION }}
 
   push-istio-chart:
     needs: package-charts
@@ -45,6 +47,8 @@ jobs:
         uses: ./.github/workflows/composite/helm-login-and-push
         with:
           target: istio
+          aws_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
+          aws_default_region: ${{ secrets.AWS_DEFAULT_REGION }}
 
   push-argocd-chart:
     needs: package-charts
@@ -56,6 +60,8 @@ jobs:
         uses: ./.github/workflows/composite/helm-login-and-push
         with:
           target: argocd
+          aws_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
+          aws_default_region: ${{ secrets.AWS_DEFAULT_REGION }}
 
   push-eks-chart:
     needs: package-charts
@@ -67,6 +73,8 @@ jobs:
         uses: ./.github/workflows/composite/helm-login-and-push
         with:
           target: eks
+          aws_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
+          aws_default_region: ${{ secrets.AWS_DEFAULT_REGION }}
 
   push-operator-istio-chart:
     needs: package-charts
@@ -78,3 +86,5 @@ jobs:
         uses: ./.github/workflows/composite/helm-login-and-push
         with:
           target: operator-istio
+          aws_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
+          aws_default_region: ${{ secrets.AWS_DEFAULT_REGION }}
