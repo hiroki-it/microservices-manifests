@@ -12,11 +12,13 @@ inputs:
 runs:
   using: "composite"
   steps:
+    # 保存したアーティファクトを取得します．
     - name: Download artifact
       uses: actions/download-artifact@v2
       with:
         name: artifact
-    - name: Export envs
+    # 必要な環境変数を設定します．
+    - name: Setup envs
       shell: bash
       run: |
         "AWS_ACCOUT_ID=$(jq -r '.inputs.aws_account_id' $GITHUB_EVENT_PATH)"
@@ -25,10 +27,12 @@ runs:
         echo "::add-mask::AWS_ACCOUT_ID" >> $GITHUB_ENV
         echo "::add-mask::AWS_DEFAULT_REGION" >> $GITHUB_ENV
         echo "::add-mask::AWS_ECR_ACCOUNT_URL" >> $GITHUB_ENV
+    # リポジトリにログインします．
     - name: Helm registry login
       shell: bash
       run: |
         aws ecr get-login-password --region "${{ env.AWS_DEFAULT_REGION }}" | helm registry login --username AWS --password-stdin "${{ env.AWS_ECR_ACCOUNT_URL }}"
+    # Helmのチャートをリポジトリにプッシュします．
     - name: Helm push
       shell: bash
       run: |

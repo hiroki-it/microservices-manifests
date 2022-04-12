@@ -11,21 +11,26 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      # gitコマンドをセットアップします．
       - name: Git config
         run: |
           git config --local user.email "hasegawafeedshop@gmail.com"
           git config --local user.name "github-actions"
           git config pull.rebase false
+      # helmコマンドをセットアップします．
       - name: Setup Helm
         uses: azure/setup-helm@v1
         with:
           version: v3.8.1
+      # チャートの静的解析を実行します．
       - name: Helm lint
         run: |
           helm lint ./kubernetes ./istio ./argocd ./eks ./operator/istio -f ./values/prd.yaml
+      # チャートアーカイブを作成します．
       - name: Helm package
         run: |
           helm package ./kubernetes ./istio ./argocd ./eks ./operator/istio
+      # マニフェストファイルを生成します．
       - name: Helm template
         run: |
           helm template release microservices-manifests-kubernetes-*.tgz -f values/prd.yaml >| ./release-plan/prd/kubernetes.yaml
@@ -33,6 +38,7 @@ jobs:
           helm template release microservices-manifests-argocd-*.tgz -f values/prd.yaml >| ./release-plan/prd/argocd.yaml
           helm template release microservices-manifests-eks-*.tgz -f values/prd.yaml >| ./release-plan/prd/eks.yaml
           helm template release microservices-manifests-operator-istio-*.tgz -f values/dev.yaml >| ./release-plan/prd/istio-operator.yaml
+      # 生成されたマニフェストファイルをプッシュします．
       - name: Git commit & push
         run: |
           git add ./release-plan

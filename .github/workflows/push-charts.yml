@@ -18,9 +18,11 @@ jobs:
         uses: azure/setup-helm@v1
         with:
           version: v3.8.1
+      # チャートアーカイブを作成します．
       - name: Helm package
         run: |
           helm package ./kubernetes ./istio ./argocd ./eks ./operator/istio -d ./archives
+      # チャートアーカイブをアーティファクトとして保存します．
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
