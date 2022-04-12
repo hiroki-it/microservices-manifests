@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+env:
+  AWS_ACCOUNT_ID: AWS_ACCOUNT_ID
+  AWS_DEFAULT_REGION: AWS_DEFAULT_REGION
+
 jobs:
   package-charts:
     runs-on: ubuntu-latest
