@@ -26,4 +26,4 @@ runs:
     - name: Helm push
       shell: bash
       run: |
-        helm push ./archives/microservices-manifests-$(inputs.target)-*.tgz oci://${AWS_ECR_ACCOUNT_URL}/
+        helm push ./archives/microservices-manifests-${{ inputs.target }}-*.tgz oci://${AWS_ECR_ACCOUNT_URL}/
