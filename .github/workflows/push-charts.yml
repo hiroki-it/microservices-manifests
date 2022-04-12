@@ -23,8 +23,8 @@ jobs:
       - name: Set output
         id: envs
         run: |
-          AWS_ACCOUNT_ID=${{ secrets.AWS_ACCOUNT_ID }}"
-          AWS_DEFAULT_REGION=${{ secrets.AWS_DEFAULT_REGION }}"
+          AWS_ACCOUNT_ID="${{ secrets.AWS_ACCOUNT_ID }}"
+          AWS_DEFAULT_REGION="${{ secrets.AWS_DEFAULT_REGION }}"
           echo "::add-mask::$AWS_ACCOUNT_ID"
           echo "::add-mask::AWS_DEFAULT_REGION"
           echo "::set-output name=AWS_ACCOUNT_ID::$AWS_ACCOUNT_ID"
