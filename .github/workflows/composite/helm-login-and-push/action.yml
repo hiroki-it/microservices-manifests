@@ -18,7 +18,7 @@ runs:
     - name: Export envs
       shell: bash
       run: |
-        echo "AWS_ECR_ACCOUNT_URL=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com" >> $GITHUB_ENV
+        echo "AWS_ECR_ACCOUNT_URL=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_DEFAULT_REGION }}.amazonaws.com" >> $GITHUB_ENV
     - name: Helm registry login
       shell: bash
       run: |
