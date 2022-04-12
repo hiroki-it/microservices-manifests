@@ -19,7 +19,9 @@ runs:
     - name: Export envs
       shell: bash
       run: |
-        echo "AWS_ECR_ACCOUNT_URL=::add-mask::${{ inputs.aws_account_id }}.dkr.ecr.::add-mask::${{ inputs.aws_default_region }}.amazonaws.com" >> $GITHUB_ENV
+        echo "::add-mask::AWS_ACCOUT_ID=$(jq -r '.inputs.aws_account_id' $GITHUB_EVENT_PATH)" >> $GITHUB_ENV
+        echo "::add-mask::AWS_DEFAULT_REGION=$(jq -r '.inputs.aws_default_region' $GITHUB_EVENT_PATH)" >> $GITHUB_ENV
+        echo "::add-mask::AWS_ECR_ACCOUNT_URL=${{ inputs.aws_account_id }}.dkr.ecr.${{ inputs.aws_default_region }}.amazonaws.com" >> $GITHUB_ENV
     - name: Helm registry login
       shell: bash
       run: |
