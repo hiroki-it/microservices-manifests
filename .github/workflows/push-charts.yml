@@ -37,6 +37,8 @@ jobs:
         with:
           name: artifact
           path: ./archives
+    outputs:
+      TEST: ${{ steps.envs.outputs.TEST }}
 
   push-kubernetes-chart:
     needs: package-charts
@@ -46,7 +48,7 @@ jobs:
         uses: actions/checkout@v2
       - name: test
         run: |
-          echo ${{ needs.package-charts.steps.envs.outputs.TEST }}
+          echo ${{ needs.package-charts.outputs.TEST }}
       - name: Helm login & push
         uses: ./.github/workflows/composite/helm-login-and-push
         with:
