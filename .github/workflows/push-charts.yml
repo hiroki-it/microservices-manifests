@@ -31,9 +31,6 @@ jobs:
           echo "::set-output name=AWS_ACCOUNT_ID::$AWS_ACCOUNT_ID"
           echo "::set-output name=AWS_DEFAULT_REGION::$AWS_DEFAULT_REGION"
           echo "::set-output name=TEST::$TEST"
-      - name: test
-        run: |
-          echo ${{ steps.envs.outputs.TEST }}
       # チャートアーカイブをアーティファクトとして保存します．
       - name: Upload artifact
         uses: actions/upload-artifact@v2
@@ -47,6 +44,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: test
+        run: |
+          echo ${{ steps.envs.outputs.TEST }}
       - name: Helm login & push
         uses: ./.github/workflows/composite/helm-login-and-push
         with:
