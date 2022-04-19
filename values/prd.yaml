@@ -3,7 +3,7 @@
 #============
 general:
   aws:
-    accountKeyId: null
+    accountId: null
     region: null
   env: prd
 #============
