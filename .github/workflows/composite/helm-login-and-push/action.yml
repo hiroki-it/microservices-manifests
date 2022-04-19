@@ -27,5 +27,5 @@ runs:
     - name: Helm push
       shell: bash
       run: |
-        source ./github/script/export_envs.sh
+        source ./.github/script/export_envs.sh
         helm push ./archives/microservices-manifests-${{ inputs.target }}-*.tgz oci://$AWS_ECR_ACCOUNT_URL/
