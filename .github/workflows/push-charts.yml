@@ -25,19 +25,21 @@ jobs:
         run: |
           AWS_ACCOUNT_ID="${{ secrets.AWS_ACCOUNT_ID }}"
           AWS_DEFAULT_REGION="${{ secrets.AWS_DEFAULT_REGION }}"
-          TEST="test"
+          TEST="${{ secrets.TEST }}"
           echo "::add-mask::$AWS_ACCOUNT_ID"
           echo "::add-mask::$AWS_DEFAULT_REGION"
           echo "::set-output name=AWS_ACCOUNT_ID::$AWS_ACCOUNT_ID"
           echo "::set-output name=AWS_DEFAULT_REGION::$AWS_DEFAULT_REGION"
           echo "::set-output name=TEST::$TEST"
-          echo ${{ steps.envs.outputs.TEST }}
       # チャートアーカイブをアーティファクトとして保存します．
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
           name: artifact
           path: ./archives
+      - name: test
+        run: |
+          echo ${{ steps.envs.outputs.TEST }}
     outputs:
       TEST: ${{ steps.envs.outputs.TEST }}
 
