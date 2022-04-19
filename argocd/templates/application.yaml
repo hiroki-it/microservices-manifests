@@ -8,11 +8,8 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/hiroki-it/microservices-manifests.git
-    targetRevision: main
-    path: ./release-plan/{{ .Values.general.env }}
-    directory:
-      include: kubernetes.yaml
+    repoURL: oci://{{ .Values.aws.accountId }}.dkr.ecr.{{ .Values.aws.region }}.amazonaws.com/
+    targetRevision: 1.0.0
   destination:
     server: https://kubernetes.default.svc
     namespace: microservices
