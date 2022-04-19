@@ -23,7 +23,7 @@ runs:
       uses: actions/download-artifact@v2
       with:
         name: artifact
-        path: .
+        path: ./archives
     # AWSクレデンシャルをセットアップします．
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
