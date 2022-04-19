@@ -17,21 +17,15 @@ runs:
       uses: actions/download-artifact@v2
       with:
         name: artifact
-    # 環境ファイルに値を設定します．
-    - name: Setup envs
-      shell: bash
-      run: |
-        echo "AWS_ACCOUT_ID=${{ inputs.aws_account_id }}" >> $GITHUB_ENV
-        echo "AWS_DEFAULT_REGION=${{ inputs.aws_default_region }}" >> $GITHUB_ENV
-        echo "AWS_ECR_ACCOUNT_URL="${{ inputs.aws_account_id }}.dkr.ecr.${{ inputs.aws_default_region }}.amazonaws.com" >> $GITHUB_ENV
     # リポジトリにログインします．
     - name: Helm registry login
       shell: bash
       run: |
-        echo $TEST
-        aws ecr get-login-password --region "${{ env.AWS_DEFAULT_REGION }}" | helm registry login --username AWS --password-stdin "${{ env.AWS_ECR_ACCOUNT_URL }}"
+        source ./github/script/export_envs.sh
+        aws ecr get-login-password --region "${{ AWS_DEFAULT_REGION }}" | helm registry login --username AWS --password-stdin "${{ AWS_ECR_ACCOUNT_URL }}"
     # Helmのチャートをリポジトリにプッシュします．
     - name: Helm push
       shell: bash
       run: |
-        helm push ./archives/microservices-manifests-${{ inputs.target }}-*.tgz oci://"${{ env.AWS_ECR_ACCOUNT_URL }}"/
+        source ./github/script/export_envs.sh
+        helm push ./archives/microservices-manifests-${{ inputs.target }}-*.tgz oci://"${{ AWS_ECR_ACCOUNT_URL }}"/
