@@ -11,9 +11,6 @@ inputs:
   foo:
     required: true
 
-env:
-  TEST: '${{ inputs.test-param }}'
-
 runs:
   using: "composite"
   steps:
