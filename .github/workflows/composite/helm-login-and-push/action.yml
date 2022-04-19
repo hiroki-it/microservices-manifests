@@ -2,6 +2,9 @@ inputs:
   target:
     description: The target of resource
     required: true
+  aws_account_id:
+    description: AWS account id
+    required: true
   aws_account_key_id:
     description: AWS account key id
     required: true
@@ -31,6 +34,6 @@ runs:
     - name: Helm login & push
       shell: bash
       run: |
-        AWS_ECR_ACCOUNT_URL="${{ inputs.aws_account_key_id }}.dkr.ecr.${{ inputs.aws_default_region }}.amazonaws.com"
+        AWS_ECR_ACCOUNT_URL="${{ inputs.aws_account_id }}.dkr.ecr.${{ inputs.aws_default_region }}.amazonaws.com"
         aws ecr get-login-password --region ${{ inputs.aws_default_region }} | helm registry login --username AWS --password-stdin $AWS_ECR_ACCOUNT_URL
         helm push ./archives/microservices-manifests-${{ inputs.target }}-*.tgz oci://$AWS_ECR_ACCOUNT_URL/

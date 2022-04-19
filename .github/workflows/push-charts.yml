@@ -36,6 +36,7 @@ jobs:
         uses: ./.github/workflows/composite/helm-login-and-push
         with:
           target: kubernetes
+          aws_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
           aws_account_key_id: ${{ secrets.AWS_ACCOUNT_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_default_region: ${{ secrets.AWS_DEFAULT_REGION }}
@@ -50,6 +51,7 @@ jobs:
         uses: ./.github/workflows/composite/helm-login-and-push
         with:
           target: istio
+          aws_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
           aws_account_key_id: ${{ secrets.AWS_ACCOUNT_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_default_region: ${{ secrets.AWS_DEFAULT_REGION }}
@@ -64,6 +66,7 @@ jobs:
         uses: ./.github/workflows/composite/helm-login-and-push
         with:
           target: argocd
+          aws_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
           aws_account_key_id: ${{ secrets.AWS_ACCOUNT_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_default_region: ${{ secrets.AWS_DEFAULT_REGION }}
@@ -78,6 +81,7 @@ jobs:
         uses: ./.github/workflows/composite/helm-login-and-push
         with:
           target: eks
+          aws_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
           aws_account_key_id: ${{ secrets.AWS_ACCOUNT_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_default_region: ${{ secrets.AWS_DEFAULT_REGION }}
@@ -92,6 +96,7 @@ jobs:
         uses: ./.github/workflows/composite/helm-login-and-push
         with:
           target: operator-istio
+          aws_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
           aws_account_key_id: ${{ secrets.AWS_ACCOUNT_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_default_region: ${{ secrets.AWS_DEFAULT_REGION }}
