@@ -37,6 +37,7 @@ jobs:
         with:
           target: kubernetes
           aws_account_key_id: ${{ secrets.AWS_ACCOUNT_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_default_region: ${{ secrets.AWS_DEFAULT_REGION }}
 
   push-istio-chart:
@@ -50,6 +51,7 @@ jobs:
         with:
           target: istio
           aws_account_key_id: ${{ secrets.AWS_ACCOUNT_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_default_region: ${{ secrets.AWS_DEFAULT_REGION }}
 
   push-argocd-chart:
@@ -63,6 +65,7 @@ jobs:
         with:
           target: argocd
           aws_account_key_id: ${{ secrets.AWS_ACCOUNT_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_default_region: ${{ secrets.AWS_DEFAULT_REGION }}
 
   push-eks-chart:
@@ -76,6 +79,7 @@ jobs:
         with:
           target: eks
           aws_account_key_id: ${{ secrets.AWS_ACCOUNT_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_default_region: ${{ secrets.AWS_DEFAULT_REGION }}
 
   push-operator-istio-chart:
@@ -89,4 +93,5 @@ jobs:
         with:
           target: operator-istio
           aws_account_key_id: ${{ secrets.AWS_ACCOUNT_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_default_region: ${{ secrets.AWS_DEFAULT_REGION }}
