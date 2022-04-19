@@ -32,9 +32,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: test
-        run: |
-          echo ${{ needs.package-charts.outputs.TEST }}
       - name: Helm login & push
         uses: ./.github/workflows/composite/helm-login-and-push
         with:
