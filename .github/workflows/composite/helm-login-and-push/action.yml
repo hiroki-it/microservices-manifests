@@ -8,11 +8,11 @@ inputs:
   aws_default_region:
     description: AWS region
     required: true
-  test:
+  test-param:
     required: true
 
 env:
-  TEST: '${{ inputs.test }}'
+  TEST: '${{ inputs.test-param }}'
 
 runs:
   using: "composite"

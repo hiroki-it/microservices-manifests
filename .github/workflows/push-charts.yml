@@ -49,7 +49,7 @@ jobs:
           target: kubernetes
           aws_account_id: ${{ steps.envs.outputs.AWS_ACCOUNT_ID }}
           aws_default_region: ${{ steps.envs.outputs.AWS_DEFAULT_REGION }}
-          test: ${{ secrets.TEST }}
+          test-param: ${{ secrets.TEST }}
 
   push-istio-chart:
     needs: package-charts
