@@ -8,6 +8,8 @@ inputs:
   aws_default_region:
     description: AWS region
     required: true
+  test:
+    required: true
 
 runs:
   using: "composite"
@@ -21,6 +23,8 @@ runs:
     - name: Setup envs
       shell: bash
       run: |
+        "TEST=$(jq -r '.inputs.test' $GITHUB_EVENT_PATH)"
+        echo $TEST
         "AWS_ACCOUT_ID=$(jq -r '.inputs.aws_account_id' $GITHUB_EVENT_PATH)"
         "AWS_DEFAULT_REGION=$(jq -r '.inputs.aws_default_region' $GITHUB_EVENT_PATH)"
         "AWS_ECR_ACCOUNT_URL=${{ inputs.aws_account_id }}.dkr.ecr.${{ inputs.aws_default_region }}.amazonaws.com"

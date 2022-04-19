@@ -25,24 +25,16 @@ jobs:
         run: |
           AWS_ACCOUNT_ID="${{ secrets.AWS_ACCOUNT_ID }}"
           AWS_DEFAULT_REGION="${{ secrets.AWS_DEFAULT_REGION }}"
-          TEST="test"
           echo "::add-mask::$AWS_ACCOUNT_ID"
           echo "::add-mask::$AWS_DEFAULT_REGION"
-          echo "::add-mask::$TEST"
           echo "::set-output name=AWS_ACCOUNT_ID::$AWS_ACCOUNT_ID"
           echo "::set-output name=AWS_DEFAULT_REGION::$AWS_DEFAULT_REGION"
-          echo "::set-output name=TEST::$TEST"
       # チャートアーカイブをアーティファクトとして保存します．
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
           name: artifact
           path: ./archives
-      - name: test
-        run: |
-          echo ${{ steps.envs.outputs.TEST }}
-    outputs:
-      TEST: ${{ steps.envs.outputs.TEST }}
 
   push-kubernetes-chart:
     needs: package-charts
@@ -59,6 +51,7 @@ jobs:
           target: kubernetes
           aws_account_id: ${{ steps.envs.outputs.AWS_ACCOUNT_ID }}
           aws_default_region: ${{ steps.envs.outputs.AWS_DEFAULT_REGION }}
+          test: ${{ secrets.TEST }}
 
   push-istio-chart:
     needs: package-charts
