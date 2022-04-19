@@ -9,6 +9,11 @@ inputs:
     description: AWS region
     required: true
 
+env:
+  AWS_ACCOUT_ID: ${{ inputs.aws_account_id }}
+  AWS_DEFAULT_REGION: ${{ inputs.aws_default_region }}
+  AWS_ECR_ACCOUNT_URL: ${{ inputs.aws_account_id }}.dkr.ecr.${{ inputs.aws_default_region }}.amazonaws.com
+
 runs:
   using: "composite"
   steps:
@@ -17,13 +22,6 @@ runs:
       uses: actions/download-artifact@v2
       with:
         name: artifact
-    # 必要な環境変数を設定します．
-    - name: Setup envs
-      shell: bash
-      run: |
-        AWS_ACCOUT_ID=${{ inputs.aws_account_id }}
-        AWS_DEFAULT_REGION=${{ inputs.aws_default_region }}
-        AWS_ECR_ACCOUNT_URL="${{ inputs.aws_account_id }}.dkr.ecr.${{ inputs.aws_default_region }}.amazonaws.com"
     # リポジトリにログインします．
     - name: Helm registry login
       shell: bash
