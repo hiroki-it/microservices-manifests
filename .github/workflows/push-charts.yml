@@ -23,6 +23,13 @@ jobs:
           sudo chmod +x /usr/bin/yq
           yq e \
             -i '(.general.aws.accountId |="'${{ secrets.AWS_ACCOUNT_ID }}'") | (.general.aws.region |="'${{ secrets.AWS_DEFAULT_REGION }}'")' ./values/prd.yaml
+      # valuesファイルをチャート内に格納します．
+      - name: Copy values file into chart
+        run: |
+          find ./kubernetes ./istio ./argocd ./eks ./operator/istio \
+            -maxdepth 0 \
+            -exec cp ./values/prd.yaml {} \;
+          ls -la ./kubernetes ./istio ./argocd ./eks ./operator/istio
       # チャートアーカイブを作成します．
       - name: Helm package
         run: |
