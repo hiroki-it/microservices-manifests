@@ -11,10 +11,11 @@ inputs:
   test:
     required: true
 
+env:
+  TEST: ${{ inputs.test }}
+
 runs:
   using: "composite"
-  env:
-    TEST: ${{ inputs.test }}
   steps:
     # 保存したアーティファクトを取得します．
     - name: Download artifact
