@@ -12,7 +12,7 @@ inputs:
     required: true
 
 env:
-  TEST: "${{ inputs.test }}"
+  TEST: '${{ inputs.test }}'
 
 runs:
   using: "composite"
