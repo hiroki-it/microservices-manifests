@@ -15,6 +15,14 @@ jobs:
         uses: azure/setup-helm@v1
         with:
           version: v3.8.1
+      # yqコマンドでvaluesファイルを編集します．
+      # @see https://github.com/mikefarah/yq
+      - name: Edit helm values file
+        run: |
+          wget https://github.com/mikefarah/yq/releases/download/v4.22.1/yq_linux_amd64
+          sudo chmod +x /usr/local/bin/yq
+          yq e \
+            -i '(.general.aws.accountId |="'${{ secrets.AWS_ACCOUNT_ID }}'") | (.general.aws.region |="'${{ secrets.AWS_DEFAULT_REGION }}'")' ./values/prd.yaml
       # チャートアーカイブを作成します．
       - name: Helm package
         run: |
