@@ -23,9 +23,11 @@ runs:
     - name: Setup envs
       shell: bash
       run: |
+        TEST=${{ inputs.test }}
         AWS_ACCOUT_ID=${{ inputs.aws_account_id }}
         AWS_DEFAULT_REGION=${{ inputs.aws_default_region }}
         AWS_ECR_ACCOUNT_URL="${{ inputs.aws_account_id }}.dkr.ecr.${{ inputs.aws_default_region }}.amazonaws.com"
+        echo $TEST >> $GITHUB_ENV
         echo "::add-mask::AWS_ACCOUT_ID" >> $GITHUB_ENV
         echo "::add-mask::AWS_DEFAULT_REGION" >> $GITHUB_ENV
         echo "::add-mask::AWS_ECR_ACCOUNT_URL" >> $GITHUB_ENV
@@ -33,6 +35,7 @@ runs:
     - name: Helm registry login
       shell: bash
       run: |
+        echo $TEST
         aws ecr get-login-password --region "${{ env.AWS_DEFAULT_REGION }}" | helm registry login --username AWS --password-stdin "${{ env.AWS_ECR_ACCOUNT_URL }}"
     # Helmのチャートをリポジトリにプッシュします．
     - name: Helm push
