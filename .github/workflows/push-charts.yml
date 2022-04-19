@@ -19,14 +19,6 @@ jobs:
       - name: Helm package
         run: |
           helm package ./kubernetes ./istio ./argocd ./eks ./operator/istio -d ./archives
-      # 環境変数をinputで使用できるように，set-outputに代入します．
-      - name: Set output
-        id: envs
-        run: |
-          AWS_ACCOUNT_ID="${{ secrets.AWS_ACCOUNT_ID }}"
-          AWS_DEFAULT_REGION="${{ secrets.AWS_DEFAULT_REGION }}"
-          echo "::set-output name=AWS_ACCOUNT_ID::$AWS_ACCOUNT_ID"
-          echo "::set-output name=AWS_DEFAULT_REGION::$AWS_DEFAULT_REGION"
       # チャートアーカイブをアーティファクトとして保存します．
       - name: Upload artifact
         uses: actions/upload-artifact@v2
@@ -47,9 +39,8 @@ jobs:
         uses: ./.github/workflows/composite/helm-login-and-push
         with:
           target: kubernetes
-          aws_account_id: ${{ steps.envs.outputs.AWS_ACCOUNT_ID }}
-          aws_default_region: ${{ steps.envs.outputs.AWS_DEFAULT_REGION }}
-          foo: ${{ secrets.TEST }}
+          aws_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
+          aws_default_region: ${{ secrets.AWS_DEFAULT_REGION }}
 
   push-istio-chart:
     needs: package-charts
@@ -61,8 +52,8 @@ jobs:
         uses: ./.github/workflows/composite/helm-login-and-push
         with:
           target: istio
-          aws_account_id: ${{ steps.envs.outputs.AWS_ACCOUNT_ID }}
-          aws_default_region: ${{ steps.envs.outputs.AWS_DEFAULT_REGION }}
+          aws_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
+          aws_default_region: ${{ secrets.AWS_DEFAULT_REGION }}
 
   push-argocd-chart:
     needs: package-charts
@@ -74,8 +65,8 @@ jobs:
         uses: ./.github/workflows/composite/helm-login-and-push
         with:
           target: argocd
-          aws_account_id: ${{ steps.envs.outputs.AWS_ACCOUNT_ID }}
-          aws_default_region: ${{ steps.envs.outputs.AWS_DEFAULT_REGION }}
+          aws_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
+          aws_default_region: ${{ secrets.AWS_DEFAULT_REGION }}
 
   push-eks-chart:
     needs: package-charts
@@ -87,8 +78,8 @@ jobs:
         uses: ./.github/workflows/composite/helm-login-and-push
         with:
           target: eks
-          aws_account_id: ${{ steps.envs.outputs.AWS_ACCOUNT_ID }}
-          aws_default_region: ${{ steps.envs.outputs.AWS_DEFAULT_REGION }}
+          aws_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
+          aws_default_region: ${{ secrets.AWS_DEFAULT_REGION }}
 
   push-operator-istio-chart:
     needs: package-charts
@@ -100,5 +91,5 @@ jobs:
         uses: ./.github/workflows/composite/helm-login-and-push
         with:
           target: operator-istio
-          aws_account_id: ${{ steps.envs.outputs.AWS_ACCOUNT_ID }}
-          aws_default_region: ${{ steps.envs.outputs.AWS_DEFAULT_REGION }}
+          aws_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
+          aws_default_region: ${{ secrets.AWS_DEFAULT_REGION }}
