@@ -2,4 +2,7 @@
 # General
 #============
 general:
+  aws:
+    accountId: null
+    region: null
   env: dev
