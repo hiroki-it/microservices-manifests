@@ -10,6 +10,7 @@ metadata:
 spec:
   project: default
   source:
+    chart: microservices-manifests-kubernetes
     repoURL: oci://.dkr.ecr..amazonaws.com/microservices-manifests-kubernetes
     targetRevision: 1.0.0
   destination:
