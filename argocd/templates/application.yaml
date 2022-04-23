@@ -11,6 +11,9 @@ spec:
     chart: microservices-manifests-kubernetes
     repoURL: oci://{{ .Values.general.aws.accountId }}.dkr.ecr.{{ .Values.general.aws.region }}.amazonaws.com/microservices-manifests-kubernetes
     targetRevision: 1.0.0
+    helm:
+      valueFiles:
+        - ./prd-values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: microservices
