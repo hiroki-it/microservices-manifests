@@ -5,10 +5,3 @@ metadata:
   labels:
     env: {{ .Values.general.env }}
     istio-injection: enabled
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: argocd
-  labels:
-    env: {{ .Values.general.env }}
