@@ -8,14 +8,6 @@ metadata:
     env: prd
     istio-injection: enabled
 ---
-# Source: microservices-manifests-kubernetes/templates/manifests/namespace.yaml
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: argocd
-  labels:
-    env: prd
----
 # Source: microservices-manifests-kubernetes/templates/manifests/account/app/service.yaml
 apiVersion: v1
 kind: Service
@@ -132,7 +124,7 @@ spec:
       containers:
         # Ginコンテナ
         - name: gin
-          image: account-gin:d74ac1c
+          image: .dkr.ecr..amazonaws.com/account-gin-repository:d74ac1c
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -171,7 +163,7 @@ spec:
       containers:
         # FastAPIコンテナ
         - name: fastapi
-          image: customer-fastapi:27942bb
+          image: .dkr.ecr..amazonaws.com/customer-fastapi-repository:27942bb
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
@@ -207,7 +199,7 @@ spec:
       containers:
         # FastAPIコンテナ
         - name: fastapi
-          image: orchestrator-fastapi:00690e9
+          image: .dkr.ecr..amazonaws.com/orchestrator-fastapi-repository:6.9e+11
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
@@ -246,12 +238,12 @@ spec:
       containers:
         # Lumenコンテナ
         - name: lumen
-          image: order-lumen:b5d0574
+          image: .dkr.ecr..amazonaws.com/order-lumen-repository:b5d0574
           imagePullPolicy: Always
           ports:
             - containerPort: 9000
         - name: nginx
-          image: order-nginx:b5d0574
+          image: .dkr.ecr..amazonaws.com/order-nginx-repository:b5d0574
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
