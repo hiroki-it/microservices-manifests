@@ -57,12 +57,11 @@ destroy-istio:
 # マニフェストファイルを生成します．
 .PHONY: plan-manifests
 plan-manifests:
-	helm package ./kubernetes ./istio ./argocd ./eks ./operator/istio
-	helm template release microservices-manifests-kubernetes-*.tgz -f values/dev.yaml >| ./release-plan/dev/kubernetes.yaml
-	helm template release microservices-manifests-istio-*.tgz -f values/dev.yaml >| ./release-plan/dev/istio.yaml
-	helm template release microservices-manifests-operator-istio-*.tgz -f values/dev.yaml >| ./release-plan/dev/istio-operator.yaml
-	helm template release microservices-manifests-argocd-*.tgz -f values/dev.yaml >| ./release-plan/dev/argocd.yaml
-	helm template release microservices-manifests-eks-*.tgz -f values/dev.yaml >| ./release-plan/dev/eks.yaml
+	helm package ./kubernetes ./istio ./argocd ./eks ./operator/istio -d ./archives
+	helm template release ./archives/microservices-manifests-kubernetes-*.tgz -f values/dev.yaml >| ./release-plan/dev/kubernetes.yaml
+	helm template release ./archives/microservices-manifests-istio-*.tgz -f values/dev.yaml >| ./release-plan/dev/istio.yaml
+	helm template release ./archives/microservices-manifests-argocd-*.tgz -f values/dev.yaml >| ./release-plan/dev/argocd.yaml
+	helm template release ./archives/microservices-manifests-eks-*.tgz -f values/dev.yaml >| ./release-plan/dev/eks.yaml
 
 # ArgoCDをデプロイします．
 .PHONY: apply-argocd
