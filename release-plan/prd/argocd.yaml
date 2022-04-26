@@ -1,4 +1,21 @@
 ---
+# Source: microservices-manifests-argocd/templates/secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  namespace: argocd
+  name: argocd-kubernetes-secret
+  labels:
+    env: prd
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  name: microservices-manifests-kubernetes
+  url: .dkr.ecr..amazonaws.com/microservices-manifests-kubernetes
+  enableOCI: true
+  type: helm
+  username: AWS
+  password: .dkr.ecr..amazonaws.com
+---
 # Source: microservices-manifests-argocd/templates/application.yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -13,6 +30,9 @@ spec:
     chart: microservices-manifests-kubernetes
     repoURL: oci://.dkr.ecr..amazonaws.com/microservices-manifests-kubernetes
     targetRevision: 1.0.0
+    helm:
+      valueFiles:
+        - ./prd.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: microservices
