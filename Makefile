@@ -1,7 +1,7 @@
 # バージョン
 KUBERNETES_VERSION := 1.23.5
 ISTIO_ADDON_VERSION := 1.12
-ARGOCD_VERSION := 2.3.1
+ARGOCD_VERSION := 2.3.3
 
 # パス
 PROJECT_DIR := $(shell dirname $(shell pwd))
