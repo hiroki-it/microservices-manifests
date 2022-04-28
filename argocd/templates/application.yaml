@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     chart: microservices-manifests-kubernetes
-    repoURL: oci://{{ .Values.general.aws.accountId }}.dkr.ecr.{{ .Values.general.aws.region }}.amazonaws.com/microservices-manifests-kubernetes
+    repoURL: {{ .Values.general.aws.accountId }}.dkr.ecr.{{ .Values.general.aws.region }}.amazonaws.com/microservices-manifests-kubernetes
     targetRevision: 1.0.0
     helm:
       valueFiles:
