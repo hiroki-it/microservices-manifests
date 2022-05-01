@@ -10,11 +10,11 @@ metadata:
     argocd.argoproj.io/secret-type: repository
 stringData:
   name: microservices-manifests-kubernetes
-  url: .dkr.ecr..amazonaws.com/microservices-manifests-kubernetes
+  url: 089167234998.dkr.ecr.ap-northeast-1.amazonaws.com/microservices-manifests-kubernetes
   enableOCI: true
   type: helm
   username: AWS
-  password: .dkr.ecr..amazonaws.com
+  password: $(aws ecr get-login-password --region ap-northeast-1)
 ---
 # Source: microservices-manifests-argocd/templates/application.yaml
 apiVersion: argoproj.io/v1alpha1
@@ -28,7 +28,7 @@ spec:
   project: default
   source:
     chart: microservices-manifests-kubernetes
-    repoURL: oci://.dkr.ecr..amazonaws.com/microservices-manifests-kubernetes
+    repoURL: 089167234998.dkr.ecr.ap-northeast-1.amazonaws.com/microservices-manifests-kubernetes
     targetRevision: 1.0.0
     helm:
       valueFiles:
