@@ -58,15 +58,6 @@ project/
 
 インフラ領域を構成する使用技術の一覧です．
 
-マイクロサービス間通信の管理方法は，リクエストリプライ方式に基づくサービスメッシュを実現するIstioを採用します．
-
-プロキシコンテナはEnvoyとしますが，インバウンド通信をFastCGIプロトコルでルーティングする場合にNginxも用いる想定です．
-
-この時，HTTPプロトコルによる同期通信を行い，gRPCプロトコルは用いない想定です．
-
-ちなみに，イベント駆動方式を採用している場合は，イベントメッシュになります．
-
-参考：https://www.redhat.com/ja/topics/integration/what-is-an-event-mesh
 
 | 役割                | ツール                 | 導入の状況          |
 |-------------------|---------------------|----------------|
@@ -78,6 +69,16 @@ project/
 | SagaパターンのためのQueue | AWS SQS             | coming soon... |
 | API Gateway       | AWS API Gateway     | coming soon... |
 | Kubernetesの実行環境   | AWS EKS             | coming soon... |
+
+マイクロサービス間通信の管理方法は，リクエストリプライ方式に基づくサービスメッシュを実現するIstioを採用します．
+
+プロキシコンテナはEnvoyとしますが，インバウンド通信をFastCGIプロトコルでルーティングする場合にNginxも用いる想定です．
+
+この時，HTTPプロトコルによる同期通信を行い，gRPCプロトコルは用いない想定です．
+
+ちなみに，イベント駆動方式を採用している場合は，イベントメッシュになります．
+
+参考：https://www.redhat.com/ja/topics/integration/what-is-an-event-mesh
 
 ### CI/CD
 
