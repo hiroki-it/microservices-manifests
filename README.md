@@ -8,6 +8,14 @@ GitOpsの **[ベストプラクティス](https://blog.argoproj.io/5-gitops-best
 
 現状，フロントエンド領域のリポジトリは用意しておりません．
 
+参考：
+
+- Kubernetesマニフェスト: https://hiroki-it.github.io/tech-notebook-mkdocs/infrastructure_as_code/infrastructure_as_code_container_kubernetes_manifest_yaml.html
+- Istioマニフェスト: https://hiroki-it.github.io/tech-notebook-mkdocs/infrastructure_as_code/infrastructure_as_code_container_istio_manifest_yaml.html
+- Helmチャート: https://hiroki-it.github.io/tech-notebook-mkdocs/infrastructure_as_code/infrastructure_as_code_container_helm_chart.html
+- ArgoCD: https://hiroki-it.github.io/tech-notebook-mkdocs/devops/devops_argocd.html
+- Skaffold: https://hiroki-it.github.io/tech-notebook-mkdocs/infrastructure_as_code/infrastructure_as_code_container_skaffold_yaml.html
+
 <br>
 
 ## 開発運用シナリオ
@@ -21,14 +29,6 @@ SREチームが以下のようなシナリオで開発運用していること�
 5. SREチームのリリース責任者は，生成されたマニフェストファイルをレビューし，プルリクをmainブランチにマージする． 
 6. GitHub Actionが，mainブランチのマージを検知する．この時，Valuesファイルの機密性の高い値を環境変数で上書きする．このValuesファイルを各チャート内にコピーし，チャートをAWS ECRにプッシュする．これらにより，Valuesファイルの機密情報のバージョン管理を避けつつ，本番環境では完全なValuesファイルを使用できる．
 7. AWS EKS上で稼働するArgoCDは，AWS ECRのチャートの変更を検知し，AWS ECRからチャートをプルする．
-
-参考：
-
-- Kubernetesマニフェスト: https://hiroki-it.github.io/tech-notebook-mkdocs/infrastructure_as_code/infrastructure_as_code_container_kubernetes_manifest_yaml.html
-- Istioマニフェスト: https://hiroki-it.github.io/tech-notebook-mkdocs/infrastructure_as_code/infrastructure_as_code_container_istio_manifest_yaml.html
-- Helmチャート: https://hiroki-it.github.io/tech-notebook-mkdocs/infrastructure_as_code/infrastructure_as_code_container_helm_chart.html
-- ArgoCD: https://hiroki-it.github.io/tech-notebook-mkdocs/devops/devops_argocd.html
-- Skaffold: https://hiroki-it.github.io/tech-notebook-mkdocs/infrastructure_as_code/infrastructure_as_code_container_skaffold_yaml.html
 
 <br>
 
@@ -52,12 +52,21 @@ project/
 
 <br>
 
-
 ## 使用技術
 
 ### インフラ
 
 インフラ領域を構成する使用技術の一覧です．
+
+マイクロサービス間通信の管理方法は，リクエストリプライ方式に基づくサービスメッシュを実現するIstioを採用します．
+
+プロキシコンテナはEnvoyとしますが，インバウンド通信をFastCGIプロトコルでルーティングする場合にNginxも用いる想定です．
+
+この時，HTTPプロトコルによる同期通信を行い，gRPCプロトコルは用いない想定です．
+
+ちなみに，イベント駆動方式を採用している場合は，イベントメッシュになります．
+
+参考：https://www.redhat.com/ja/topics/integration/what-is-an-event-mesh
 
 | 役割                | ツール                 | 導入の状況          |
 |-------------------|---------------------|----------------|
@@ -72,26 +81,15 @@ project/
 
 ### CI/CD
 
+開発環境ではSkaffoldを用いてCI/CDを実行します．
+
+一方で，本番環境ではCIをGitHub Actionsで，またCDをArgoCDで実行します．
+
 | 役割          | ツール                   | 導入の状況 |
 |-------------|-----------------------|-------|
 | CI/CD（開発環境） | Skaffold              | ⭕     |
 | CI（本番環境）    | GitHub Actions & Helm | ⭕     |
 | CD（本番環境）    | ArgoCD                | ⭕     |
-
-
-### 補足
-
-#### ▼ マイクロサービス間通信の管理
-
-マイクロサービス間通信の管理方法は，リクエストリプライ方式に基づくサービスメッシュを実現するIstioを採用します．
-
-プロキシコンテナはEnvoyとしますが，インバウンド通信をFastCGIプロトコルでルーティングする場合にNginxも用いる想定です．
-
-この時，HTTPプロトコルによる同期通信を行い，gRPCプロトコルは用いない想定です．
-
-ちなみに，イベント駆動方式を採用している場合は，イベントメッシュになります．
-
-参考：https://www.redhat.com/ja/topics/integration/what-is-an-event-mesh
 
 <br>
 
