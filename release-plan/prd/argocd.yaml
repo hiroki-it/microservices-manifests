@@ -9,12 +9,12 @@ metadata:
     env: prd
     argocd.argoproj.io/secret-type: repository
 stringData:
-  name: microservices-manifests-kubernetes
-  url: .dkr.ecr..amazonaws.com/microservices-manifests-kubernetes
-  enableOCI: true
+  name: microservices-manifests-chart-registry
+  url: .dkr.ecr..amazonaws.com
+  enableOCI: "true"
   type: helm
   username: AWS
-  password: .dkr.ecr..amazonaws.com
+  password: null
 ---
 # Source: microservices-manifests-argocd/templates/application.yaml
 apiVersion: argoproj.io/v1alpha1
@@ -27,8 +27,8 @@ metadata:
 spec:
   project: default
   source:
-    chart: microservices-manifests-kubernetes
-    repoURL: oci://.dkr.ecr..amazonaws.com/microservices-manifests-kubernetes
+    chart: microservices-manifests-argocd
+    repoURL: .dkr.ecr..amazonaws.com
     targetRevision: 1.0.0
     helm:
       valueFiles:
