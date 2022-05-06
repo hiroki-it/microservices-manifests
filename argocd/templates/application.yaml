@@ -8,7 +8,7 @@ metadata:
 spec:
   project: default
   source:
-    chart: microservices-manifests-kubernetes
+    chart: microservices-manifests-argocd
     repoURL: {{ .Values.general.aws.accountId }}.dkr.ecr.{{ .Values.general.aws.region }}.amazonaws.com
     targetRevision: 1.0.0
     helm:
