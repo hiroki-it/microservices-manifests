@@ -4,14 +4,14 @@ apiVersion: v1
 kind: Secret
 metadata:
   namespace: argocd
-  name: argocd-kubernetes-secret
+  name: microservices-manifests-chart-registry-secret
   labels:
     env: prd
     argocd.argoproj.io/secret-type: repository
 stringData:
-  name: microservices-manifests-kubernetes
-  url: .dkr.ecr..amazonaws.com/microservices-manifests-kubernetes
-  enableOCI: true
+  name: microservices-manifests-chart-registry
+  url: .dkr.ecr..amazonaws.com
+  enableOCI: "true"
   type: helm
   username: AWS
   password: null
@@ -21,14 +21,14 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   namespace: argocd
-  name: argocd-application
+  name: kubernetes-application
   labels:
-      env: prd
+    env: prd
 spec:
   project: default
   source:
     chart: microservices-manifests-kubernetes
-    repoURL: .dkr.ecr..amazonaws.com/microservices-manifests-kubernetes
+    repoURL: .dkr.ecr..amazonaws.com
     targetRevision: 1.0.0
     helm:
       valueFiles:

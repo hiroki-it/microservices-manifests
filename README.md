@@ -8,6 +8,14 @@ GitOpsの **[ベストプラクティス](https://blog.argoproj.io/5-gitops-best
 
 現状，フロントエンド領域のリポジトリは用意しておりません．
 
+参考：
+
+- Kubernetesマニフェスト: https://hiroki-it.github.io/tech-notebook-mkdocs/infrastructure_as_code/infrastructure_as_code_container_kubernetes_manifest_yaml.html
+- Istioマニフェスト: https://hiroki-it.github.io/tech-notebook-mkdocs/infrastructure_as_code/infrastructure_as_code_container_istio_manifest_yaml.html
+- Helmチャート: https://hiroki-it.github.io/tech-notebook-mkdocs/infrastructure_as_code/infrastructure_as_code_container_helm_chart.html
+- ArgoCD: https://hiroki-it.github.io/tech-notebook-mkdocs/devops/devops_argocd.html
+- Skaffold: https://hiroki-it.github.io/tech-notebook-mkdocs/infrastructure_as_code/infrastructure_as_code_container_skaffold_yaml.html
+
 <br>
 
 ## 開発運用シナリオ
@@ -17,18 +25,11 @@ SREチームが以下のようなシナリオで開発運用していること�
 1. SREチームは，各マイクロサービスのイメージがAWS ECRのいずれのリポジトリで管理されているか，またコンテナのインバウンド通信を受け付けるポートは何番か，を知っておく必要がある．
 2. SREチームは，本番環境のAWS EKS上でKubernetesを稼働させる前に，Skaffoldを用いてMinikube上でKubernetesの挙動を検証する．DBとして，本番環境ではAWS RDS(Aurora)を用いるが，開発環境ではMySQLコンテナを用いる．
 3. SREチームは，マニフェストファイルのソースコードを変更し，プルリクを作成する．またGitFlowを経て変更がreleaseブランチにマージされる．
-4. 本リポジトリ上のGitHub Actionsは，releaseブランチのプッシュを検知する．releaseブランチのプッシュを検知する．この時，HelmがValuesファイルを基にしてマニフェストファイルを自動生成し，これをプルリク上にプッシュする．ただし，ArgoCDはあくまでAWS ECRを監視しており，生成されたマニフェストファイルは実行計画のみのために用いられる．
+4. 本リポジトリ上のGitHub Actionsは，releaseブランチのプッシュを検知する．この時，HelmがValuesファイルを基にして実行計画用のマニフェストファイルを自動生成し，これをプルリク上にプッシュする．
 5. SREチームのリリース責任者は，生成されたマニフェストファイルをレビューし，プルリクをmainブランチにマージする． 
-6. GitHub Actionが，mainブランチのマージを検知する．この時，Valuesファイルの機密性の高い値を環境変数で上書きする．このValuesファイルを各チャート内にコピーし，チャートをAWS ECRにプッシュする．これらにより，Valuesファイルの機密情報のバージョン管理を避けつつ，本番環境では完全なValuesファイルを使用できる．
-7. AWS EKS上で稼働するArgoCDは，AWS ECRのチャートの変更を検知し，AWS ECRからチャートをプルする．
-
-参考：
-
-- Kubernetesマニフェスト: https://hiroki-it.github.io/tech-notebook-mkdocs/infrastructure_as_code/infrastructure_as_code_container_kubernetes_manifest_yaml.html
-- Istioマニフェスト: https://hiroki-it.github.io/tech-notebook-mkdocs/infrastructure_as_code/infrastructure_as_code_container_istio_manifest_yaml.html
-- Helmチャート: https://hiroki-it.github.io/tech-notebook-mkdocs/infrastructure_as_code/infrastructure_as_code_container_helm_chart.html
-- ArgoCD: https://hiroki-it.github.io/tech-notebook-mkdocs/devops/devops_argocd.html
-- Skaffold: https://hiroki-it.github.io/tech-notebook-mkdocs/infrastructure_as_code/infrastructure_as_code_container_skaffold_yaml.html
+6. GitHub Actionが，mainブランチのマージを検知する．この時，Valuesファイルの機密性の高い値を環境変数で上書きする．このValuesファイルを各チャート内にコピーし，チャートをAWS ECRにプッシュする．これらにより，Valuesファイルの機密情報のバージョン管理を避けつつ，本番環境では完全なValuesファイルを使用できる． 
+7. AWS EKS上で稼働するArgoCDが，mainブランチのマージを検知し，AWS ECRからチャートをプルする．
+8. Kubernetesリソースのデプロイが完了する．
 
 <br>
 
@@ -52,12 +53,12 @@ project/
 
 <br>
 
-
 ## 使用技術
 
 ### インフラ
 
 インフラ領域を構成する使用技術の一覧です．
+
 
 | 役割                | ツール                 | 導入の状況          |
 |-------------------|---------------------|----------------|
@@ -70,19 +71,6 @@ project/
 | API Gateway       | AWS API Gateway     | coming soon... |
 | Kubernetesの実行環境   | AWS EKS             | coming soon... |
 
-### CI/CD
-
-| 役割          | ツール                   | 導入の状況 |
-|-------------|-----------------------|-------|
-| CI/CD（開発環境） | Skaffold              | ⭕     |
-| CI（本番環境）    | GitHub Actions & Helm | ⭕     |
-| CD（本番環境）    | ArgoCD                | ⭕     |
-
-
-### 補足
-
-#### ▼ マイクロサービス間通信の管理
-
 マイクロサービス間通信の管理方法は，リクエストリプライ方式に基づくサービスメッシュを実現するIstioを採用します．
 
 プロキシコンテナはEnvoyとしますが，インバウンド通信をFastCGIプロトコルでルーティングする場合にNginxも用いる想定です．
@@ -92,6 +80,18 @@ project/
 ちなみに，イベント駆動方式を採用している場合は，イベントメッシュになります．
 
 参考：https://www.redhat.com/ja/topics/integration/what-is-an-event-mesh
+
+### CI/CD
+
+開発環境ではSkaffoldを用いてCI/CDを実行します．
+
+一方で，本番環境ではCIをGitHub Actionsで，またCDをArgoCDで実行します．
+
+| 役割          | ツール                   | 導入の状況 |
+|-------------|-----------------------|-------|
+| CI/CD（開発環境） | Skaffold              | ⭕     |
+| CI（本番環境）    | GitHub Actions & Helm | ⭕     |
+| CD（本番環境）    | ArgoCD                | ⭕     |
 
 <br>
 
