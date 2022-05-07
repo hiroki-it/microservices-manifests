@@ -48,3 +48,28 @@ spec:
       allowEmpty: true
       prune: true
       selfHeal: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  namespace: argocd
+  name: istio-application
+  labels:
+    env: {{ .Values.general.env }}
+spec:
+  project: default
+  source:
+    chart: microservices-manifests-istio
+    repoURL: {{ .Values.general.aws.accountId }}.dkr.ecr.{{ .Values.general.aws.region }}.amazonaws.com
+    targetRevision: 1.0.0
+    helm:
+      valueFiles:
+        - ./prd.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: microservices
+  syncPolicy:
+    automated:
+      allowEmpty: true
+      prune: true
+      selfHeal: true
