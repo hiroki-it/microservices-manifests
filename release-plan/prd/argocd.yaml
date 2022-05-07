@@ -21,13 +21,13 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   namespace: argocd
-  name: argocd-application
+  name: kubernetes-application
   labels:
     env: prd
 spec:
   project: default
   source:
-    chart: microservices-manifests-argocd
+    chart: microservices-manifests-kubernetes
     repoURL: .dkr.ecr..amazonaws.com
     targetRevision: 1.0.0
     helm:
