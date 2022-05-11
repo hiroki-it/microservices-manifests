@@ -5,6 +5,13 @@ general:
   aws:
     accountId: null
     region: null
+    user:
+      kubernetes:
+        accountKeyId: null
+        secretAccessKey: null
+      argocd:
+        accountKeyId: null
+        secretAccessKey: null
   env: prd
 #============
 # Kubernetes
