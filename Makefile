@@ -66,6 +66,7 @@ plan-manifests:
 # ArgoCDをデプロイします．
 .PHONY: apply-argocd
 apply-argocd:
+	minikube kubectl -- create namespace argocd
 	minikube kubectl -- apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v${ARGOCD_VERSION}/manifests/install.yaml
 	minikube kubectl -- patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
 	minikube kubectl -- apply -f ./release-plan/prd/argocd.yaml
