@@ -14,8 +14,8 @@ init:
 		--mount=true \
 		--mount-string="${PROJECT_DIR}/microservices-backend:/data" \
 		--kubernetes-version=v${KUBERNETES_VERSION} \
-		--cpus=4 \
-		--memory=16384 \
+		--cpus=2 \
+		--memory=4096 \
 		--addons=metrics-server
 
 # ポート8001番で，ローカルPCからワーカーノードにポートフォワードを実行します．
