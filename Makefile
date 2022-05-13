@@ -10,7 +10,7 @@ PROJECT_DIR := $(shell dirname $(shell pwd))
 .PHONY: init
 init:
 	minikube start \
-		--driver=hyperkit \
+		--driver=docker \
 		--mount=true \
 		--mount-string="${PROJECT_DIR}/microservices-backend:/data" \
 		--kubernetes-version=v${KUBERNETES_VERSION} \
