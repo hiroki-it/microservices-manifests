@@ -1,0 +1,27 @@
+---
+# Source: microservices-manifests-eks/templates/namespace.yaml
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: aws-observability
+  labels:
+    aws-observability: enabled
+    env: prd
+---
+# Source: microservices-manifests-eks/templates/config-map.yaml
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: aws-logging
+  namespace: aws-observability
+  labels:
+    env: prd
+data:
+  output.conf: |
+    [OUTPUT]
+        Name cloudwatch
+        Match *
+        region ap-northeast-1
+        log_group_name fluent-bit-cloudwatch
+        log_stream_prefix from-fluent-bit-
+        auto_create_group true
