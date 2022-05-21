@@ -1,0 +1,95 @@
+---
+# Source: microservices-manifests-argocd/templates/secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  namespace: argocd
+  name: microservices-manifests-chart-registry-secret
+  labels:
+    env: prd
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  name: microservices-manifests-chart-registry
+  url: 089167234998.dkr.ecr.ap-northeast-1.amazonaws.com
+  enableOCI: "true"
+  type: helm
+  username: AWS
+  password: eyJwYXlsb2FkIjoiWWxLRzlSelpXZkpnZkJ3RXhLdDYzQ0JJckptN1RMWGh6SHFXS3JKTksvVE53WVhpaTBadDdLZFUvSk5SZUpwcHVSSENZTEZvTlE1YkVjYytjaGpjTXE2QlNTZit1STduOVFSTnN3UmlWNFJ2VFpuYmpBdGVnUWV2cGFhc1I4eTROYmpNdk03SGliMFhIdSt3VkxmUGlMTnpEL1hCUUpnS3NJdTNSNEFsc0xxcjdseXVycWZFL2pnRVlmdkZkT0doc1VuNEo0RW1BYXhlQXZ0bXJBVWEyV2xzTkhjd2RFY2pkMG1MYzFNR2xaYUtBc1RZT29YRHFmdTAvZnhMeEsveU4rbDIwUWp6N0F5OWJqcWRiR2VhSFBDQjErc1FuaTdtVy8zekI3cTVZQUI3WGJsWWE1V0hIUFpzMmJBYXRvOFBwaWg3UzJ1QWRFVjh4c3NLNkFDbXdlcnJnUXlWOGU2WGVBWnRaN21uWlZGZFZqbmR6UjRGZVhUekl3RnRzZTZJT1BQdHNJZkd0NzZXRTlucnVrTmdTRzNoM2d5OXYvZERJU2N5UTRRK2ZVUytwbWNoYkw4VzZ2UnhKL0hvUmZEVng3N3NMdjg4U0xmSGJ4MGtUaVhFZUFpSlVNVnBzdlpKQytCek1PcmlzVWVuRklLMW5pVVJza0t0eStDeThhcTVJOFZkb2NNV2FFK3BraWQ0aTFWQno0dk1jM3lNQjBMSEhGd2g0bXE0T1kzYzJNOFV6MTNEbHNQOWV6VHlZejhXNkl3bmt4LzZFVUdBRk9Gb2tRMm5ic0VyMXN0OFBBbmVsbWZKNjhrRXh2UmF4c2s1MjRwWjBLWE8weTJCQkVnbmRxM3ZTUlh5cDRNZkRuRFJuTUNpQ1VJRVExT2YvOHNJZTRTcXNTdGMvWmZUbVlURUEzaVA2YVpYWDVqZHpHeHIvaCtGSjVNOGxyaDBOVVZocFEzeGdBclp0SlA2SFN2RWdzbDNoQ3Fxc0FXei9oMWpaNTNtNzhxeE42Rlo5UnFEdkd2UXRHbURhdCtxVHBrdjk4eU1wRzcwY1FqWGhCMzJIZVFaYlZ0ZW9oQ0lUR1dDMU9HLzJHWDdGQStULzhqTkpvcFRmV0NYTUJvOUxySUVpRjlWVDhLWFp3cnJEZkROdzZBc1ZPRllsbGl0VlBjVnVkSW9mNlFMMHpNSTJmamFWcFJ4eFVyWGFzYnRWQkxvUE53MmJXeXprWEc3blNmanpMdlo1Vk9xbk5UN2hoZXhWVVNUWDBrNDVUQi81VWcwWW83TEh6M04wUk5Gb1o0OEcxSWJ4RHMzTVZTTW1GUUNQaExVb2NpRGJsRDVYWmdNKzl2T25HK3I2eE5tRmVXVU1uZWVmNWRjQys4T3MzT2d3SFFaSmJqNzVtVnBObU5zdlJRMHQxcz0iLCJkYXRha2V5IjoiQVFFQkFIZ0FNZktEbElvcEM2enMwYk1kUnJZU0hhL0MzOWtDcmNQOGtWcHJFOWYra1FBQUFINHdmQVlKS29aSWh2Y05BUWNHb0c4d2JRSUJBREJvQmdrcWhraUc5dzBCQndFd0hnWUpZSVpJQVdVREJBRXVNQkVFREcrNFhqWVBWb1NkYzgzOERnSUJFSUE3UVNEVlF3QjRvb2d4U3JLTG45NGFjNVdiUFFYcTFpQlhubTFZNkkyOHBNc0hNUGlNMjBWWFBxb2RLeGRibm9RVkdlYTFYellYVW1zczdpOD0iLCJ2ZXJzaW9uIjoiMiIsInR5cGUiOiJEQVRBX0tFWSIsImV4cGlyYXRpb24iOjE2NTIzOTk5NDV9
+---
+# Source: microservices-manifests-argocd/templates/application.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  namespace: argocd
+  name: argocd-application
+  labels:
+    env: prd
+spec:
+  project: default
+  source:
+    chart: microservices-manifests-argocd
+    repoURL: 089167234998.dkr.ecr.ap-northeast-1.amazonaws.com
+    targetRevision: 1.0.0
+    helm:
+      valueFiles:
+        - ./prd.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: microservices
+  syncPolicy:
+    automated:
+      allowEmpty: true
+      prune: true
+      selfHeal: true
+---
+# Source: microservices-manifests-argocd/templates/application.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  namespace: argocd
+  name: kubernetes-application
+  labels:
+    env: prd
+spec:
+  project: default
+  source:
+    chart: microservices-manifests-kubernetes
+    repoURL: 089167234998.dkr.ecr.ap-northeast-1.amazonaws.com
+    targetRevision: 1.0.0
+    helm:
+      valueFiles:
+        - ./prd.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: microservices
+  syncPolicy:
+    automated:
+      allowEmpty: true
+      prune: true
+      selfHeal: true
+---
+# Source: microservices-manifests-argocd/templates/application.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  namespace: argocd
+  name: istio-application
+  labels:
+    env: prd
+spec:
+  project: default
+  source:
+    chart: microservices-manifests-istio
+    repoURL: 089167234998.dkr.ecr.ap-northeast-1.amazonaws.com
+    targetRevision: 1.0.0
+    helm:
+      valueFiles:
+        - ./prd.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: microservices
+  syncPolicy:
+    automated:
+      allowEmpty: true
+      prune: true
+      selfHeal: true

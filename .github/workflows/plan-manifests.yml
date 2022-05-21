@@ -33,15 +33,15 @@ jobs:
       # マニフェストファイルを生成します．
       - name: Helm template
         run: |
-          helm template release microservices-manifests-kubernetes-*.tgz -f values/prd.yaml >| ./release-plan/prd/kubernetes.yaml
-          helm template release microservices-manifests-istio-*.tgz -f values/prd.yaml >| ./release-plan/prd/istio.yaml
-          helm template release microservices-manifests-argocd-*.tgz -f values/prd.yaml >| ./release-plan/prd/argocd.yaml
-          helm template release microservices-manifests-eks-*.tgz -f values/prd.yaml >| ./release-plan/prd/eks.yaml
-          helm template release microservices-manifests-operator-istio-*.tgz -f values/dev.yaml >| ./release-plan/prd/istio-operator.yaml
+          helm template release microservices-manifests-kubernetes-*.tgz -f values/prd.yaml >| ./release/prd/kubernetes/kubernetes.yaml
+          helm template release microservices-manifests-istio-*.tgz -f values/prd.yaml >| ./release/prd/istio/istio.yaml
+          helm template release microservices-manifests-argocd-*.tgz -f values/prd.yaml >| ./release/prd/argocd/argocd.yaml
+          helm template release microservices-manifests-eks-*.tgz -f values/prd.yaml >| ./release/prd/eks/eks.yaml
+          helm template release microservices-manifests-operator-istio-*.tgz -f values/dev.yaml >| ./release/prd/istio-operator/istio-operator.yaml
       # 生成されたマニフェストファイルをプッシュします．
       - name: Git commit & push
         run: |
-          git add ./release-plan
+          git add ./release
           if [ -z "$(git status --porcelain)" ]; then
             echo "マニフェストファイルに変更点がないため，GitHub Actionは終了しました．"
             exit 0

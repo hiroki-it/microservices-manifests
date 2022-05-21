@@ -39,7 +39,7 @@ build:
 deploy:
   kubectl:
     manifests:
-      - ./release-plan/dev/kubernetes.yaml
+      - ./release/dev/kubernetes.yaml
 
 # NOTE: すでにポートが使用中の場合は，+1されたポート番号が自動的に使用される．
 portForward:
