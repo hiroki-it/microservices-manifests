@@ -37,8 +37,8 @@ apply-k8s-with-pf:
 .PHONY: apply-istio
 apply-istio:
 	istioctl operator init
-	istioctl install -y -f ./release/dev/istio-operator.yaml
-	minikube kubectl -- apply -f ./release/dev/istio.yaml
+	istioctl install -y -f ./release/dev/istio-operator/istio-operator.yaml
+	minikube kubectl -- apply -f ./release/dev/istio/istio.yaml
 	istioctl verify-install
 
 # Istioのダッシュボードをデプロイします．
@@ -58,10 +58,10 @@ destroy-istio:
 .PHONY: plan-manifests
 plan-manifests:
 	helm package ./kubernetes ./istio ./argocd ./eks ./operator/istio -d ./archives
-	helm template release ./archives/microservices-manifests-kubernetes-*.tgz -f values/dev.yaml >| ./release/dev/kubernetes.yaml
-	helm template release ./archives/microservices-manifests-istio-*.tgz -f values/dev.yaml >| ./release/dev/istio.yaml
-	helm template release ./archives/microservices-manifests-argocd-*.tgz -f values/dev.yaml >| ./release/dev/argocd.yaml
-	helm template release ./archives/microservices-manifests-eks-*.tgz -f values/dev.yaml >| ./release/dev/eks.yaml
+	helm template release ./archives/microservices-manifests-kubernetes-*.tgz -f values/dev.yaml >| ./release/dev/kubernetes/kubernetes.yaml
+	helm template release ./archives/microservices-manifests-istio-*.tgz -f values/dev.yaml >| ./release/dev/istio/istio.yaml
+	helm template release ./archives/microservices-manifests-argocd-*.tgz -f values/dev.yaml >| ./release/dev/argocd/argocd.yaml
+	helm template release ./archives/microservices-manifests-eks-*.tgz -f values/dev.yaml >| ./release/dev/eks/eks.yaml
 
 # ArgoCDをデプロイします．
 .PHONY: apply-argocd
