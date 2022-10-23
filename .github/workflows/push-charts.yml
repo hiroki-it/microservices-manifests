@@ -19,21 +19,11 @@ jobs:
       # @see https://github.com/mikefarah/yq
       - name: Edit helm values file
         run: |
-          wget https://github.com/mikefarah/yq/releases/download/v4.22.1/yq_linux_amd64
-          sudo chmod +x /usr/bin/yq
-          yq e \
-            -i '(.general.aws.accountId |="'${{ secrets.AWS_ACCOUNT_ID }}'") | (.general.aws.region |="'${{ secrets.AWS_DEFAULT_REGION }}'")' ./values/prd.yaml
-      # valuesファイルをチャート内に格納します．
-      - name: Copy values file into chart
-        run: |
-          find ./kubernetes ./istio ./argocd ./eks ./operator/istio \
-            -maxdepth 0 \
-            -exec cp ./values/prd.yaml {} \;
-          ls -la ./kubernetes ./istio ./argocd ./eks ./operator/istio
+          source ./.github/ops/edit_helm_values_file.sh
       # チャートアーカイブを作成します．
       - name: Helm package
         run: |
-          helm package ./kubernetes ./istio ./argocd ./eks ./operator/istio -d ./archives
+          source ./.github/ops/helm_package.sh
       # チャートアーカイブをアーティファクトとして保存します．
       - name: Upload artifact
         uses: actions/upload-artifact@v2

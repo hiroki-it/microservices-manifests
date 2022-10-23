@@ -25,19 +25,11 @@ jobs:
       # チャートの静的解析を実行します．
       - name: Helm lint
         run: |
-          helm lint ./kubernetes ./istio ./argocd ./eks ./operator/istio -f ./values/prd.yaml
-      # チャートアーカイブを作成します．
-      - name: Helm package
-        run: |
-          helm package ./kubernetes ./istio ./argocd ./eks ./operator/istio
+          source ./.github/ops/helm_lint.sh
       # マニフェストファイルを生成します．
       - name: Helm template
         run: |
-          helm template release microservices-manifests-kubernetes-*.tgz -f values/prd.yaml >| ./release/prd/kubernetes/kubernetes.yaml
-          helm template release microservices-manifests-istio-*.tgz -f values/prd.yaml >| ./release/prd/istio/istio.yaml
-          helm template release microservices-manifests-argocd-*.tgz -f values/prd.yaml >| ./release/prd/argocd/argocd.yaml
-          helm template release microservices-manifests-eks-*.tgz -f values/prd.yaml >| ./release/prd/eks/eks.yaml
-          helm template release microservices-manifests-operator-istio-*.tgz -f values/dev.yaml >| ./release/prd/istio-operator/istio-operator.yaml
+          source ./.github/ops/helm_template.sh
       # 生成されたマニフェストファイルをプッシュします．
       - name: Git commit & push
         run: |
