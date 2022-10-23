@@ -3,7 +3,7 @@
       containers:
         # Ginコンテナ
         - name: gin
-          image: {{ .Values.general.aws.accountId }}.dkr.ecr.{{ .Values.general.aws.region }}.amazonaws.com/account-gin-repository:{{ .Values.kubernetes.image.account.gin }}
+          image: {{ .Values.general.aws.accountId }}.dkr.ecr.{{ .Values.general.aws.region }}.amazonaws.com/account-gin-repository:{{ .Values.image.account.gin }}
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

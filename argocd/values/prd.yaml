@@ -1,0 +1,8 @@
+general:
+  env: prd
+aws:
+  accountId: null
+  region: null
+  user:
+    accountKeyId: null
+    secretAccessKey: null
