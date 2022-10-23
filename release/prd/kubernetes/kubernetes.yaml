@@ -163,7 +163,7 @@ spec:
       containers:
         # FastAPIコンテナ
         - name: fastapi
-          image: .dkr.ecr..amazonaws.com/customer-fastapi-repository:cad5c87
+          image: .dkr.ecr..amazonaws.com/customer-fastapi-repository:5d9f5e2
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
