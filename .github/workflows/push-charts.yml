@@ -18,6 +18,9 @@ jobs:
       # yqコマンドでvaluesファイルを編集します．
       # @see https://github.com/mikefarah/yq
       - name: Edit helm values file
+        env:
+          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
         run: |
           source ./.github/ops/edit_helm_values_file.sh
       # チャートアーカイブを作成します．

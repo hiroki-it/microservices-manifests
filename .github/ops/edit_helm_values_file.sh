@@ -11,5 +11,5 @@ charts=(
 )
 
 for chart in "${charts[@]}" ; do
-    yq e -i '(.general.aws.accountId |="'${{ secrets.AWS_ACCOUNT_ID }}'") | (.general.aws.region |="'${{ secrets.AWS_DEFAULT_REGION }}'")' ./${chart}/values/prd.yaml
+    yq e -i '(.general.aws.accountId |="'${AWS_ACCOUNT_ID}'") | (.general.aws.region |="'${AWS_DEFAULT_REGION}'")' ./${chart}/values/prd.yaml
 done
