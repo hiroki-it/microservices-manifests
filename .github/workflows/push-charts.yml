@@ -91,7 +91,7 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_default_region: ${{ secrets.AWS_DEFAULT_REGION }}
 
-  push-operator-istio-chart:
+  push-istio-operator-chart:
     needs: package-charts
     runs-on: ubuntu-latest
     steps:
@@ -100,7 +100,7 @@ jobs:
       - name: Helm login & push
         uses: ./.github/workflows/composite/helm-login-and-push
         with:
-          target: operator-istio
+          target: istio-operator
           aws_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
           aws_account_key_id: ${{ secrets.AWS_ACCOUNT_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
