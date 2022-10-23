@@ -4,7 +4,7 @@ aws:
   accountId: null
   region: null
   user:
-    accountKeyId: null
+    accessKeyId: null
     secretAccessKey: null
 image:
   account:
