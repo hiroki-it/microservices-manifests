@@ -10,7 +10,7 @@ spec:
     istio: ingressgateway
   servers:
     - port:
-        name: http-customer-app-gateway
+        name: http-customer-app
         protocol: HTTP
         number: 30000
       hosts:

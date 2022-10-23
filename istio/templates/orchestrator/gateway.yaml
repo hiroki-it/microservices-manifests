@@ -10,7 +10,7 @@ spec:
     istio: ingressgateway
   servers:
     - port:
-        name: http-orchestrator-app-gateway
+        name: http-orchestrator-app
         protocol: HTTP
         number: 30001
       hosts:
