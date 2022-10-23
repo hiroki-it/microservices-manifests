@@ -11,7 +11,7 @@ spec:
   hosts:
     - "*"
   gateways:
-    - gateway
+    - customer-app-gateway
   http:
     - name: customer-route
       match:
