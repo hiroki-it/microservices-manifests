@@ -16,3 +16,17 @@ spec:
     ingressGateways:
       - name: istio-ingressgateway
         enabled: true
+        k8s:
+          # istio-ingressgawayの内部のServiceが、NodePort Serviceになるようにする。
+          # https://github.com/istio/istio/issues/28310#issuecomment-733079966
+          service:
+            type: NodePort
+            ports:
+              - name: http-customer-app
+                nodePort: 30000
+                port: 30000
+                targetPort: 30000
+              - name: http-orchestrator-app
+                nodePort: 30001
+                port: 30001
+                targetPort: 30000
