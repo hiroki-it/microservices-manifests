@@ -2,7 +2,7 @@ apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   namespace: istio-system
-  name: customer-virtual-service
+  name: customer-app-virtual-service
   labels:
       env: {{ .Values.general.env }}
 spec:

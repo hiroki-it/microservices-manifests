@@ -2,7 +2,7 @@ apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
   namespace: istio-system
-  name: orchestrator-destination-rule
+  name: orchestrator-app-destination-rule
   labels:
     env: {{ .Values.general.env }}
 spec:
