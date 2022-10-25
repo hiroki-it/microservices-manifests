@@ -8,14 +8,6 @@ GitOpsの **[ベストプラクティス](https://blog.argoproj.io/5-gitops-best
 
 現状，フロントエンド領域のリポジトリは用意しておりません．
 
-参考：
-
-- Kubernetesマニフェスト: https://hiroki-it.github.io/tech-notebook-mkdocs/infrastructure_as_code/infrastructure_as_code_container_kubernetes_manifest_yaml.html
-- Istioマニフェスト: https://hiroki-it.github.io/tech-notebook-mkdocs/infrastructure_as_code/infrastructure_as_code_container_kubernetes_custom_resource_istio_manifest_yaml.html
-- Helmチャート: https://hiroki-it.github.io/tech-notebook-mkdocs/infrastructure_as_code/infrastructure_as_code_container_helm_chart.html
-- ArgoCD: https://hiroki-it.github.io/tech-notebook-mkdocs/devops/devops_argocd.html
-- Skaffold: https://hiroki-it.github.io/tech-notebook-mkdocs/devops/devops_skaffold_yaml.html
-
 <br>
 
 ## 開発運用シナリオ
