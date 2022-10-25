@@ -40,7 +40,7 @@ apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
   namespace: istio-system
-  name: orchestrator-destination-rule
+  name: orchestrator-app-destination-rule
   labels:
     env: prd
 spec:
@@ -71,12 +71,12 @@ spec:
     tls:
       mode: DISABLE
 ---
-# Source: microservices-manifests-istio/templates/gateway.yaml
+# Source: microservices-manifests-istio/templates/customer/gateway.yaml
 apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
   namespace: istio-system
-  name: gateway
+  name: customer-app-gateway
   labels:
       env: prd
 spec:
@@ -84,9 +84,28 @@ spec:
     istio: ingressgateway
   servers:
     - port:
-        name: http
+        name: http-customer-app
         protocol: HTTP
-        number: 80
+        number: 30000
+      hosts:
+        - "*"
+---
+# Source: microservices-manifests-istio/templates/orchestrator/gateway.yaml
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  namespace: istio-system
+  name: orchestrator-app-gateway
+  labels:
+    env: prd
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        name: http-orchestrator-app
+        protocol: HTTP
+        number: 30001
       hosts:
         - "*"
 ---
@@ -107,7 +126,7 @@ apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   namespace: istio-system
-  name: account-virtual-service
+  name: account-app-virtual-service
   labels:
       env: prd
 spec:
@@ -133,7 +152,7 @@ apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   namespace: istio-system
-  name: customer-virtual-service
+  name: customer-app-virtual-service
   labels:
       env: prd
 spec:
@@ -142,7 +161,7 @@ spec:
   hosts:
     - "*"
   gateways:
-    - gateway
+    - customer-app-gateway
   http:
     - name: customer-route
       match:
@@ -159,7 +178,7 @@ apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   namespace: istio-system
-  name: orchestrator-virtual-service
+  name: orchestrator-app-virtual-service
   labels:
       env: prd
 spec:
@@ -168,7 +187,7 @@ spec:
   hosts:
     - "*"
   gateways:
-    - gateway
+    - orchestrator-app-gateway
   http:
     - name: checkout-route
       match:

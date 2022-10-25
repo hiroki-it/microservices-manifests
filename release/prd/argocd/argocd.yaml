@@ -4,18 +4,6 @@ apiVersion: v1
 kind: Secret
 metadata:
   namespace: argocd
-  name: aws-user-argocd-secret
-  labels:
-    env: prd
-stringData:
-  AWS_ACCESS_KEY_ID: 
-  AWS_SECRET_ACCESS_KEY:
----
-# Source: microservices-manifests-argocd/templates/secret.yaml
-apiVersion: v1
-kind: Secret
-metadata:
-  namespace: argocd
   name: chart-registry-secret
   labels:
     env: prd
@@ -105,3 +93,16 @@ spec:
       allowEmpty: true
       prune: true
       selfHeal: true
+---
+# Source: microservices-manifests-argocd/templates/secret-provider-class.yaml
+apiVersion: secrets-store.csi.x-k8s.io/v1alpha1
+kind: SecretProviderClass
+metadata:
+  namespace: argocd
+  name: aws-user-argocd-secret
+  labels:
+    env: prd
+provider: aws
+stringData:
+  AWS_ACCESS_KEY_ID: 
+  AWS_SECRET_ACCESS_KEY:

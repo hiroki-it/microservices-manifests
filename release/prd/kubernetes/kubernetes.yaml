@@ -1,5 +1,5 @@
 ---
-# Source: microservices-manifests-kubernetes/templates/manifests/namespace.yaml
+# Source: microservices-manifests-kubernetes/templates/shared/namespace.yaml
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -8,7 +8,7 @@ metadata:
     env: prd
     istio-injection: enabled
 ---
-# Source: microservices-manifests-kubernetes/templates/manifests/account/app/service.yaml
+# Source: microservices-manifests-kubernetes/templates/shared/account/app/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -29,7 +29,7 @@ spec:
       port: 80
       targetPort: 8080
 ---
-# Source: microservices-manifests-kubernetes/templates/manifests/customer/app/service.yaml
+# Source: microservices-manifests-kubernetes/templates/shared/customer/app/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -50,7 +50,7 @@ spec:
       port: 80
       targetPort: 8000
 ---
-# Source: microservices-manifests-kubernetes/templates/manifests/orchestrator/app/service.yaml
+# Source: microservices-manifests-kubernetes/templates/shared/orchestrator/app/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -69,7 +69,7 @@ spec:
       port: 80
       targetPort: 8000
 ---
-# Source: microservices-manifests-kubernetes/templates/manifests/order/app/service.yaml
+# Source: microservices-manifests-kubernetes/templates/shared/order/app/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -90,7 +90,7 @@ spec:
       port: 80
       targetPort: 8080
 ---
-# Source: microservices-manifests-kubernetes/templates/manifests/account/app/deployment.yaml
+# Source: microservices-manifests-kubernetes/templates/shared/account/app/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -129,7 +129,7 @@ spec:
           ports:
             - containerPort: 8080
 ---
-# Source: microservices-manifests-kubernetes/templates/manifests/customer/app/deployment.yaml
+# Source: microservices-manifests-kubernetes/templates/shared/customer/app/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -168,7 +168,7 @@ spec:
           ports:
             - containerPort: 8000
 ---
-# Source: microservices-manifests-kubernetes/templates/manifests/orchestrator/app/deployment.yaml
+# Source: microservices-manifests-kubernetes/templates/shared/orchestrator/app/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -204,7 +204,7 @@ spec:
           ports:
             - containerPort: 8000
 ---
-# Source: microservices-manifests-kubernetes/templates/manifests/order/app/deployment.yaml
+# Source: microservices-manifests-kubernetes/templates/shared/order/app/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
