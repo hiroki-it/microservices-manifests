@@ -3,7 +3,7 @@
       containers:
         # FastAPIコンテナ
         - name: fastapi
-          image: {{ .Values.general.aws.accountId }}.dkr.ecr.{{ .Values.general.aws.region }}.amazonaws.com/customer-fastapi-repository:{{ .Values.image.customer.fastapi }}
+          image: {{ .Values.aws.accountId }}.dkr.ecr.{{ .Values.aws.region }}.amazonaws.com/customer-fastapi-repository:{{ .Values.image.customer.fastapi }}
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
