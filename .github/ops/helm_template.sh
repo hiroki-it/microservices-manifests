@@ -11,5 +11,5 @@ charts=(
 )
 
 for chart in "${charts[@]}" ; do
-    helm template prd ./${chart} >| ./release/prd/${chart}/${chart}.yaml
+    helm template ./${chart} -f ./${chart}/values/prd.yaml >| ./release/prd/${chart}/${chart}.yaml
 done
