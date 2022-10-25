@@ -23,6 +23,10 @@ jobs:
           AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
         run: |
           source ./.github/ops/edit_helm_values_file.sh
+      # チャートの静的解析を実行します．
+      - name: Helm lint
+        run: |
+          source ./.github/ops/helm_lint.sh
       # チャートアーカイブを作成します．
       - name: Helm package
         run: |
