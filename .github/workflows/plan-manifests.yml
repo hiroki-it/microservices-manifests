@@ -19,9 +19,9 @@ jobs:
           git config pull.rebase false
       # helmコマンドをセットアップします．
       - name: Setup Helm
-        uses: azure/setup-helm@v1
+        uses: azure/setup-helm@v3
         with:
-          version: v3.8.1
+          version: v3.10.1
       # チャートの静的解析を実行します．
       - name: Helm lint
         run: |

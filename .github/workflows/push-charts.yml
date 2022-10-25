@@ -12,9 +12,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup Helm
-        uses: azure/setup-helm@v1
+        uses: azure/setup-helm@v3
         with:
-          version: v3.8.1
+          version: v3.10.1
       # yqコマンドでvaluesファイルを編集します．
       # @see https://github.com/mikefarah/yq
       - name: Edit helm values file
