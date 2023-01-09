@@ -6,7 +6,9 @@
 
 GitOpsの **[ベストプラクティス](https://blog.argoproj.io/5-gitops-best-practices-d95cb0cbe9ff)** に則って，バックエンド領域は **[microservices-backendリポジトリ](https://github.com/hiroki-it/microservices-backend)** で管理しています．
 
-現状，フロントエンド領域のリポジトリは用意しておりません．
+フロントエンド領域のリポジトリは用意しておりません．
+
+現在、ディレクトリ構成とチャートを [helm-charts-practiceリポジトリ](https://github.com/hiroki-it/helm-charts-practice) で検証中であり、随時本リポジトリに横展開する予定です。
 
 <br>
 
