@@ -8,4 +8,4 @@ metadata:
 spec:
   exportTo:
     - "*"
-  host: customer-app-service.microservices.svc.cluster.local
+  host: customer-app-service.services.svc.cluster.local

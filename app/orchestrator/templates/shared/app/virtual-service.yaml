@@ -19,6 +19,6 @@ spec:
             prefix: /checkout/
       route:
         - destination:
-            host: orchestrator-service.microservices.svc.cluster.local
+            host: orchestrator-service.services.svc.cluster.local
             port:
               number: 80

@@ -19,6 +19,6 @@ spec:
             prefix: /customers/
       route:
         - destination:
-            host: customer-app-service.microservices.svc.cluster.local
+            host: customer-app-service.services.svc.cluster.local
             port:
               number: 80

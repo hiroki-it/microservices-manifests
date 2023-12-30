@@ -8,4 +8,4 @@ metadata:
 spec:
   exportTo:
     - "*"
-  host: orchestrator-service.microservices.svc.cluster.local
+  host: orchestrator-service.services.svc.cluster.local

@@ -19,6 +19,6 @@ spec:
             prefix: /orders/
       route:
         - destination:
-            host: order-app-service.microservices.svc.cluster.local
+            host: order-app-service.services.svc.cluster.local
             port:
               number: 80
