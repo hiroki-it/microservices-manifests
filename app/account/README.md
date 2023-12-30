@@ -8,6 +8,10 @@
 | ---- | ------ | --- |
 | hiroki hasegawa |  |  |
 
+## Source Code
+
+* <https://github.com/hiroki-it/microservices-manifests>
+
 ## Values
 
 | Key | Type | Default | Description |

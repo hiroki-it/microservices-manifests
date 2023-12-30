@@ -3,5 +3,6 @@ appVersion: 1.0.0
 maintainers:
   - name: hiroki hasegawa
 name: account
+sources: ["https://github.com/hiroki-it/microservices-manifests"]
 type: application
 version: 1.0.0
