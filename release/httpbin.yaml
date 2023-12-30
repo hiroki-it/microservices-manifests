@@ -1,0 +1,106 @@
+---
+# Source: httpbin/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: services
+  name: httpbin-service
+  labels:
+    env: prd
+spec:
+  type: NodePort
+  ports:
+    - name: http-bin
+      port: 8000
+      targetPort: 8080
+  selector:
+    app: httpbin
+---
+# Source: httpbin/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: services
+  name: httpbin-service
+  labels:
+    env: prd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: httpbin
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: httpbin
+        version: v1
+    spec:
+      containers:
+        - image: docker.io/kong/httpbin
+          imagePullPolicy: IfNotPresent
+          name: httpbin
+          command:
+            - gunicorn
+            - -b
+            - 0.0.0.0:8080
+            - httpbin:app
+            - -k
+            - gevent
+          env:
+            - name: WORKON_HOME
+              value: /tmp
+          ports:
+            - containerPort: 8080
+---
+# Source: httpbin/templates/destination-rule.yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: httpbin-app-destination-rule
+  namespace: services
+  labels:
+    env: prd
+spec:
+  host: httpbin-app-service.app.svc.cluster.local
+---
+# Source: httpbin/templates/gateway.yaml
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  namespace: services
+  name: httpbin-app-gateway
+  labels:
+    env: prd
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        name: http-httpbin
+        protocol: HTTP
+        number: 80
+      hosts:
+        - "*"
+---
+# Source: httpbin/templates/virtual-service.yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  namespace: services
+  name: httpbin-app-virtual-service
+  labels:
+    env: prd
+spec:
+  exportTo:
+    - "."
+  hosts:
+    - "*"
+  gateways:
+    - httpbin-app-gateway
+  http:
+    - route:
+        - destination:
+            host: httpbin
+            port:
+              number: 8000

@@ -1,0 +1,99 @@
+---
+# Source: account/templates/shared/app/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: services
+  name: account-app-service
+  labels:
+    app: account
+    component: app
+    env: prd
+spec:
+  type: ClusterIP
+  selector:
+    app: account
+    component: app
+  ports:
+    - name: http-account
+      appProtocol: http
+      port: 80
+      targetPort: 8080
+---
+# Source: account/templates/shared/app/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: services
+  name: account-app-pod
+  labels:
+    app: account
+    component: app
+    env: prd
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 100%
+      maxUnavailable: 0%
+  selector:
+    matchLabels:
+      app: account
+      component: app
+      env: prd
+  template:
+    metadata:
+      labels:
+        app: account
+        component: app
+        env: prd
+    spec:
+      hostname: account-app-pod
+      containers:
+        # Ginコンテナ
+        - name: gin
+          image: .dkr.ecr..amazonaws.com/account-gin-repository:d74ac1c
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+---
+# Source: account/templates/shared/app/destination-rule.yaml
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  namespace: services
+  name: account-app-destination-rule
+  labels:
+    env: prd
+spec:
+  exportTo:
+    - "."
+  host: account-app-service.services.svc.cluster.local
+---
+# Source: account/templates/shared/app/virtual-service.yaml
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  namespace: services
+  name: account-app-virtual-service
+  labels:
+    env: prd
+spec:
+  exportTo:
+    - "."
+  hosts:
+    - account-app
+  gateways:
+    - mesh
+  http:
+    - name: account-route
+      match:
+        - uri:
+            prefix: /account/
+      route:
+        - destination:
+            host: account-app-service.services.svc.cluster.local
+            port:
+              number: 80
