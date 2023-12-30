@@ -6,4 +6,4 @@ metadata:
   labels:
     env: {{ .Values.global.env }}
 spec:
-  host: {{ .Values.global.serviceName }}-app-service.app.svc.cluster.local
+  host: {{ .Values.global.serviceName }}-app-service
