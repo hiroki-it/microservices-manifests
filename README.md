@@ -16,7 +16,7 @@ GitOpsの **[ベストプラクティス](https://blog.argoproj.io/5-gitops-best
 SREチームが以下のようなシナリオで開発運用していること，を想定しながら練習しております．
 
 1. SREチームは，各マイクロサービスのイメージがAWS ECRのいずれのリポジトリで管理されているか，またコンテナのインバウンド通信を受け付けるポートは何番か，を知っておく必要がある．
-2. SREチームは，本番環境のAWS EKS上でKubernetesを稼働させる前に，Skaffoldを用いてMinikube上でKubernetesの挙動を検証する．DBとして，本番環境ではAWS RDS(Aurora)を用いるが，開発環境ではMySQLコンテナを用いる．
+2. SREチームは，本番環境のAWS EKS上でKubernetesを稼働させる前に，Minikube上でKubernetesの挙動を検証する．DBとして，本番環境ではAWS RDS(Aurora)を用いるが，開発環境ではMySQLコンテナを用いる．
 3. SREチームは，マニフェストファイルのソースコードを変更し，プルリクを作成する．またGitFlowを経て変更がreleaseブランチにマージされる．
 4. 本リポジトリ上のGitHub Actionsは，releaseブランチのプッシュを検知する．この時，HelmがValuesファイルを基にして実行計画用のマニフェストファイルを自動生成し，これをプルリク上にプッシュする．
 5. SREチームのリリース責任者は，生成されたマニフェストファイルをレビューし，プルリクをmainブランチにマージする． 
@@ -94,8 +94,6 @@ repository/
 
 #### ▼ CI/CD
 
-開発環境ではSkaffoldを用いてCI/CDを実行します．
-
 一方で，本番環境ではCIをGitHub Actionsで，またCDをArgoCDで実行します．
 
 | 役割 | ツール                   |  導入の状況  |
@@ -114,14 +112,7 @@ repository/
 
 ArgoCDでは、[App-Of-Appsパターン](https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/#app-of-apps-pattern)を採用しており、以下のようなApplication構成になっています。
 
-```yaml
-argocd-root
-├── argocd-app-parent # アプリチームのマイクロサービスごとのチャートをデプロイできる。
-└── argocd-infra-parent # インフラチームのツールごとのチャートをデプロイできる
-```
-
 ArgoCDのルートApplication (argocd-root) のみ、ArgoCDを使用してデプロイできないため、Helmfileを使用しています。
-
 
 #### ▼ プロジェクト
 
