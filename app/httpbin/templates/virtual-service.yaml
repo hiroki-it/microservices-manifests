@@ -11,7 +11,7 @@ spec:
   hosts:
     - "*"
   gateways:
-    - {{ .Values.global.serviceName }}-app-gateway
+    - mesh
   http:
     - route:
         - destination:
