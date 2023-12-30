@@ -3,6 +3,7 @@ name: plan-manifests
 on:
   push:
     branches:
+      - main
       - release/**
 
 jobs:
