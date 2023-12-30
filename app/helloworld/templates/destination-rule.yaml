@@ -8,4 +8,4 @@ metadata:
 spec:
   host: {{ .Values.global.serviceName }}-app-service.app.svc.cluster.local
   exportTo:
-    - "*"
+    - "."

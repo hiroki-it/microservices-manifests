@@ -7,5 +7,5 @@ metadata:
     env: {{ .Values.global.env }}
 spec:
   exportTo:
-    - "*"
+    - "."
   host: orchestrator-service.services.svc.cluster.local
