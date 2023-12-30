@@ -9,8 +9,3 @@ spec:
   exportTo:
     - "*"
   host: order-app-service.microservices.svc.cluster.local
-  trafficPolicy:
-    loadBalancer:
-      simple: ROUND_ROBIN
-    tls:
-      mode: DISABLE
