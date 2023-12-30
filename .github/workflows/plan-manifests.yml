@@ -39,7 +39,7 @@ jobs:
             echo "マニフェストファイルに変更点がないため、GitHub Actionは終了しました。"
             exit 0
           fi
-          git checkout -b release/manifest
+          git checkout release/manifest
           git commit -m "${{github.run_number}} helm templateを実行し、マニフェストファイルを自動生成しました"
           git pull
           git push origin HEAD
