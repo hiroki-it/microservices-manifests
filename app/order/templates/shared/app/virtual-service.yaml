@@ -9,7 +9,7 @@ spec:
   exportTo:
     - "."
   hosts:
-    - "*"
+    - order-app
   gateways:
     - mesh
   http:
