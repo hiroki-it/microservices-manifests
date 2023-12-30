@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  namespace: argocd
+  name: httpbin-application
+  labels:
+    env: {{ .Values.global.env }}
+spec:
+  project: app
+  source:
+    repoURL: https://github.com/hiroki-it/microservices-manifests.git
+    targetRevision: main
+    path: ./app/httpbin
+    helm:
+      releaseName: httpbin
+      valueFiles:
+        - ./values-{{ .Values.global.env }}.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
