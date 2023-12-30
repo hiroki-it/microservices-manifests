@@ -11,6 +11,6 @@ services=(
     "shared"
 )
 
-for chart in "${services[@]}" ; do
-    helm template ./app/${services} -f ./${services}/values-prd.yaml >| ./release/${services}.yaml
+for service in "${services[@]}" ; do
+    helm template ./app/${service} -f ./${service}/values-prd.yaml >| ./release/${service}.yaml
 done

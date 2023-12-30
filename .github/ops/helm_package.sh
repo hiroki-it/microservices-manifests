@@ -2,14 +2,15 @@
 
 set -xeuo pipefail
 
-charts=(
-    "argocd"
-    "eks"
-    "istio"
-    "istio-operator"
-    "kubernetes"
+services=(
+    "account"
+    "customer"
+    "helloworld"
+    "orchestrator"
+    "order"
+    "shared"
 )
 
-for chart in "${charts[@]}" ; do
-    helm package ./${chart} -d ./archives
+for service in "${services[@]}" ; do
+    helm package ./app/${service} -d ./archives
 done

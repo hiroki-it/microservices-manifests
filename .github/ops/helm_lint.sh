@@ -2,14 +2,15 @@
 
 set -xeuo pipefail
 
-charts=(
-    "argocd"
-    "eks"
-    "istio"
-    "istio-operator"
-    "kubernetes"
+services=(
+    "account"
+    "customer"
+    "helloworld"
+    "orchestrator"
+    "order"
+    "shared"
 )
 
-for chart in "${charts[@]}" ; do
-    helm lint ./${chart} -f ./${chart}/values/prd.yaml --strict
+for service in "${services[@]}" ; do
+    helm lint ./app/${service} -f ./${service}/values-prd.yaml --strict
 done
