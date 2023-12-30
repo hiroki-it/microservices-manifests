@@ -19,21 +19,23 @@ spec:
           type: NodePort
           ports:
             - name: http-customer
-              port: 80
-              targetPort: 80
+              {{- /* Nodeが待ち受けるポート番号 */}}
               nodePort: 30001
+              {{- /* NodePort Serviceが待ち受けるポート番号 */}}
+              port: 50001
+              targetPort: 50001
             - name: http-orchestrator
-              port: 80
-              targetPort: 80
               nodePort: 30002
+              port: 50002
+              targetPort: 50002
             - name: http-helloworld
-              port: 80
-              targetPort: 80
               nodePort: 30003
+              port: 50003
+              targetPort: 50003
             - name: http-httpbin
-              port: 8080
-              targetPort: 8080
               nodePort: 30004
+              port: 50004
+              targetPort: 50004
         affinity:
           nodeAffinity:
             requiredDuringSchedulingIgnoredDuringExecution:

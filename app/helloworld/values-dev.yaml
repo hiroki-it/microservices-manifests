@@ -6,7 +6,7 @@ deployment:
   containerPort: 8080
 
 service:
-  port: 80
+  port: 50003
 
 ingressGateway:
-  port: 80
+  port: 30003

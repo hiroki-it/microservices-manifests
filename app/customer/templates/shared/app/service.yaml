@@ -15,5 +15,5 @@ spec:
   ports:
     - name: http-customer
       appProtocol: http
-      port: 80
+      port: 50001
       targetPort: 8000

@@ -13,5 +13,5 @@ spec:
   ports:
     - name: http-orchestrator
       appProtocol: http
-      port: 80
+      port: 50002
       targetPort: 8000
