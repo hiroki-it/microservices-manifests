@@ -1,0 +1,22 @@
+{{- define "dev.orchestrator.app.persistent-volume-claim" }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: services
+  name: orchestrator-host-path-persistent-volume-claim
+  labels:
+    app: orchestrator
+    env: {{ .Values.global.env }}
+spec:
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+  selector:
+    matchLabels:
+      app: orchestrator
+      env: {{ .Values.global.env }}
+      type: hostPath
+{{- end }}

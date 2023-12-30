@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  namespace: argocd
+  name: helloworld-application
+  labels:
+    env: {{ .Values.global.env }}
+spec:
+  project: app
+  source:
+    repoURL: https://github.com/hiroki-it/helm-charts-practice.git
+    targetRevision: main
+    path: ./app/helloworld
+    helm:
+      releaseName: helloworld
+      valueFiles:
+        - ./values-{{ .Values.global.env }}.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd

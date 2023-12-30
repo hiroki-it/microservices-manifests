@@ -1,0 +1,6 @@
+global:
+  env: dev
+
+application:
+  dottedRevision: 1.19.5
+  hyphenatedRevision: 1-19-5

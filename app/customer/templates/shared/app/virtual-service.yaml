@@ -1,0 +1,24 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  namespace: istio-system
+  name: customer-app-virtual-service
+  labels:
+      env: {{ .Values.global.env }}
+spec:
+  exportTo:
+    - "*"
+  hosts:
+    - "*"
+  gateways:
+    - customer-app-gateway
+  http:
+    - name: customer-route
+      match:
+        - uri:
+            prefix: /customers/
+      route:
+        - destination:
+            host: customer-app-service.microservices.svc.cluster.local
+            port:
+              number: 80

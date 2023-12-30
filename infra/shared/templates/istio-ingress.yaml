@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: istio-ingress
+  labels:
+    # istio-proxyコンテナのインジェクションを有効化する。
+    istio.io/rev: default

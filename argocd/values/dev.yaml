@@ -1,8 +1,0 @@
-general:
-  env: dev
-aws:
-  accountId: null
-  region: null
-  user:
-    accessKeyId: null
-    secretAccessKey: null

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: services
+  labels:
+    # istio-proxyコンテナのインジェクションを有効化する。
+    istio.io/rev: default
+    env: {{ .Values.global.env }}

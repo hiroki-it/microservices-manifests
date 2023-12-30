@@ -1,0 +1,22 @@
+{{- define "dev.account.db.persistent-volume" }}
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: services
+  name: account-db-persistent-volume
+  labels:
+    app: account
+    component: db
+    env: {{ .Values.global.env }}
+    type: hostPath
+spec:
+  storageClassName: standard
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: /data/src/account
+    type: DirectoryOrCreate
+{{- end }}

@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  namespace: argocd
+  name: app-parent-application
+  labels:
+    env: {{ .Values.global.env }}
+spec:
+  project: app
+  source:
+    repoURL: https://github.com/hiroki-it/helm-charts-practice.git
+    targetRevision: main
+    path: ./deploy/argocd/app/child
+    helm:
+      releaseName: app-parent
+      valueFiles:
+        - ./values-{{ .Values.global.env }}.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd

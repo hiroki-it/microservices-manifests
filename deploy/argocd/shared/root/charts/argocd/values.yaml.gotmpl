@@ -1,0 +1,98 @@
+global:
+  additionalLabels:
+    env: {{ .Environment.Name }}
+  logging:
+    level: warn
+
+applicationSet:
+  enabled: false
+
+controller:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: node.kubernetes.io/nodegroup
+                operator: In
+                values:
+                  - deploy
+
+
+configs:
+  cm:
+    url: https://localhost:8080
+    dex.config: |
+      connectors:
+        - type: github
+          id: github
+          name: argocd-sso
+          config:
+            clientID: {{ .Values.configs.clientId }}
+            clientSecret: {{ .Values.configs.clientSecret }}
+  rbac:
+    policy.default: role:readonly
+    policy.csv: |
+      p, role:admin, *, *, *, allow
+      p, role:app, *, *, app/*, allow
+      p, role:infra, *, *, infra/*, allow
+      
+      g, hasegawafeedshop@gmail.com, role:admin
+      g, admin@gmail.com, role:admin
+      g, app-team@gmail.com, role:app
+      g, infra-team@gmail.com, role:infra
+    scopes: '[email]'
+
+dex:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: node.kubernetes.io/nodegroup
+                operator: In
+                values:
+                  - deploy
+
+
+notifications:
+  enabled: false
+
+redis:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: node.kubernetes.io/nodegroup
+                operator: In
+                values:
+                  - deploy
+
+repoServer:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: node.kubernetes.io/nodegroup
+                operator: In
+                values:
+                  - deploy
+
+server:
+  containerPort: 8080
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hosts:
+      - helloworld.argocd.com
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: node.kubernetes.io/nodegroup
+                operator: In
+                values:
+                  - deploy

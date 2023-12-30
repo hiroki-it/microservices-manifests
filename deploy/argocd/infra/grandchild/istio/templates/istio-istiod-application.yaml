@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  namespace: argocd
+  name: istio-istiod-application
+  labels:
+    env: {{ .Values.global.env }}
+spec:
+  project: infra
+  source:
+    repoURL: https://istio-release.storage.googleapis.com/charts
+    chart: istiod
+    targetRevision: {{ .Values.application.dottedRevision }}
+    helm:
+      {{- /* カナリアリリース時に並行稼働させるため、リリース名にリビジョン番号を設定する */}}
+      releaseName: istio-istiod-{{ .Values.application.hyphenatedRevision }}
+      values: |
+        revision: "{{ .Values.application.hyphenatedRevision }}"
+        {{- /* リビジョン値をエイリアスで管理する */}}
+        revisionTags:
+          - "default"
+        pilot:
+          {{- /* 全てのトラフィックでスパンを作成する */}}
+          traceSampling: 100.0
+          nodeSelector:
+            node.kubernetes.io/nodegroup: system
+        global:
+          proxy:
+            {{- /* Jaegerを使用するが、オプション名はZipkinである */}}
+            tracer: "zipkin"
+            logLevel: info
+          tracer:
+            zipkin:
+              {{- /* istio-proxyで収集したスパンをjaeger-collectorに送信する */}}
+              address: "jaeger-collector.observability:9411"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: istio-system

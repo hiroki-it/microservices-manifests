@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: services
+  name: orchestrator-pod
+  labels: 
+    app: orchestrator
+    env: {{ .Values.global.env }}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 100%
+      maxUnavailable: 0%
+  selector:
+    matchLabels:
+      app: orchestrator
+      env: {{ .Values.global.env }}
+  template:
+    metadata:
+      labels:
+        app: orchestrator
+        env: {{ .Values.global.env }}
+    spec:
+{{- if eq .Values.global.env "dev" }}
+  {{- include "dev.orchestrator.app.deployment" . }}
+{{- end }}
+{{- if eq .Values.global.env "prd" }}
+  {{- include "prd.orchestrator.app.deployment" . }}
+{{- end }}

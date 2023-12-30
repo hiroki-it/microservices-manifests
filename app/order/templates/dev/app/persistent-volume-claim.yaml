@@ -1,0 +1,24 @@
+{{- define "dev.order.app.persistent-volume-claim" }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: services
+  name: order-app-host-path-persistent-volume-claim
+  labels:
+    app: order
+    component: app
+    env: {{ .Values.global.env }}
+spec:
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+  selector:
+    matchLabels:
+      app: order
+      component: app
+      env: {{ .Values.global.env }}
+      type: hostPath
+{{- end }}

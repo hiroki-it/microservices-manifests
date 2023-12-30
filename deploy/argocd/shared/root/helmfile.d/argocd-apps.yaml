@@ -1,0 +1,16 @@
+repositories:
+  - name: argo-helm
+    url: https://argoproj.github.io/argo-helm
+
+releases:
+  - name: argocd-apps
+    namespace: argocd
+    chart: argo-helm/argocd-apps
+    version: 1.4.1
+    atomic: true
+    values:
+      - ../charts/argocd-apps/values.yaml.gotmpl
+
+environments:
+  prd:
+  dev:

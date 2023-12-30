@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  namespace: istio-system
+  name: orchestrator-app-gateway
+  labels:
+    env: {{ .Values.global.env }}
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        name: http-orchestrator-app
+        protocol: HTTP
+        number: 30001
+      hosts:
+        - "*"

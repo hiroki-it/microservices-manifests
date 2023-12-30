@@ -1,0 +1,11 @@
+global:
+  env: prd
+aws:
+  accountId: null
+  region: null
+  user:
+    accessKeyId: null
+    secretAccessKey: null
+image:
+  account:
+    gin: d74ac1c

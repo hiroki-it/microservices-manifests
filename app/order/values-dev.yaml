@@ -1,0 +1,5 @@
+global:
+  env: dev
+aws:
+  accountId: null
+  region: null

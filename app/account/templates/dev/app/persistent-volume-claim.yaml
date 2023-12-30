@@ -1,0 +1,24 @@
+{{- define "dev.account.app.persistent-volume-claim" }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: services
+  name: account-app-host-path-persistent-volume-claim
+  labels:
+    app: account
+    component: app
+    env: {{ .Values.global.env }}
+spec:
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+  selector:
+    matchLabels:
+      app: account
+      component: app
+      env: {{ .Values.global.env }}
+      type: hostPath
+{{- end }}

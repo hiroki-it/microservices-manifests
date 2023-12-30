@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  namespace: istio-system
+  name: customer-app-destination-rule
+  labels:
+    env: {{ .Values.global.env }}
+spec:
+  exportTo:
+    - "*"
+  host: customer-app-service.microservices.svc.cluster.local
+  trafficPolicy:
+    loadBalancer:
+      simple: ROUND_ROBIN
+    tls:
+      mode: DISABLE

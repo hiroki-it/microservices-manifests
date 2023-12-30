@@ -1,0 +1,59 @@
+applications:
+  - name: root-application
+    namespace: argocd
+    additionalLabels:
+      env: {{ .Environment.Name }}
+    project: root
+    source:
+      repoURL: https://github.com/hiroki-it/kubernetes-network-practice.git
+      targetRevision: main
+      path: ./deploy/argocd/shared/parent
+      helm:
+        releaseName: root
+        valueFiles:
+          - values-{{ .Environment.Name }}.yaml
+    destination:
+      server: https://kubernetes.default.svc
+      namespace: argocd
+
+
+projects:
+  - name: root
+    namespace: argocd
+    additionalLabels:
+      env: {{ .Environment.Name }}
+    description: This is root project
+    sourceRepos:
+      - '*'
+    destinations:
+      - server: https://kubernetes.default.svc
+        namespace: '*'
+    clusterResourceWhitelist:
+      - group: '*'
+        kind: '*'
+  - name: app
+    namespace: argocd
+    additionalLabels:
+      env: {{ .Environment.Name }}
+    description: This is app project
+    sourceRepos:
+      - '*'
+    destinations:
+      - server: https://kubernetes.default.svc
+        namespace: '*'
+    clusterResourceWhitelist:
+      - group: '*'
+        kind: '*'
+  - name: infra
+    namespace: argocd
+    additionalLabels:
+      env: {{ .Environment.Name }}
+    description: This is infra project
+    sourceRepos:
+      - '*'
+    destinations:
+      - server: https://kubernetes.default.svc
+        namespace: '*'
+    clusterResourceWhitelist:
+      - group: '*'
+        kind: '*'

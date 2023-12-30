@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.global.serviceName }}-deployment
+  namespace: services
+  labels:
+    env: {{ .Values.global.env }}
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: {{ .Values.global.serviceName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.global.serviceName }}
+    spec:
+      containers:
+        - name: {{ .Values.global.serviceName }}
+          image: paulbouwer/hello-kubernetes:1.10
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: {{ .Values.deployment.containerPort }}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: node.kubernetes.io/nodegroup
+                    operator: In
+                    values:
+                      - app

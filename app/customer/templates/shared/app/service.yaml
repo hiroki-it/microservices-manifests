@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: services
+  name: customer-app-service
+  labels:
+    app: customer
+    component: app
+    env: {{ .Values.global.env }}
+spec:
+  type: ClusterIP
+  selector:
+    app: customer
+    component: app
+  ports:
+    - name: http-customer
+      appProtocol: http
+      port: 80
+      targetPort: 8000

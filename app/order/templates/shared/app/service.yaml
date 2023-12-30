@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: services
+  name: order-app-service
+  labels:
+    app: order
+    component: app
+    env: {{ .Values.global.env }}
+spec:
+  type: ClusterIP
+  selector:
+    app: order
+    component: app
+  ports:
+    - name: http-order
+      appProtocol: http
+      port: 80
+      targetPort: 8080

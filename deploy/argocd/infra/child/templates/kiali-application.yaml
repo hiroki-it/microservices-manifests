@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  namespace: argocd
+  name: kiali-application
+  labels:
+    env: {{ .Values.global.env }}
+spec:
+  project: infra
+  source:
+    repoURL: https://kiali.org/helm-charts
+    chart: kiali-server
+    targetRevision: 1.62.0
+    helm:
+      releaseName: kiali
+      values: |
+        {{- /* ダッシュボードへのアクセスで認証認可を不要にする */}}
+        auth:
+          strategy: anonymous
+        {{- /* テレメトリー収集ツールと連携する */}}
+        external_services:
+          grafana:
+            enabled: true
+            in_cluster_url: http://helloworld.grafana.com
+            auth:
+              type: basic
+              username: admin
+              password: prom-operator
+          prometheus:
+            url: http://helloworld.prometheus.com
+          tracing:
+            enabled: true
+
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: istio-system

@@ -1,0 +1,12 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: {{ .Values.global.serviceName }}-destination-rule
+  namespace: services
+  labels:
+    env: {{ .Values.global.env }}
+spec:
+  host: {{ .Values.global.serviceName }}-service.app.svc.cluster.local
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
