@@ -2,14 +2,15 @@
 
 set -xeuo pipefail
 
-charts=(
-    "argocd"
-    "eks"
-    "istio"
-    "istio-operator"
-    "kubernetes"
+services=(
+    "account"
+    "customer"
+    "helloworld"
+    "orchestrator"
+    "order"
+    "shared"
 )
 
-for chart in "${charts[@]}" ; do
-    helm template ./${chart} -f ./${chart}/values/prd.yaml >| ./release/prd/${chart}/${chart}.yaml
+for chart in "${services[@]}" ; do
+    helm template ./app/${services} -f ./${services}/values-prd.yaml >| ./release/${services}.yaml
 done
