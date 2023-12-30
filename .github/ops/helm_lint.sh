@@ -12,5 +12,5 @@ services=(
 )
 
 for service in "${services[@]}" ; do
-    helm lint ./app/${service} -f ./${service}/values-prd.yaml --strict
+    helm lint ./app/${service} -f ./app/${service}/values-prd.yaml --strict
 done

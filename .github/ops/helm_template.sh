@@ -12,5 +12,5 @@ services=(
 )
 
 for service in "${services[@]}" ; do
-    helm template ./app/${service} -f ./${service}/values-prd.yaml >| ./release/${service}.yaml
+    helm template ./app/${service} -f ./app/${service}/values-prd.yaml >| ./release/${service}.yaml
 done
