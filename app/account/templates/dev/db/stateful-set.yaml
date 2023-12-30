@@ -1,6 +1,6 @@
 {{- define "dev.account.db.stateful-set" }}
 apiVersion: apps/v1
-kind:  StatefulSet
+kind: StatefulSet
 metadata:
   namespace: services
   name: account-db-pod
@@ -17,6 +17,8 @@ spec:
   serviceName: account-app-service
   template:
     metadata:
+      annotations:
+        sidecar.istio.io/inject: "false"
       labels:
         app: account
         component: db

@@ -1,6 +1,6 @@
 {{- define "dev.customer.db.stateful-set" }}
 apiVersion: apps/v1
-kind:  StatefulSet
+kind: StatefulSet
 metadata:
   namespace: services
   name: customer-db-pod
@@ -17,6 +17,8 @@ spec:
   serviceName: customer-db-service
   template:
     metadata:
+      annotations:
+        sidecar.istio.io/inject: "false"
       labels:
         app: customer
         component: db
