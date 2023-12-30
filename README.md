@@ -16,12 +16,12 @@ GitOpsの **[ベストプラクティス](https://blog.argoproj.io/5-gitops-best
 SREチームが以下のようなシナリオで開発運用していること、を想定しながら練習しております。
 
 1. SREチームは、各マイクロサービスのイメージがAWS ECRのいずれのリポジトリで管理されているか、またコンテナのインバウンド通信を受け付けるポートは何番か、を知っておく必要がある。
-2. SREチームは、本番環境のAWS EKS上でKubernetesを稼働させる前に、Minikube上でKubernetesの挙動を検証する。DBとして、本番環境ではAWS RDS(Aurora)を用いるが、開発環境ではMySQLコンテナを用いる。
+2. SREチームは、本番環境のAWS EKS上でKubernetesを稼働させる前に、Minikube上でKubernetesの挙動を検証する。DBとして、本番環境ではAWS RDS (Aurora) を用いるが、開発環境ではMySQLコンテナを用いる。
 3. SREチームは、マニフェストファイルのソースコードを変更し、プルリクを作成する。またGitFlowを経て変更がreleaseブランチにマージされる。
-4. 本リポジトリ上のGitHub Actionsは、releaseブランチのプッシュを検知する。この時、HelmがValuesファイルを基にして実行計画用のマニフェストファイルを自動生成し、これをプルリク上にプッシュする。
-5. SREチームのリリース責任者は、生成されたマニフェストファイルをレビューし、プルリクをmainブランチにマージする。 
-6. GitHub Actionが、mainブランチのマージを検知する。
-7. AWS EKS上で稼働するArgoCDが、mainブランチのマージを検知し、リポジトリからチャートをプルする。
+4. 本リポジトリ上のGitHub Actionsは、`release`ブランチのプッシュを検知し、HelmがValuesファイルを基にして実行計画用のマニフェストファイルを自動生成する。
+5. `release`ブランチ上の`release`ディレクトリに自動生成したマニフェストをプッシュする。
+5. SREチームのリリース責任者は、`release`ブランチから`main`ブランチにマージするプルリクをレビューする。 
+7. AWS EKS上で稼働するArgoCDが、`main`ブランチのマージを検知し、リポジトリからチャートをプルする。
 8. Kubernetesリソースのデプロイが完了する。
 
 <br>
