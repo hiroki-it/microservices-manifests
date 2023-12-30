@@ -6,6 +6,7 @@ services=(
     "account"
     "customer"
     "helloworld"
+    "httpbin"
     "orchestrator"
     "order"
     "shared"
