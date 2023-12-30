@@ -70,16 +70,17 @@ repository/
 インフラ領域を構成する使用技術の一覧です．
 
 
-| 役割                | ツール                | 導入の状況          |
-|-------------------|--------------------|----------------|
-| 仮想化               | Docker             | ⭕              |
-| コンテナオーケストレーション    | Kubernetes         | ⭕              |
-| マイクロサービス間通信の管理    | Istio | ⭕              |
-| プロキシコンテナ          | Envoy，Nginx        | ⭕              |
-| テンプレート管理          | Helm               | ⭕              |
-| SagaパターンのためのQueue | AWS SQS            | coming soon... |
-| API Gateway       | AWS API Gateway    | coming soon... |
-| Kubernetesの実行環境   | AWS EKS            | coming soon... |
+| 役割                | ツール             |      導入の状況       |
+|-------------------|-----------------|:----------------:|
+| 仮想化               | Containerd      |        ⭕         |
+| コンテナオーケストレーション    | Kubernetes      |        ⭕         |
+| マイクロサービス間通信の管理    | Istio           |        ⭕         |
+| プロキシコンテナ          | Envoy，Nginx     |        ⭕         |
+| テンプレート管理          | Helm            |        ⭕         |
+| SagaパターンのためのQueue | AWS SQS         |  coming soon...  |
+| API Gateway       | AWS API Gateway |  coming soon...  |
+| Kubernetesの開発環境   | Minikube        |        ⭕         |
+| Kubernetesの本番環境   | AWS EKS         |  coming soon...  |
 
 マイクロサービス間通信の管理方法は，リクエストリプライ方式に基づくサービスメッシュを実現するIstioを採用します．
 
@@ -97,11 +98,10 @@ repository/
 
 一方で，本番環境ではCIをGitHub Actionsで，またCDをArgoCDで実行します．
 
-| 役割          | ツール                   | 導入の状況 |
-|-------------|-----------------------|-------|
-| CI/CD（開発環境） | Skaffold              | ⭕     |
-| CI（本番環境）    | GitHub Actions & Helm | ⭕     |
-| CD（本番環境）    | ArgoCD                | ⭕     |
+| 役割          | ツール                   |  導入の状況  |
+|-------------|-----------------------|:-------:|
+| CI（本番環境）    | GitHub Actions & Helm |    ⭕    |
+| CD（本番環境）    | ArgoCD                |    ⭕    |
 
 <br>
 
