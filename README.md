@@ -96,10 +96,10 @@ repository/
 
 一方で，本番環境ではCIをGitHub Actionsで，またCDをArgoCDで実行します．
 
-| 役割 | ツール                   |  導入の状況  |
-|----|-----------------------|:-------:|
-| CI | GitHub Actions & Helm |    ⭕    |
-| CD | ArgoCD                |    ⭕    |
+| 役割 | ツール            |  導入の状況  |
+|----|----------------|:-------:|
+| CI | GitHub Actions |    ⭕    |
+| CD | ArgoCD         |    ⭕    |
 
 <br>
 
