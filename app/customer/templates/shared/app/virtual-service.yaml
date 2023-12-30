@@ -21,4 +21,4 @@ spec:
         - destination:
             host: customer-app-service.services.svc.cluster.local
             port:
-              number: 80
+              number: 50001

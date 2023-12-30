@@ -15,5 +15,5 @@ spec:
   ports:
     - name: http-account
       appProtocol: http
-      port: 80
+      port: 50000
       targetPort: 8080

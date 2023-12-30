@@ -12,6 +12,6 @@ spec:
     - port:
         name: http-{{ .Values.global.serviceName }}
         protocol: HTTP
-        number: 80
+        number: 30004
       hosts:
         - "*"

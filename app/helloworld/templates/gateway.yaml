@@ -11,7 +11,7 @@ spec:
   servers:
     - port:
         name: http-{{ .Values.global.serviceName }}
-        number: {{ .Values.ingressGateway.port }}
         protocol: HTTP
+        number: {{ .Values.ingressGateway.port }}
       hosts:
         - "*"

@@ -21,4 +21,4 @@ spec:
         - destination:
             host: orchestrator-service.services.svc.cluster.local
             port:
-              number: 80
+              number: 50002

@@ -17,7 +17,7 @@ spec:
         - port: {{ .Values.ingressGateway.port }}
       route:
         - destination:
-            host: {{ .Values.global.serviceName }}-app-service.app.svc.cluster.local
+            host: {{ .Values.global.serviceName }}-app-service
             port:
-              number: {{ .Values.ingressGateway.port }}
+              number: {{ .Values.service.port }}
 

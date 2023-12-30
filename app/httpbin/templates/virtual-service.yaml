@@ -17,4 +17,4 @@ spec:
         - destination:
             host: {{ .Values.global.serviceName }}
             port:
-              number: 8000
+              number: 30004
