@@ -14,13 +14,18 @@ spec:
     helm:
       releaseName: istio-ingressgateway
       values: |
+        {{- /* リクエストをIstio IngressGatewayに送信するためのService */}}
         service:
           type: NodePort
           ports:
             - name: http-helloworld
               port: 80
               targetPort: 80
-              nodePort: 31039
+              nodePort: 50000
+            - name: http-httpbin
+              port: 8080
+              targetPort: 8080
+              nodePort: 50001
         affinity:
           nodeAffinity:
             requiredDuringSchedulingIgnoredDuringExecution:
