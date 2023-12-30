@@ -6,7 +6,6 @@ metadata:
   labels:
     env: {{ .Values.global.env }}
 spec:
-  host: {{ .Values.global.serviceName }}-service.app.svc.cluster.local
-  trafficPolicy:
-    tls:
-      mode: ISTIO_MUTUAL
+  host: {{ .Values.global.serviceName }}-app-service.app.svc.cluster.local
+  exportTo:
+    - "*"
