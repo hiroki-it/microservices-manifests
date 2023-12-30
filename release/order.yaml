@@ -1,0 +1,109 @@
+---
+# Source: customer/templates/shared/app/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: services
+  name: order-app-service
+  labels:
+    app: order
+    component: app
+    env: prd
+spec:
+  type: ClusterIP
+  selector:
+    app: order
+    component: app
+  ports:
+    - name: http-order
+      appProtocol: http
+      port: 80
+      targetPort: 8080
+---
+# Source: customer/templates/shared/app/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: services
+  name: order-app-pod
+  labels:
+    app: order
+    component: app
+    env: prd
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 100%
+      maxUnavailable: 0%
+  selector:
+    matchLabels:
+      app: order
+      component: app
+      env: prd
+  template:
+    metadata:
+      labels:
+        app: order
+        component: app
+        env: prd
+    spec:
+      hostname: order-app-pod
+      containers:
+        # Lumenコンテナ
+        - name: lumen
+          image: .dkr.ecr..amazonaws.com/order-lumen-repository:b5d0574
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9000
+        - name: nginx
+          image: .dkr.ecr..amazonaws.com/order-nginx-repository:b5d0574
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+---
+# Source: customer/templates/shared/app/destination-rule.yaml
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  namespace: istio-system
+  name: order-app-destination-rule
+  labels:
+    env: prd
+spec:
+  exportTo:
+    - "*"
+  host: order-app-service.microservices.svc.cluster.local
+  trafficPolicy:
+    loadBalancer:
+      simple: ROUND_ROBIN
+    tls:
+      mode: DISABLE
+---
+# Source: customer/templates/shared/app/virtual-service.yaml
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  namespace: istio-system
+  name: order-virtual-service
+  labels:
+      env: prd
+spec:
+  exportTo:
+    - "*"
+  hosts:
+    - "*"
+  gateways:
+    - gateway
+  http:
+    - name: order-route
+      match:
+        - uri:
+            prefix: /orders/
+      route:
+        - destination:
+            host: order-app-service.microservices.svc.cluster.local
+            port:
+              number: 80

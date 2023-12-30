@@ -1,0 +1,123 @@
+---
+# Source: customer/templates/shared/app/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: services
+  name: customer-app-service
+  labels:
+    app: customer
+    component: app
+    env: prd
+spec:
+  type: ClusterIP
+  selector:
+    app: customer
+    component: app
+  ports:
+    - name: http-customer
+      appProtocol: http
+      port: 80
+      targetPort: 8000
+---
+# Source: customer/templates/shared/app/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: services
+  name: customer-app-pod
+  labels:
+    app: customer
+    component: app
+    env: prd
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 100%
+      maxUnavailable: 0%
+  selector:
+    matchLabels:
+      app: customer
+      component: app
+      env: prd
+  template:
+    metadata:
+      labels:
+        app: customer
+        component: app
+        env: prd
+    spec:
+      hostname: customer-app-pod
+      containers:
+        # FastAPIコンテナ
+        - name: fastapi
+          image: .dkr.ecr..amazonaws.com/customer-fastapi-repository:cad5c87
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+---
+# Source: customer/templates/shared/app/destination-rule.yaml
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  namespace: istio-system
+  name: customer-app-destination-rule
+  labels:
+    env: prd
+spec:
+  exportTo:
+    - "*"
+  host: customer-app-service.microservices.svc.cluster.local
+  trafficPolicy:
+    loadBalancer:
+      simple: ROUND_ROBIN
+    tls:
+      mode: DISABLE
+---
+# Source: customer/templates/shared/app/gateway.yaml
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  namespace: istio-system
+  name: customer-app-gateway
+  labels:
+      env: prd
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        name: http-customer-app
+        protocol: HTTP
+        number: 30000
+      hosts:
+        - "*"
+---
+# Source: customer/templates/shared/app/virtual-service.yaml
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  namespace: istio-system
+  name: customer-app-virtual-service
+  labels:
+      env: prd
+spec:
+  exportTo:
+    - "*"
+  hosts:
+    - "*"
+  gateways:
+    - customer-app-gateway
+  http:
+    - name: customer-route
+      match:
+        - uri:
+            prefix: /customers/
+      route:
+        - destination:
+            host: customer-app-service.microservices.svc.cluster.local
+            port:
+              number: 80

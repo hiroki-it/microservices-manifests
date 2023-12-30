@@ -1,0 +1,22 @@
+---
+# Source: shared/templates/namespace.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: services
+  labels:
+    # istio-proxyコンテナのインジェクションを有効化する。
+    istio.io/rev: default
+    env: prd
+---
+# Source: shared/templates/peer-authentication.yaml
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  namespace: services
+  name: peer-authentication
+  labels:
+      env: prd
+spec:
+  mtls:
+    mode: DISABLE
