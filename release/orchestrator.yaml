@@ -1,0 +1,113 @@
+---
+# Source: orchestrator/templates/shared/app/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: services
+  name: orchestrator-service
+  labels:
+    app: orchestrator
+    env: prd
+spec:
+  type: ClusterIP
+  selector:
+    app: orchestrator
+  ports:
+    - name: http-orchestrator
+      appProtocol: http
+      port: 80
+      targetPort: 8000
+---
+# Source: orchestrator/templates/shared/app/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: services
+  name: orchestrator-pod
+  labels: 
+    app: orchestrator
+    env: prd
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 100%
+      maxUnavailable: 0%
+  selector:
+    matchLabels:
+      app: orchestrator
+      env: prd
+  template:
+    metadata:
+      labels:
+        app: orchestrator
+        env: prd
+    spec:
+      hostname: orchestrator-pod
+      containers:
+        # FastAPIコンテナ
+        - name: fastapi
+          image: .dkr.ecr..amazonaws.com/orchestrator-fastapi-repository:6.9e+11
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+---
+# Source: orchestrator/templates/shared/app/destination-rule.yaml
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  namespace: services
+  name: orchestrator-app-destination-rule
+  labels:
+    env: prd
+spec:
+  exportTo:
+    - "."
+  host: orchestrator-service.services.svc.cluster.local
+---
+# Source: orchestrator/templates/shared/app/gateway.yaml
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  namespace: services
+  name: orchestrator-app-gateway
+  labels:
+    env: prd
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        name: http-orchestrator-app
+        protocol: HTTP
+        number: 30001
+      hosts:
+        - "*"
+---
+# Source: orchestrator/templates/shared/app/virtual-service.yaml
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  namespace: services
+  name: orchestrator-app-virtual-service
+  labels:
+    env: prd
+spec:
+  exportTo:
+    - "."
+  hosts:
+    - "*"
+  gateways:
+    - orchestrator-app-gateway
+  http:
+    - name: checkout-route
+      match:
+        - uri:
+            prefix: /checkout/
+      route:
+        - destination:
+            host: orchestrator-service.services.svc.cluster.local
+            port:
+              number: 80
