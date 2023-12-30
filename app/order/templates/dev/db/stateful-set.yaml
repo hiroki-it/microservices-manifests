@@ -28,7 +28,7 @@ spec:
       containers:
         # MySQLコンテナ (開発環境のみ) 
         - name: mysql
-          image: mysql:5.7
+          image: mysql:5.7.44
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3306
