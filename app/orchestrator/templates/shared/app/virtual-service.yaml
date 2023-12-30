@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  namespace: istio-system
+  namespace: services
   name: orchestrator-app-virtual-service
   labels:
       env: {{ .Values.global.env }}

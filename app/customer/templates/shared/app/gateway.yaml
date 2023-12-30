@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
-  namespace: istio-system
+  namespace: services
   name: customer-app-gateway
   labels:
       env: {{ .Values.global.env }}
