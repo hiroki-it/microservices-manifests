@@ -43,7 +43,7 @@ spec:
             - name: order-db-host-path-persistent-volume-claim
               # NOTE:
               # mysqld: Can't create/write to file '/var/lib/mysql/is_writable' (Errcode: 13 - Permission denied)
-              # datadirにマウントできない．
+              # datadirにマウントできない。
               mountPath: /var/volume
   volumeClaimTemplates:
     - metadata:

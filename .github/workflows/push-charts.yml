@@ -15,7 +15,7 @@ jobs:
         uses: azure/setup-helm@v3
         with:
           version: v3.10.1
-      # yqコマンドでvaluesファイルを編集します．
+      # yqコマンドでvaluesファイルを編集します。
       # @see https://github.com/mikefarah/yq
       - name: Edit helm values file
         env:
@@ -23,15 +23,15 @@ jobs:
           AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
         run: |
           source ./.github/ops/edit_helm_values_file.sh
-      # チャートの静的解析を実行します．
+      # チャートの静的解析を実行します。
       - name: Helm lint
         run: |
           source ./.github/ops/helm_lint.sh
-      # チャートアーカイブを作成します．
+      # チャートアーカイブを作成します。
       - name: Helm package
         run: |
           source ./.github/ops/helm_package.sh
-      # チャートアーカイブをアーティファクトとして保存します．
+      # チャートアーカイブをアーティファクトとして保存します。
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
@@ -48,66 +48,6 @@ jobs:
         uses: ./.github/workflows/composite/helm-login-and-push
         with:
           target: kubernetes
-          aws_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
-          aws_account_key_id: ${{ secrets.AWS_ACCOUNT_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws_default_region: ${{ secrets.AWS_DEFAULT_REGION }}
-
-  push-istio-chart:
-    needs: package-charts
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Helm login & push
-        uses: ./.github/workflows/composite/helm-login-and-push
-        with:
-          target: istio
-          aws_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
-          aws_account_key_id: ${{ secrets.AWS_ACCOUNT_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws_default_region: ${{ secrets.AWS_DEFAULT_REGION }}
-
-  push-argocd-chart:
-    needs: package-charts
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Helm login & push
-        uses: ./.github/workflows/composite/helm-login-and-push
-        with:
-          target: argocd
-          aws_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
-          aws_account_key_id: ${{ secrets.AWS_ACCOUNT_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws_default_region: ${{ secrets.AWS_DEFAULT_REGION }}
-
-  push-eks-chart:
-    needs: package-charts
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Helm login & push
-        uses: ./.github/workflows/composite/helm-login-and-push
-        with:
-          target: eks
-          aws_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
-          aws_account_key_id: ${{ secrets.AWS_ACCOUNT_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws_default_region: ${{ secrets.AWS_DEFAULT_REGION }}
-
-  push-istio-operator-chart:
-    needs: package-charts
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Helm login & push
-        uses: ./.github/workflows/composite/helm-login-and-push
-        with:
-          target: istio-operator
           aws_account_id: ${{ secrets.AWS_ACCOUNT_ID }}
           aws_account_key_id: ${{ secrets.AWS_ACCOUNT_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

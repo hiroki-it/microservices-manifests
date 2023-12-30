@@ -2,27 +2,27 @@
 
 ## 概要
 
-マイクロサービスアーキテクチャのアプリケーションのインフラ領域を管理するリポジトリ．
+マイクロサービスアーキテクチャのアプリケーションのインフラ領域を管理するリポジトリ。
 
-GitOpsの **[ベストプラクティス](https://blog.argoproj.io/5-gitops-best-practices-d95cb0cbe9ff)** に則って，バックエンド領域は **[microservices-backendリポジトリ](https://github.com/hiroki-it/microservices-backend)** で管理しています．
+GitOpsの **[ベストプラクティス](https://blog.argoproj.io/5-gitops-best-practices-d95cb0cbe9ff)** に則って、バックエンド領域は **[microservices-backendリポジトリ](https://github.com/hiroki-it/microservices-backend)** で管理しています。
 
-フロントエンド領域のリポジトリは用意しておりません．
+フロントエンド領域のリポジトリは用意しておりません。
 
 
 <br>
 
 ## 開発運用シナリオ
 
-SREチームが以下のようなシナリオで開発運用していること，を想定しながら練習しております．
+SREチームが以下のようなシナリオで開発運用していること、を想定しながら練習しております。
 
-1. SREチームは，各マイクロサービスのイメージがAWS ECRのいずれのリポジトリで管理されているか，またコンテナのインバウンド通信を受け付けるポートは何番か，を知っておく必要がある．
-2. SREチームは，本番環境のAWS EKS上でKubernetesを稼働させる前に，Minikube上でKubernetesの挙動を検証する．DBとして，本番環境ではAWS RDS(Aurora)を用いるが，開発環境ではMySQLコンテナを用いる．
-3. SREチームは，マニフェストファイルのソースコードを変更し，プルリクを作成する．またGitFlowを経て変更がreleaseブランチにマージされる．
-4. 本リポジトリ上のGitHub Actionsは，releaseブランチのプッシュを検知する．この時，HelmがValuesファイルを基にして実行計画用のマニフェストファイルを自動生成し，これをプルリク上にプッシュする．
-5. SREチームのリリース責任者は，生成されたマニフェストファイルをレビューし，プルリクをmainブランチにマージする． 
-6. GitHub Actionが，mainブランチのマージを検知する．この時，Valuesファイルの機密性の高い値を環境変数で上書きする．このValuesファイルを各チャート内にコピーし，チャートをAWS ECRにプッシュする．これらにより，Valuesファイルの機密情報のバージョン管理を避けつつ，本番環境では完全なValuesファイルを使用できる． 
-7. AWS EKS上で稼働するArgoCDが，mainブランチのマージを検知し，AWS ECRからチャートをプルする．
-8. Kubernetesリソースのデプロイが完了する．
+1. SREチームは、各マイクロサービスのイメージがAWS ECRのいずれのリポジトリで管理されているか、またコンテナのインバウンド通信を受け付けるポートは何番か、を知っておく必要がある。
+2. SREチームは、本番環境のAWS EKS上でKubernetesを稼働させる前に、Minikube上でKubernetesの挙動を検証する。DBとして、本番環境ではAWS RDS(Aurora)を用いるが、開発環境ではMySQLコンテナを用いる。
+3. SREチームは、マニフェストファイルのソースコードを変更し、プルリクを作成する。またGitFlowを経て変更がreleaseブランチにマージされる。
+4. 本リポジトリ上のGitHub Actionsは、releaseブランチのプッシュを検知する。この時、HelmがValuesファイルを基にして実行計画用のマニフェストファイルを自動生成し、これをプルリク上にプッシュする。
+5. SREチームのリリース責任者は、生成されたマニフェストファイルをレビューし、プルリクをmainブランチにマージする。 
+6. GitHub Actionが、mainブランチのマージを検知する。
+7. AWS EKS上で稼働するArgoCDが、mainブランチのマージを検知し、AWS ECRからチャートをプルする。
+8. Kubernetesリソースのデプロイが完了する。
 
 <br>
 
@@ -67,7 +67,7 @@ repository/
 
 #### ▼ インフラ
 
-インフラ領域を構成する使用技術の一覧です．
+インフラ領域を構成する使用技術の一覧です。
 
 
 | 役割                | ツール             |      導入の状況       |
@@ -75,26 +75,26 @@ repository/
 | 仮想化               | Containerd      |        ⭕         |
 | コンテナオーケストレーション    | Kubernetes      |        ⭕         |
 | マイクロサービス間通信の管理    | Istio           |        ⭕         |
-| プロキシコンテナ          | Envoy，Nginx     |        ⭕         |
+| プロキシコンテナ          | Envoy、Nginx     |        ⭕         |
 | テンプレート管理          | Helm            |        ⭕         |
 | SagaパターンのためのQueue | AWS SQS         |  coming soon...  |
 | API Gateway       | AWS API Gateway |  coming soon...  |
 | Kubernetesの開発環境   | Minikube        |        ⭕         |
 | Kubernetesの本番環境   | AWS EKS         |  coming soon...  |
 
-マイクロサービス間通信の管理方法は，リクエストリプライ方式に基づくサービスメッシュを実現するIstioを採用します．
+マイクロサービス間通信の管理方法は、リクエストリプライ方式に基づくサービスメッシュを実現するIstioを採用します。
 
-プロキシコンテナはEnvoyとしますが，インバウンド通信をFastCGIプロトコルでルーティングする場合にNginxも用いる想定です．
+プロキシコンテナはEnvoyとしますが、インバウンド通信をFastCGIプロトコルでルーティングする場合にNginxも用いる想定です。
 
-この時，HTTPプロトコルによる同期通信を行い，gRPCプロトコルは用いない想定です．
+この時、HTTPプロトコルによる同期通信を行い、gRPCプロトコルは用いない想定です。
 
-ちなみに，イベント駆動方式を採用している場合は，イベントメッシュになります．
+ちなみに、イベント駆動方式を採用している場合は、イベントメッシュになります。
 
 参考：https://www.redhat.com/ja/topics/integration/what-is-an-event-mesh
 
 #### ▼ CI/CD
 
-一方で，本番環境ではCIをGitHub Actionsで，またCDをArgoCDで実行します．
+一方で、本番環境ではCIをGitHub Actionsで、またCDをArgoCDで実行します。
 
 | 役割 | ツール            |  導入の状況  |
 |----|----------------|:-------:|
