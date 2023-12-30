@@ -10,5 +10,5 @@ spec:
     app: {{ .Values.global.serviceName }}
   ports:
     - name: http-httpbin
-      port: 8080
+      port: 30004
       targetPort: 8080

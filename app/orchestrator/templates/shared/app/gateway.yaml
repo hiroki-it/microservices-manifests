@@ -12,6 +12,6 @@ spec:
     - port:
         name: http-orchestrator
         protocol: HTTP
-        number: 30001
+        number: 30002
       hosts:
         - "*"
