@@ -1,0 +1,8 @@
+apiVersion: v2
+appVersion: "0.1"
+maintainers:
+  - name: hiroki hasegawa
+name: httpbin
+sources: ["https://github.com/hiroki-it/microservices-manifests"]
+type: application
+version: 0.1.0
