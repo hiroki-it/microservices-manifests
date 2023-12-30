@@ -4,7 +4,7 @@ metadata:
   namespace: services
   name: customer-app-gateway
   labels:
-      env: {{ .Values.global.env }}
+    env: {{ .Values.global.env }}
 spec:
   selector:
     istio: ingressgateway

@@ -4,7 +4,7 @@ metadata:
   namespace: services
   name: order-virtual-service
   labels:
-      env: {{ .Values.global.env }}
+    env: {{ .Values.global.env }}
 spec:
   exportTo:
     - "."
