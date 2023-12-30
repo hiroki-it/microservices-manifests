@@ -36,7 +36,7 @@ SREチームが以下のようなシナリオで開発運用していること�
 
 一方で、公式チャートはチャートリポジトリを参照しています。
 
-複数のチャートから構成される一部のツール（Istioなど）、各チャートのリポジトリを監視する孫Applicationを用意し、これを子Applicationで管理しています。
+複数のチャートから構成される一部のツール (Istioなど) 、各チャートのリポジトリを監視する孫Applicationを用意し、これを子Applicationで管理しています。
 
 ```yaml
 repository/
@@ -98,10 +98,10 @@ repository/
 
 一方で，本番環境ではCIをGitHub Actionsで，またCDをArgoCDで実行します．
 
-| 役割          | ツール                   |  導入の状況  |
-|-------------|-----------------------|:-------:|
-| CI（本番環境）    | GitHub Actions & Helm |    ⭕    |
-| CD（本番環境）    | ArgoCD                |    ⭕    |
+| 役割 | ツール                   |  導入の状況  |
+|----|-----------------------|:-------:|
+| CI | GitHub Actions & Helm |    ⭕    |
+| CD | ArgoCD                |    ⭕    |
 
 <br>
 
@@ -120,7 +120,7 @@ argocd-root
 └── argocd-infra-parent # インフラチームのツールごとのチャートをデプロイできる
 ```
 
-ArgoCDのルートApplication（argocd-root）のみ、ArgoCDを使用してデプロイできないため、Helmfileを使用しています。
+ArgoCDのルートApplication (argocd-root) のみ、ArgoCDを使用してデプロイできないため、Helmfileを使用しています。
 
 
 #### ▼ プロジェクト

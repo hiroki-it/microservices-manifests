@@ -23,7 +23,7 @@ spec:
         env: {{ .Values.global.env }}
     spec:
       containers:
-        # MySQLコンテナ（開発環境のみ）
+        # MySQLコンテナ（開発環境のみ) 
         - name: mysql
           image: mysql:5.7
           imagePullPolicy: IfNotPresent
