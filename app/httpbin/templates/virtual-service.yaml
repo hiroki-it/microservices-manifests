@@ -9,7 +9,7 @@ spec:
   hosts:
     - "*"
   gateways:
-    - {{ .Values.global.serviceName }}-gateway
+    - {{ .Values.global.serviceName }}-app-gateway
   http:
     - route:
         - destination:

@@ -2,7 +2,7 @@ apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
   namespace: services
-  name: {{ .Values.global.serviceName }}-gateway
+  name: {{ .Values.global.serviceName }}-app-gateway
   labels:
     env: {{ .Values.global.env }}
 spec:
