@@ -107,7 +107,7 @@ repository/
 
 #### ▼ App-Of-Appsパターン
 
-<img src="https://raw.githubusercontent.com/hiroki-it/helm-charts-practice/main/root-application.png" alt="root-application" style="zoom:80%;" />
+<img src="https://raw.githubusercontent.com/hiroki-it/microservices-manifests/main/root-application.png" alt="root-application" style="zoom:80%;" />
 
 
 ArgoCDでは、[App-Of-Appsパターン](https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/#app-of-apps-pattern)を採用しており、以下のようなApplication構成になっています。

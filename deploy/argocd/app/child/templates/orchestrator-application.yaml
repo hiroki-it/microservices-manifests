@@ -8,7 +8,7 @@ metadata:
 spec:
   project: app
   source:
-    repoURL: https://github.com/hiroki-it/helm-charts-practice.git
+    repoURL: https://github.com/hiroki-it/microservices-manifests
     targetRevision: main
     path: ./app/orchestrator
     helm:

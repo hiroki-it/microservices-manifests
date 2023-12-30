@@ -8,7 +8,7 @@ metadata:
 spec:
   project: infra
   source:
-    repoURL: https://github.com/hiroki-it/helm-charts-practice.git
+    repoURL: https://github.com/hiroki-it/microservices-manifests.git
     targetRevision: main
     path: ./infra/shared
     helm:
