@@ -1,4 +1,4 @@
-{{/* karpenterはMinikubeで使用できないため、デプロイしない */}}
+{{-/* karpenterはMinikubeで使用できないため、デプロイしない */}}
 {{- if ne .Values.global.env "dev" }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
