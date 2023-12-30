@@ -6,10 +6,9 @@ metadata:
   labels:
     env: {{ .Values.global.env }}
 spec:
-  type: NodePort
+  selector:
+    app: {{ .Values.global.serviceName }}
   ports:
     - name: http-httpbin
       port: 8080
       targetPort: 8080
-  selector:
-    app: {{ .Values.global.serviceName }}
