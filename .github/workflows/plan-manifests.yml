@@ -40,6 +40,9 @@ jobs:
             exit 0
           fi
           git checkout release/manifest
-          git commit -m "${{github.run_number}} helm templateを実行し、マニフェストファイルを自動生成しました"
+          git commit -m "${{github.run_number}} helm templateを実行し、マニフェストファイルを自動生成した"
           git pull
           git push origin HEAD
+      - name: Git create pull request for GitOps
+        run: |
+          gh pr create -t "チャートからマニフェストを作成した"
