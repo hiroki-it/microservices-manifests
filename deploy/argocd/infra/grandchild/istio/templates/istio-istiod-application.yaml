@@ -24,6 +24,9 @@ spec:
           traceSampling: 100.0
           nodeSelector:
             node.kubernetes.io/nodegroup: system
+        meshConfig:
+          outboundTrafficPolicy:
+            mode: REGISTRY_ONLY
         global:
           proxy:
             {{- /* Jaegerを使用するが、オプション名はZipkinである */}}
