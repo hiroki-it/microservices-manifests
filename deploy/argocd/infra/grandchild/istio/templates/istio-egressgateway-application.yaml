@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  namespace: argocd
+  name: istio-egressgateway-application
+  labels:
+    env: {{ .Values.global.env }}
+spec:
+  project: infra
+  source:
+    repoURL: https://istio-release.storage.googleapis.com/charts
+    chart: gateway
+    targetRevision: {{ .Values.application.dottedRevision }}
+    helm:
+      releaseName: istio-egressgateway
+      values: |
+        {{- /* リクエストをIstio EgressGatewayに送信するためのService */}}
+        service:
+          type: ClusterIP
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: node.kubernetes.io/nodegroup
+                      operator: In
+                      values:
+                        - ingress
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: istio-ingress
