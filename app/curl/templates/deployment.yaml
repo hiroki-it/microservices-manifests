@@ -22,4 +22,4 @@ spec:
           command:
             - sh
             - -c
-            - curl -G https://httpbin.org/get
+            - curl -G https://httpbin.org/status/200
