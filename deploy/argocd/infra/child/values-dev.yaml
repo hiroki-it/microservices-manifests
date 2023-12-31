@@ -1,2 +1,20 @@
 global:
   env: dev
+
+alertmanager:
+  domain: helloworld.alertmanager.com
+
+grafana:
+  domain: helloworld.grafana.com
+  serviceName: kube-prometheus-stack-grafana
+
+jaeger:
+  domain: helloworld.jaeger.com
+
+kiali:
+  istioRevision: 1-19-5
+
+prometheus:
+  domain: helloworld.prometheus.com
+  serviceName: kube-prometheus-stack-prometheus
+

@@ -28,7 +28,7 @@ spec:
             ingressClassName: nginx
             {{- /* チャートの構成上、設定が必須になっている */}}
             hosts:
-              - helloworld.jaeger.com
+              - {{ .Values.jaeger.domain }}
           nodeSelector:
             node.kubernetes.io/nodegroup: system
         cassandra:
