@@ -35,6 +35,7 @@ jobs:
       - name: Git commit & push
         run: |
           git status
+          git branch --all
           git add .
           if [ -z "$(git status --porcelain)" ]; then
             echo "マニフェストファイルに変更点がないため、GitHub Actionは終了しました。"
