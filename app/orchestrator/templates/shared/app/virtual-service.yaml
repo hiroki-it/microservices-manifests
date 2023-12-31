@@ -13,10 +13,8 @@ spec:
   gateways:
     - orchestrator-app-gateway
   http:
-    - name: checkout-route
-      match:
-        - uri:
-            prefix: /checkout/
+    - match:
+        - port: {{ .Values.service.listenPort }}
       route:
         - destination:
             host: orchestrator-app-service

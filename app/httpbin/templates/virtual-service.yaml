@@ -13,7 +13,9 @@ spec:
   gateways:
     - {{ .Values.global.serviceName }}-app-gateway
   http:
-    - route:
+    - match:
+        - port: {{ .Values.ingressGateway.pod.listenPort }}
+      route:
         - destination:
             host: {{ .Values.global.serviceName }}
             port:

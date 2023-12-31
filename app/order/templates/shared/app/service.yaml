@@ -15,5 +15,5 @@ spec:
   ports:
     - name: http-order
       appProtocol: http
-      port: 80
+      port: {{ .Values.service.listenPort }}
       targetPort: 8080

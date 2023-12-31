@@ -13,12 +13,10 @@ spec:
   gateways:
     - mesh
   http:
-    - name: order-route
-      match:
-        - uri:
-            prefix: /orders/
+    - match:
+        - port: {{ .Values.ingressGateway.pod.listenPort }}
       route:
         - destination:
             host: order-app-service
             port:
-              number: 80
+              number: {{ .Values.service.listenPort }}

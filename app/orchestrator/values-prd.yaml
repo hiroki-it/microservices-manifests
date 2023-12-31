@@ -1,5 +1,6 @@
 global:
   env: prd
+  serviceName: orchestrator
 
 aws:
   accountId: null
@@ -11,10 +12,6 @@ aws:
 image:
   orchestrator:
     fastapi: 00690e9
-
-ingressGateway:
-  pod:
-    listenPort: 50002
 
 service:
   listenPort: 50002

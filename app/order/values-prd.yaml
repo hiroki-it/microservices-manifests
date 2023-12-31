@@ -1,12 +1,21 @@
 global:
   env: prd
+
 aws:
   accountId: null
   region: null
   user:
     accessKeyId: null
     secretAccessKey: null
+
 image:
   order:
     lumen: b5d0574
     nginx: b5d0574
+
+ingressGateway:
+  pod:
+    listenPort: 50002
+
+service:
+  listenPort: 50002

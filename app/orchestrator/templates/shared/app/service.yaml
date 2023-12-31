@@ -11,7 +11,7 @@ spec:
   selector:
     app: orchestrator
   ports:
-    - name: http-orchestrator
+    - name: http-{{ .Values.global.serviceName }}
       appProtocol: http
       port: {{ .Values.service.listenPort }}
       targetPort: 8000

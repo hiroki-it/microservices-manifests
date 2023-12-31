@@ -9,6 +9,6 @@ spec:
   selector:
     app: {{ .Values.global.serviceName }}
   ports:
-    - name: http-httpbin-app
+    - name: http-{{ .Values.global.serviceName }}
       port: {{ .Values.service.listenPort }}
       targetPort: 8080
