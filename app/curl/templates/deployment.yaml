@@ -18,6 +18,8 @@ spec:
         version: v1
     spec:
       containers:
-        - image: curlimages/curl:8.5.0
+        - name: {{ .Values.global.serviceName }}
+          image: curlimages/curl:8.5.0
           imagePullPolicy: IfNotPresent
-          name: {{ .Values.global.serviceName }}
+          command:
+            - /bin/sh
