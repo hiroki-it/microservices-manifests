@@ -1,17 +1,17 @@
 {{- define "dev.account.app.deployment" }}
-      hostname: account-app-pod
+      hostname: {{ .Values.global.serviceName }}-app-pod
       containers:
         # Ginコンテナ
         - name: gin
-          image: account-gin:latest
+          image: {{ .Values.global.serviceName }}-gin:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
           volumeMounts:
-            - name: account-app-persistent-volume
+            - name: {{ .Values.global.serviceName }}-app-persistent-volume
               mountPath: /go/src
       volumes:
-        - name: account-app-persistent-volume
+        - name: {{ .Values.global.serviceName }}-app-persistent-volume
           persistentVolumeClaim:
-            claimName: account-app-host-path-persistent-volume-claim
+            claimName: {{ .Values.global.serviceName }}-app-host-path-persistent-volume-claim
 {{- end }}

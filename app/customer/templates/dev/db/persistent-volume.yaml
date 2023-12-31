@@ -3,7 +3,7 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   namespace: services
-  name: customer-db-persistent-volume
+  name: {{ .Values.global.serviceName }}-db-persistent-volume
   labels:
     app: customer
     component: db

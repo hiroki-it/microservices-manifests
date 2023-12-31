@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: services
-  name: customer-app-pod
+  name: {{ .Values.global.serviceName }}-app-pod
   labels:
     app: customer
     component: app

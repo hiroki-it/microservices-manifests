@@ -3,7 +3,7 @@ apiVersion: v1
 kind: Service
 metadata:
   namespace: services
-  name: account-db-service
+  name: {{ .Values.global.serviceName }}-db-service
   labels:
     app: account
     component: db

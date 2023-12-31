@@ -3,7 +3,7 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   namespace: services
-  name: order-app-persistent-volume
+  name: {{ .Values.global.serviceName }}-app-persistent-volume
   labels:
     app: order
     component: app

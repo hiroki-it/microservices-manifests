@@ -2,7 +2,7 @@ apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   namespace: services
-  name: account-app-virtual-service
+  name: {{ .Values.global.serviceName }}-app-virtual-service
   labels:
     env: {{ .Values.global.env }}
 spec:
@@ -17,6 +17,6 @@ spec:
         - port: {{ .Values.service.listenPort }}
       route:
         - destination:
-            host: account-app-service
+            host: {{ .Values.global.serviceName }}-app-service
             port:
               number: {{ .Values.service.listenPort }}

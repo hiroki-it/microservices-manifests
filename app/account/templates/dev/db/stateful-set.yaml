@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   namespace: services
-  name: account-db-pod
+  name: {{ .Values.global.serviceName }}-db-pod
   labels:
     app: account
     component: db
@@ -14,7 +14,7 @@ spec:
     matchLabels:
       app: account
       component: db
-  serviceName: account-app-service
+  serviceName: {{ .Values.global.serviceName }}-app-service
   template:
     metadata:
       annotations:
@@ -41,14 +41,14 @@ spec:
             - name: MYSQL_PASSWORD
               value: dev_password
           volumeMounts:
-            - name: account-db-host-path-persistent-volume-claim
+            - name: {{ .Values.global.serviceName }}-db-host-path-persistent-volume-claim
               # NOTE:
               # mysqld: Can't create/write to file '/var/lib/mysql/is_writable' (Errcode: 13 - Permission denied)
               # datadirにマウントできない。
               mountPath: /var/volume
   volumeClaimTemplates:
     - metadata:
-        name: account-db-host-path-persistent-volume-claim
+        name: {{ .Values.global.serviceName }}-db-host-path-persistent-volume-claim
         labels:
           app: account
           component: db

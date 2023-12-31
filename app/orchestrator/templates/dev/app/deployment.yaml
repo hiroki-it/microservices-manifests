@@ -1,17 +1,17 @@
 {{- define "dev.orchestrator.app.deployment" }}
-      hostname: orchestrator-pod
+      hostname: {{ .Values.global.serviceName }}-pod
       containers:
         # FastAPIコンテナ
         - name: fastapi
-          image: orchestrator-fastapi:latest
+          image: {{ .Values.global.serviceName }}-fastapi:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
           volumeMounts:
-            - name: orchestrator-persistent-volume
+            - name: {{ .Values.global.serviceName }}-persistent-volume
               mountPath: /var/www/orchestrator
       volumes:
-        - name: orchestrator-persistent-volume
+        - name: {{ .Values.global.serviceName }}-persistent-volume
           persistentVolumeClaim:
-            claimName: orchestrator-host-path-persistent-volume-claim
+            claimName: {{ .Values.global.serviceName }}-host-path-persistent-volume-claim
 {{- end }}

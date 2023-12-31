@@ -1,9 +1,9 @@
 {{- define "prd.account.app.deployment" }}
-      hostname: account-app-pod
+      hostname: {{ .Values.global.serviceName }}-app-pod
       containers:
         # Ginコンテナ
         - name: gin
-          image: {{ .Values.aws.accountId }}.dkr.ecr.{{ .Values.aws.region }}.amazonaws.com/account-gin-repository:{{ .Values.image.account.gin }}
+          image: {{ .Values.aws.accountId }}.dkr.ecr.{{ .Values.aws.region }}.amazonaws.com/{{ .Values.global.serviceName }}-gin-repository:{{ .Values.image.account.gin }}
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

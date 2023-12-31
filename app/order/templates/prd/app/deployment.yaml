@@ -1,14 +1,14 @@
 {{- define "prd.order.app.deployment" }}
-      hostname: order-app-pod
+      hostname: {{ .Values.global.serviceName }}-app-pod
       containers:
         # Lumenコンテナ
         - name: lumen
-          image: {{ .Values.aws.accountId }}.dkr.ecr.{{ .Values.aws.region }}.amazonaws.com/order-lumen-repository:{{ .Values.image.order.lumen }}
+          image: {{ .Values.aws.accountId }}.dkr.ecr.{{ .Values.aws.region }}.amazonaws.com/{{ .Values.global.serviceName }}-lumen-repository:{{ .Values.image.order.lumen }}
           imagePullPolicy: Always
           ports:
             - containerPort: 9000
         - name: nginx
-          image: {{ .Values.aws.accountId }}.dkr.ecr.{{ .Values.aws.region }}.amazonaws.com/order-nginx-repository:{{ .Values.image.order.nginx }}
+          image: {{ .Values.aws.accountId }}.dkr.ecr.{{ .Values.aws.region }}.amazonaws.com/{{ .Values.global.serviceName }}-nginx-repository:{{ .Values.image.order.nginx }}
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

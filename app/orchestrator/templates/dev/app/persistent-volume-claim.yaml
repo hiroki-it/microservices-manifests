@@ -3,7 +3,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   namespace: services
-  name: orchestrator-host-path-persistent-volume-claim
+  name: {{ .Values.global.serviceName }}-host-path-persistent-volume-claim
   labels:
     app: orchestrator
     env: {{ .Values.global.env }}

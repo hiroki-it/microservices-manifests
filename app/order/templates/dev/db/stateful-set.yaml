@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   namespace: services
-  name: order-db-pod
+  name: {{ .Values.global.serviceName }}-db-pod
   labels:
     app: order
     component: db
@@ -15,7 +15,7 @@ spec:
       app: order
       component: db
       env: {{ .Values.global.env }}
-  serviceName: order-app-service
+  serviceName: {{ .Values.global.serviceName }}-app-service
   template:
     metadata:
       annotations:
@@ -42,14 +42,14 @@ spec:
             - name: MYSQL_PASSWORD
               value: dev_password
           volumeMounts:
-            - name: order-db-host-path-persistent-volume-claim
+            - name: {{ .Values.global.serviceName }}-db-host-path-persistent-volume-claim
               # NOTE:
               # mysqld: Can't create/write to file '/var/lib/mysql/is_writable' (Errcode: 13 - Permission denied)
               # datadirにマウントできない。
               mountPath: /var/volume
   volumeClaimTemplates:
     - metadata:
-        name: order-db-host-path-persistent-volume-claim
+        name: {{ .Values.global.serviceName }}-db-host-path-persistent-volume-claim
         labels:
           app: order
           component: db

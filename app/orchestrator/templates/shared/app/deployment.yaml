@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: services
-  name: orchestrator-pod
+  name: {{ .Values.global.serviceName }}-pod
   labels: 
     app: orchestrator
     env: {{ .Values.global.env }}

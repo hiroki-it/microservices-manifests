@@ -1,9 +1,9 @@
 {{- define "prd.orchestrator.app.deployment" }}
-      hostname: orchestrator-pod
+      hostname: {{ .Values.global.serviceName }}-pod
       containers:
         # FastAPIコンテナ
         - name: fastapi
-          image: {{ .Values.aws.accountId }}.dkr.ecr.{{ .Values.aws.region }}.amazonaws.com/orchestrator-fastapi-repository:{{ .Values.image.orchestrator.fastapi }}
+          image: {{ .Values.aws.accountId }}.dkr.ecr.{{ .Values.aws.region }}.amazonaws.com/{{ .Values.global.serviceName }}-fastapi-repository:{{ .Values.image.orchestrator.fastapi }}
           imagePullPolicy: Always
           ports:
             - containerPort: 8000

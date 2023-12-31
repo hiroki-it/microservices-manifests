@@ -2,7 +2,7 @@ apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
   namespace: services
-  name: order-app-destination-rule
+  name: {{ .Values.global.serviceName }}-app-destination-rule
   labels:
     env: {{ .Values.global.env }}
 spec:

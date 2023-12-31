@@ -3,7 +3,7 @@ apiVersion: v1
 kind: Service
 metadata:
   namespace: services
-  name: order-db-service
+  name: {{ .Values.global.serviceName }}-db-service
   labels:
     app: order
     component: db
