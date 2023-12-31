@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   namespace: argocd
-  name: istio-gateway-application
+  name: istio-ingressgateway-application
   labels:
     env: {{ .Values.global.env }}
 spec:
