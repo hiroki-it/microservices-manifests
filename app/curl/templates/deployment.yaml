@@ -10,12 +10,10 @@ spec:
   selector:
     matchLabels:
       app: {{ .Values.global.serviceName }}
-      version: v1
   template:
     metadata:
       labels:
         app: {{ .Values.global.serviceName }}
-        version: v1
     spec:
       containers:
         - name: {{ .Values.global.serviceName }}
