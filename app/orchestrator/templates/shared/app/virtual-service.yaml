@@ -17,6 +17,6 @@ spec:
         - port: {{ .Values.service.listenPort }}
       route:
         - destination:
-            host: orchestrator-app-service
+            host: {{ .Values.global.serviceName }}-app-service
             port:
               number: {{ .Values.service.listenPort }}
