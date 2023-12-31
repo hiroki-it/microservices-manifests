@@ -41,7 +41,7 @@ jobs:
             exit 0
           fi
           git commit -m "helm templateを実行し、マニフェストファイルを自動生成した"
-          git push origin HEAD
+          git push -f origin HEAD
       - name: Git create pull request for GitOps
         run: |
           gh pr create -t "チャートからマニフェストを作成した"
