@@ -13,9 +13,5 @@ image:
     lumen: b5d0574
     nginx: b5d0574
 
-ingressGateway:
-  pod:
-    listenPort: 50002
-
 service:
-  listenPort: 50002
+  listenPort: 50005

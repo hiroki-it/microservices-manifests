@@ -25,15 +25,15 @@ spec:
               port: 50001
               {{- /* NodePort Serviceの宛先ポート番号 (Istio IngressGatewayのPodが待ち受けるポート番号) */}}
               targetPort: 50001
-            - name: http-orchestrator
+            - name: http-helloworld
               nodePort: 30002
               port: 50002
               targetPort: 50002
-            - name: http-helloworld
+            - name: http-httpbin
               nodePort: 30003
               port: 50003
               targetPort: 50003
-            - name: http-httpbin
+            - name: http-orchestrator
               nodePort: 30004
               port: 50004
               targetPort: 50004

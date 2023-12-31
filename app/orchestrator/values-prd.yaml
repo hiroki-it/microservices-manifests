@@ -13,5 +13,9 @@ image:
   orchestrator:
     fastapi: 00690e9
 
+ingressGateway:
+  pod:
+    listenPort: 50004
+
 service:
-  listenPort: 50002
+  listenPort: 50004

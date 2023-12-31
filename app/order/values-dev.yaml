@@ -4,9 +4,5 @@ aws:
   accountId: null
   region: null
 
-ingressGateway:
-  pod:
-    listenPort: 50002
-
 service:
-  listenPort: 50002
+  listenPort: 50005

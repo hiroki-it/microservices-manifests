@@ -7,7 +7,7 @@ deployment:
 
 ingressGateway:
   pod:
-    listenPort: 50003
+    listenPort: 50002
 
 service:
-  listenPort: 50003
+  listenPort: 50002
