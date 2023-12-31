@@ -1,0 +1,11 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: {{ .Values.global.serviceName }}-app-destination-rule
+  namespace: services
+  labels:
+    env: {{ .Values.global.env }}
+spec:
+  exportTo:
+    - "*"
+  host: httpbin.org

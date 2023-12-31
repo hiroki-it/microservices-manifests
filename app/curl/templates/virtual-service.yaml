@@ -1,0 +1,25 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  namespace: services
+  name: {{ .Values.global.serviceName }}-app-virtual-service
+  labels:
+    env: {{ .Values.global.env }}
+spec:
+  exportTo:
+    - "*"
+  hosts:
+    - httpbin.org
+  gateways:
+    - {{ .Values.global.serviceName }}-app-gateway
+    - mesh
+  http:
+    - match:
+        - gateways:
+            - istio-egressgateway
+          port: {{ .Values.egressGateway.pod.listenPort }}
+      route:
+        - destination:
+            host: httpbin.org
+            port:
+              number: {{ .Values.egressGateway.pod.listenPort }}
