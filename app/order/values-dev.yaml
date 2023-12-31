@@ -1,5 +1,7 @@
 global:
   env: dev
+  serviceName: order
+
 aws:
   accountId: null
   region: null
