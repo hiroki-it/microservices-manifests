@@ -26,3 +26,80 @@ spec:
           command:
             - sleep
             - infinity
+---
+# Source: curl/templates/destination-rule.yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: curl-app-destination-rule
+  namespace: services
+  labels:
+    env: prd
+spec:
+  exportTo:
+    - "*"
+  host: httpbin.org
+---
+# Source: curl/templates/gateway.yaml
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  namespace: services
+  name: curl-app-gateway
+  labels:
+    env: prd
+spec:
+  selector:
+    istio: egressgateway
+  servers:
+    - port:
+        name: http-curl
+        protocol: HTTP
+        number: 80
+      hosts:
+        - httpbin.org
+---
+# Source: curl/templates/service-entry.yaml
+apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+  namespace: services
+  name: curl-service-entry
+  labels:
+    env: prd
+spec:
+  hosts:
+    - httpbin.org
+  location: MESH_EXTERNAL
+  ports:
+    - number: 80
+      name: http
+      protocol: HTTP
+  resolution: DNS
+---
+# Source: curl/templates/virtual-service.yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  namespace: services
+  name: curl-app-virtual-service
+  labels:
+    env: prd
+spec:
+  exportTo:
+    - "*"
+  hosts:
+    - httpbin.org
+  gateways:
+    - curl-app-gateway
+    - mesh
+  http:
+    - match:
+        - gateways:
+            - istio-egressgateway
+          port: 80
+      route:
+        - destination:
+            host: httpbin.org
+            port:
+              number: 80
