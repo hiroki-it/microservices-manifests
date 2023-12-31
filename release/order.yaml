@@ -1,5 +1,5 @@
 ---
-# Source: customer/templates/shared/app/service.yaml
+# Source: order/templates/shared/app/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -20,7 +20,7 @@ spec:
       port: 50005
       targetPort: 8080
 ---
-# Source: customer/templates/shared/app/deployment.yaml
+# Source: order/templates/shared/app/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -64,7 +64,7 @@ spec:
           ports:
             - containerPort: 8080
 ---
-# Source: customer/templates/shared/app/destination-rule.yaml
+# Source: order/templates/shared/app/destination-rule.yaml
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
@@ -77,7 +77,7 @@ spec:
     - "."
   host: order-app-service
 ---
-# Source: customer/templates/shared/app/virtual-service.yaml
+# Source: order/templates/shared/app/virtual-service.yaml
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
