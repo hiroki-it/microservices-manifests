@@ -20,6 +20,5 @@ spec:
           image: curlimages/curl:8.5.0
           imagePullPolicy: IfNotPresent
           command:
-            - sh
-            - -c
-            - curl -i -G https://httpbin.org/get
+            - sleep
+            - infinity
