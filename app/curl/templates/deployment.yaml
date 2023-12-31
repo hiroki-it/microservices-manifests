@@ -22,4 +22,6 @@ spec:
           image: curlimages/curl:8.5.0
           imagePullPolicy: IfNotPresent
           command:
-            - /bin/sh
+            - sh
+            - -c
+            - curl -s https://www.google.com/
