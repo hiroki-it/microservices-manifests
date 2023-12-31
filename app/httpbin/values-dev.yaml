@@ -4,7 +4,7 @@ global:
 
 ingressGateway:
   pod:
-    listenPort: 30004
+    listenPort: 50004
 
 service:
   listenPort: 50004

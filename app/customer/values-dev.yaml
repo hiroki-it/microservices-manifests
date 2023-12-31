@@ -8,7 +8,7 @@ aws:
 
 ingressGateway:
   pod:
-    listenPort: 30001
+    listenPort: 50001
 
 service:
   listenPort: 50001

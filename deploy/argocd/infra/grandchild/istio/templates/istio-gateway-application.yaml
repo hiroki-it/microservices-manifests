@@ -23,6 +23,7 @@ spec:
               nodePort: 30001
               {{- /* NodePort Serviceが待ち受けるポート番号 */}}
               port: 50001
+              {{- /* NodePort Serviceの宛先ポート番号 (Istio IngressGatewayのPodが待ち受けるポート番号) */}}
               targetPort: 50001
             - name: http-orchestrator
               nodePort: 30002
