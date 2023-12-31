@@ -24,4 +24,4 @@ spec:
           command:
             - sh
             - -c
-            - curl -s https://www.google.com/
+            - curl -G https://httpbin.org/get
