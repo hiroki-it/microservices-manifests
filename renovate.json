@@ -1,6 +1,12 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
-  ]
+    "config:base",
+    "group:allNonMajor"
+  ],
+  "labels": ["renovate"],
+  "prHourlyLimit": 0,
+  "prConcurrentLimit": 0,
+  "reviewers": ["@hiroki-it"],
+  "timezone": "Asia/Tokyo"
 }
