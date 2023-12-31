@@ -1,3 +1,7 @@
 global:
   env: prd
   serviceName: curl
+
+egressGateway:
+  pod:
+    listenPort: 80
