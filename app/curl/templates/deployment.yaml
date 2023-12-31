@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: services
+  name: {{ .Values.global.serviceName }}-app-service
+  labels:
+    env: {{ .Values.global.env }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.global.serviceName }}
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.global.serviceName }}
+        version: v1
+    spec:
+      containers:
+        - image: curlimages/curl:8.5.0
+          imagePullPolicy: IfNotPresent
+          name: {{ .Values.global.serviceName }}
