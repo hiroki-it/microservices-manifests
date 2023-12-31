@@ -21,16 +21,33 @@ spec:
         external_services:
           grafana:
             enabled: true
-            in_cluster_url: http://helloworld.grafana.com
+            in_cluster_url: http://{{ .Values.grafana.serviceName }}.prometheus
+            url: http://{{ .Values.grafana.domain }}
             auth:
               type: basic
               username: admin
               password: prom-operator
           prometheus:
-            url: http://helloworld.prometheus.com
+            url: http://{{ .Values.prometheus.serviceName }}.prometheus:9090
+          custom_dashboards:
+            prometheus:
+              url: http://{{ .Values.prometheus.serviceName }}.prometheus:9090
           tracing:
-            enabled: true
-
+            enabled: false
+          istio:
+            component_status:
+              components:
+                - app_label: istiod
+                - app_label: istio-ingressgateway
+                  namespace: istio-ingress
+                - app_label: istio-egressgateway
+                  namespace: istio-egress
+              enabled: true
+            config_map_name: istio-{{ .Values.kiali.istioRevision }}
+            istio_sidecar_injector_config_map_name: istio-sidecar-injector-{{ .Values.kiali.istioRevision }}
+            istiod_deployment_name: istiod-{{ .Values.kiali.istioRevision }}
+            root_namespace: istio-system
+            url_service_version: http://istiod-{{ .Values.kiali.istioRevision }}:15014/version
 
   destination:
     server: https://kubernetes.default.svc
