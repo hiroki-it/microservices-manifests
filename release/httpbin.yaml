@@ -4,24 +4,23 @@ apiVersion: v1
 kind: Service
 metadata:
   namespace: services
-  name: httpbin-service
+  name: httpbin-app-service
   labels:
     env: prd
 spec:
-  type: NodePort
-  ports:
-    - name: http-bin
-      port: 8000
-      targetPort: 8080
   selector:
     app: httpbin
+  ports:
+    - name: http-httpbin
+      port: 50003
+      targetPort: 8080
 ---
 # Source: httpbin/templates/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: services
-  name: httpbin-service
+  name: httpbin-app-service
   labels:
     env: prd
 spec:
@@ -37,7 +36,7 @@ spec:
         version: v1
     spec:
       containers:
-        - image: docker.io/kong/httpbin
+        - image: kennethreitz/httpbin
           imagePullPolicy: IfNotPresent
           name: httpbin
           command:
@@ -62,7 +61,9 @@ metadata:
   labels:
     env: prd
 spec:
-  host: httpbin-app-service.app.svc.cluster.local
+  exportTo:
+    - "*"
+  host: httpbin-app-service
 ---
 # Source: httpbin/templates/gateway.yaml
 apiVersion: networking.istio.io/v1beta1
@@ -79,7 +80,7 @@ spec:
     - port:
         name: http-httpbin
         protocol: HTTP
-        number: 80
+        number: 50003
       hosts:
         - "*"
 ---
@@ -93,14 +94,16 @@ metadata:
     env: prd
 spec:
   exportTo:
-    - "."
+    - "*"
   hosts:
     - "*"
   gateways:
     - httpbin-app-gateway
   http:
-    - route:
+    - match:
+        - port: 50003
+      route:
         - destination:
-            host: httpbin
+            host: httpbin-app-service
             port:
-              number: 8000
+              number: 50003
