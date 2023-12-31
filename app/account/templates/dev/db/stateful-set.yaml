@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   namespace: services
-  name: {{ .Values.global.serviceName }}-db-pod
+  name: {{ .Values.global.serviceName }}-db-stateful-set
   labels:
     app: account
     component: db

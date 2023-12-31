@@ -1,5 +1,5 @@
 {{- define "prd.orchestrator.app.deployment" }}
-      hostname: {{ .Values.global.serviceName }}-pod
+      hostname: {{ .Values.global.serviceName }}-app
       containers:
         # FastAPIコンテナ
         - name: fastapi
