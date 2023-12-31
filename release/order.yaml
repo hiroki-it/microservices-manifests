@@ -25,7 +25,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: services
-  name: order-app-pod
+  name: order-app-deployment
   labels:
     app: order
     component: app
@@ -50,7 +50,7 @@ spec:
         component: app
         env: prd
     spec:
-      hostname: order-app-pod
+      hostname: order-app
       containers:
         # Lumenコンテナ
         - name: lumen

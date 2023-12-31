@@ -20,7 +20,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: services
-  name: httpbin-app-service
+  name: httpbin-app-deployment
   labels:
     env: prd
 spec:

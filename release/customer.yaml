@@ -25,7 +25,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: services
-  name: customer-app-pod
+  name: customer-app-deployment
   labels:
     app: customer
     component: app
@@ -50,7 +50,7 @@ spec:
         component: app
         env: prd
     spec:
-      hostname: customer-app-pod
+      hostname: customer-app
       containers:
         # FastAPIコンテナ
         - name: fastapi

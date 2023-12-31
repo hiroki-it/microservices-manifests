@@ -25,7 +25,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: services
-  name: account-app-pod
+  name: account-app-deployment
   labels:
     app: account
     component: app
@@ -50,7 +50,7 @@ spec:
         component: app
         env: prd
     spec:
-      hostname: account-app-pod
+      hostname: account-app
       containers:
         # Ginコンテナ
         - name: gin

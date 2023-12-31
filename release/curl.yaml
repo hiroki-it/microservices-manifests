@@ -1,0 +1,28 @@
+---
+# Source: curl/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: services
+  name: curl-app-deployment
+  labels:
+    env: prd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: curl
+  template:
+    metadata:
+      labels:
+        app: curl
+    spec:
+      containers:
+        - name: curl
+          image: curlimages/curl:8.5.0
+          imagePullPolicy: IfNotPresent
+          # コンテナ起動後にすぐに終了してCrashLoopBackOffになってしまうため、ずっとスリープするようにする
+          # @see https://vamdemicsystem.black/kubernetes/%E3%80%90kubernetes%E3%80%91kubernetes%E3%81%A7ubuntu%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8%E3%82%92%E8%B5%B7%E5%8B%95%E3%81%99%E3%82%8Bdeployment%E3%81%AE%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB
+          command:
+            - sleep
+            - infinity
