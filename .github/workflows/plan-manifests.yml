@@ -40,7 +40,7 @@ jobs:
             exit 0
           fi
           git checkout release/manifest
-          git commit -m "helm templateを実行し、マニフェストファイルを自動生成した (https://github.com/hiroki-it/tech-notebook/actions/runs/${{github.run_number}})"
+          git commit -m "helm templateを実行し、マニフェストファイルを自動生成した"
           git pull
           git push origin HEAD
       - name: Git create pull request for GitOps
