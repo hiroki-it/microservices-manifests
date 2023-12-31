@@ -1,5 +1,6 @@
 global:
   env: prd
+  serviceName: customer
 
 aws:
   accountId: null
