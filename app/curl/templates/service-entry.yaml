@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+  namespace: services
+  name: {{ .Values.global.serviceName }}-service-entry
+  labels:
+    env: {{ .Values.global.env }}
+spec:
+  hosts:
+    - httpbin.org
+  location: MESH_EXTERNAL
+  ports:
+    - number: 80
+      name: http
+      protocol: HTTP
+  resolution: DNS
