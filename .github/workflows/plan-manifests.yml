@@ -35,7 +35,7 @@ jobs:
       - name: Git commit & push
         run: |
           git checkout -b release/manifest
-          git add .
+          git add ./release
           if [ -z "$(git status --porcelain)" ]; then
             echo "マニフェストファイルに変更点がないため、GitHub Actionは終了しました。"
             exit 0
