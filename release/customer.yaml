@@ -17,7 +17,7 @@ spec:
   ports:
     - name: http-customer
       appProtocol: http
-      port: 80
+      port: 50001
       targetPort: 8000
 ---
 # Source: customer/templates/shared/app/deployment.yaml
@@ -69,8 +69,8 @@ metadata:
     env: prd
 spec:
   exportTo:
-    - "."
-  host: customer-app-service.services.svc.cluster.local
+    - "*"
+  host: customer-app-service
 ---
 # Source: customer/templates/shared/app/gateway.yaml
 apiVersion: networking.istio.io/v1beta1
@@ -85,9 +85,9 @@ spec:
     istio: ingressgateway
   servers:
     - port:
-        name: http-customer-app
+        name: http-customer
         protocol: HTTP
-        number: 30000
+        number: 50001
       hosts:
         - "*"
 ---
@@ -101,18 +101,16 @@ metadata:
     env: prd
 spec:
   exportTo:
-    - "."
+    - "*"
   hosts:
     - "*"
   gateways:
     - customer-app-gateway
   http:
-    - name: customer-route
-      match:
-        - uri:
-            prefix: /customers/
+    - match:
+        - port: 50001
       route:
         - destination:
-            host: customer-app-service.services.svc.cluster.local
+            host: customer-app-service
             port:
-              number: 80
+              number: 50001

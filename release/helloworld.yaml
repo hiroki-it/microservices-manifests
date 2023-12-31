@@ -13,7 +13,7 @@ spec:
   ports:
     - name: http-helloworld
       protocol: TCP
-      port: 80
+      port: 50002
       targetPort: 8080
 ---
 # Source: helloworld/templates/deployment.yaml
@@ -59,9 +59,9 @@ metadata:
   labels:
     env: prd
 spec:
-  host: helloworld-app-service.app.svc.cluster.local
   exportTo:
-    - "."
+    - "*"
+  host: helloworld-app-service
 ---
 # Source: helloworld/templates/gateway.yaml
 apiVersion: networking.istio.io/v1alpha3
@@ -77,8 +77,8 @@ spec:
   servers:
     - port:
         name: http-helloworld
-        number: 80
         protocol: HTTP
+        number: 50002
       hosts:
         - "*"
 ---
@@ -92,16 +92,16 @@ metadata:
     env: prd
 spec:
   exportTo:
-    - "."
+    - "*"
   hosts:
     - "*"
   gateways:
     - helloworld-app-gateway
   http:
     - match:
-        - port: 80
+        - port: 50002
       route:
         - destination:
-            host: helloworld-app-service.app.svc.cluster.local
+            host: helloworld-app-service
             port:
-              number: 80
+              number: 50002

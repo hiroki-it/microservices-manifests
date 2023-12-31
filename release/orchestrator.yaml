@@ -4,7 +4,7 @@ apiVersion: v1
 kind: Service
 metadata:
   namespace: services
-  name: orchestrator-service
+  name: orchestrator-app-service
   labels:
     app: orchestrator
     env: prd
@@ -15,7 +15,7 @@ spec:
   ports:
     - name: http-orchestrator
       appProtocol: http
-      port: 80
+      port: 50004
       targetPort: 8000
 ---
 # Source: orchestrator/templates/shared/app/deployment.yaml
@@ -64,8 +64,8 @@ metadata:
     env: prd
 spec:
   exportTo:
-    - "."
-  host: orchestrator-service.services.svc.cluster.local
+    - "*"
+  host: orchestrator-app-service
 ---
 # Source: orchestrator/templates/shared/app/gateway.yaml
 apiVersion: networking.istio.io/v1beta1
@@ -80,9 +80,9 @@ spec:
     istio: ingressgateway
   servers:
     - port:
-        name: http-orchestrator-app
+        name: http-orchestrator
         protocol: HTTP
-        number: 30001
+        number: 50004
       hosts:
         - "*"
 ---
@@ -96,18 +96,16 @@ metadata:
     env: prd
 spec:
   exportTo:
-    - "."
+    - "*"
   hosts:
     - "*"
   gateways:
     - orchestrator-app-gateway
   http:
-    - name: checkout-route
-      match:
-        - uri:
-            prefix: /checkout/
+    - match:
+        - port: 50004
       route:
         - destination:
-            host: orchestrator-service.services.svc.cluster.local
+            host: orchestrator-app-service
             port:
-              number: 80
+              number: 50004

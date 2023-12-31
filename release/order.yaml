@@ -17,7 +17,7 @@ spec:
   ports:
     - name: http-order
       appProtocol: http
-      port: 80
+      port: 50005
       targetPort: 8080
 ---
 # Source: customer/templates/shared/app/deployment.yaml
@@ -75,7 +75,7 @@ metadata:
 spec:
   exportTo:
     - "."
-  host: order-app-service.services.svc.cluster.local
+  host: order-app-service
 ---
 # Source: customer/templates/shared/app/virtual-service.yaml
 apiVersion: networking.istio.io/v1beta1
@@ -89,16 +89,14 @@ spec:
   exportTo:
     - "."
   hosts:
-    - order-app
+    - order-app-service
   gateways:
     - mesh
   http:
-    - name: order-route
-      match:
-        - uri:
-            prefix: /orders/
+    - match:
+        - port: 50005
       route:
         - destination:
-            host: order-app-service.services.svc.cluster.local
+            host: order-app-service
             port:
-              number: 80
+              number: 50005

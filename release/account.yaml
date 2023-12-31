@@ -17,7 +17,7 @@ spec:
   ports:
     - name: http-account
       appProtocol: http
-      port: 80
+      port: 50000
       targetPort: 8080
 ---
 # Source: account/templates/shared/app/deployment.yaml
@@ -70,7 +70,7 @@ metadata:
 spec:
   exportTo:
     - "."
-  host: account-app-service.services.svc.cluster.local
+  host: account-app-service
 ---
 # Source: account/templates/shared/app/virtual-service.yaml
 apiVersion: networking.istio.io/v1beta1
@@ -84,16 +84,14 @@ spec:
   exportTo:
     - "."
   hosts:
-    - account-app
+    - account-app-service
   gateways:
     - mesh
   http:
-    - name: account-route
-      match:
-        - uri:
-            prefix: /account/
+    - match:
+        - port: 50000
       route:
         - destination:
-            host: account-app-service.services.svc.cluster.local
+            host: account-app-service
             port:
-              number: 80
+              number: 50000
