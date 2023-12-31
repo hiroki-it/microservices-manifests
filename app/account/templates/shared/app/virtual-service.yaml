@@ -9,7 +9,7 @@ spec:
   exportTo:
     - "."
   hosts:
-    - account-app
+    - {{ .Values.global.serviceName }}-app-service
   gateways:
     - mesh
   http:
@@ -17,6 +17,6 @@ spec:
         - port: {{ .Values.service.listenPort }}
       route:
         - destination:
-            host: account-app-service.services
+            host: account-app-service
             port:
               number: {{ .Values.service.listenPort }}

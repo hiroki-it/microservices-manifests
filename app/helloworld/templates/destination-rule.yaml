@@ -6,6 +6,7 @@ metadata:
   labels:
     env: {{ .Values.global.env }}
 spec:
-  host: {{ .Values.global.serviceName }}-app-service
   exportTo:
     - "."
+  host: {{ .Values.global.serviceName }}-app-service
+

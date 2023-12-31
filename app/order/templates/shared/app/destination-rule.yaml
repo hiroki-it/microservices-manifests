@@ -8,4 +8,4 @@ metadata:
 spec:
   exportTo:
     - "."
-  host: order-app-service
+  host: {{ .Values.global.serviceName }}-app-service

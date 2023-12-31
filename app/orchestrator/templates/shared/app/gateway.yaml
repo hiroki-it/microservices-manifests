@@ -10,7 +10,7 @@ spec:
     istio: ingressgateway
   servers:
     - port:
-        name: http-orchestrator
+        name: http-{{ .Values.global.serviceName }}
         protocol: HTTP
         number: {{ .Values.ingressGateway.pod.listenPort }}
       hosts:

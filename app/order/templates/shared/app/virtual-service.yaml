@@ -9,7 +9,7 @@ spec:
   exportTo:
     - "."
   hosts:
-    - order-app
+    - {{ .Values.global.serviceName }}-app-service
   gateways:
     - mesh
   http:
@@ -17,6 +17,6 @@ spec:
         - port: {{ .Values.ingressGateway.pod.listenPort }}
       route:
         - destination:
-            host: order-app-service
+            host: {{ .Values.global.serviceName }}-app-service
             port:
               number: {{ .Values.service.listenPort }}

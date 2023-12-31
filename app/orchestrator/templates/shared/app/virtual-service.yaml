@@ -11,7 +11,7 @@ spec:
   hosts:
     - "*"
   gateways:
-    - orchestrator-app-gateway
+    - {{ .Values.global.serviceName }}-app-gateway
   http:
     - match:
         - port: {{ .Values.service.listenPort }}
