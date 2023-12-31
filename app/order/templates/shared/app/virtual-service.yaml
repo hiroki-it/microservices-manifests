@@ -14,7 +14,7 @@ spec:
     - mesh
   http:
     - match:
-        - port: {{ .Values.ingressGateway.pod.listenPort }}
+        - port: {{ .Values.service.listenPort }}
       route:
         - destination:
             host: {{ .Values.global.serviceName }}-app-service
