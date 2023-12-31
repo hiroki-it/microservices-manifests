@@ -96,7 +96,7 @@ spec:
   http:
     - match:
         - gateways:
-            - istio-egressgateway
+            - curl-app-gateway
           port: 80
       route:
         - destination:
