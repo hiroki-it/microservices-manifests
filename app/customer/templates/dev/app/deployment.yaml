@@ -1,5 +1,5 @@
 {{- define "dev.customer.app.deployment" }}
-      hostname: {{ .Values.global.serviceName }}-app-pod
+      hostname: {{ .Values.global.serviceName }}-app
       containers:
         # FastAPIコンテナ
         - name: fastapi

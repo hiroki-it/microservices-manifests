@@ -1,5 +1,5 @@
 {{- define "dev.order.app.deployment" }}
-      hostname: {{ .Values.global.serviceName }}-app-pod
+      hostname: {{ .Values.global.serviceName }}-app
       containers:
         # Lumenコンテナ
         - name: lumen

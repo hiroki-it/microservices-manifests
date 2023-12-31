@@ -1,5 +1,5 @@
 {{- define "prd.account.app.deployment" }}
-      hostname: {{ .Values.global.serviceName }}-app-pod
+      hostname: {{ .Values.global.serviceName }}-app
       containers:
         # Ginコンテナ
         - name: gin
