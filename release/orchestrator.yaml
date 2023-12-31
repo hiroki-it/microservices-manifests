@@ -23,7 +23,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: services
-  name: orchestrator-pod
+  name: orchestrator-app-deployment
   labels: 
     app: orchestrator
     env: prd
@@ -45,7 +45,7 @@ spec:
         app: orchestrator
         env: prd
     spec:
-      hostname: orchestrator-pod
+      hostname: orchestrator-app
       containers:
         # FastAPIコンテナ
         - name: fastapi
