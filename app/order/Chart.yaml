@@ -2,7 +2,7 @@ apiVersion: v2
 appVersion: 1.0.0
 maintainers:
   - name: hiroki hasegawa
-name: customer
+name: order
 sources: ["https://github.com/hiroki-it/microservices-manifests"]
 type: application
 version: 1.0.0
