@@ -18,7 +18,7 @@ spec:
         version: v1
     spec:
       containers:
-        - image: docker.io/kong/httpbin
+        - image: kennethreitz/httpbin
           imagePullPolicy: IfNotPresent
           name: {{ .Values.global.serviceName }}
           command:
