@@ -4,6 +4,7 @@ set -xeuo pipefail
 
 services=(
     "account"
+    "curl"
     "customer"
     "helloworld"
     "httpbin"
