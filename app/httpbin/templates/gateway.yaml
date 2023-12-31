@@ -12,6 +12,6 @@ spec:
     - port:
         name: http-{{ .Values.global.serviceName }}
         protocol: HTTP
-        number: 30004
+        number: {{ .Values.ingressGateway.pod.listenPort }}
       hosts:
         - "*"

@@ -11,14 +11,12 @@ spec:
   hosts:
     - "*"
   gateways:
-    - customer-app-gateway
+    - {{ .Values.global.serviceName }}-app-gateway
   http:
-    - name: customer-route
-      match:
-        - uri:
-            prefix: /customers/
+    - match:
+        - port: {{ .Values.ingressGateway.pod.listenPort }}
       route:
         - destination:
-            host: customer-app-service.services.svc.cluster.local
+            host: {{ .Values.global.serviceName }}-app-service
             port:
-              number: 50001
+              number: {{ .Values.service.listenPort }}

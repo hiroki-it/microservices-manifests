@@ -13,7 +13,7 @@ spec:
     app: customer
     component: app
   ports:
-    - name: http-customer
+    - name: http-{{ .Values.global.serviceName }}
       appProtocol: http
-      port: 50001
+      port: {{ .Values.service.listenPort }}
       targetPort: 8000

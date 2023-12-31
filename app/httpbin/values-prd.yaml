@@ -1,3 +1,10 @@
 global:
   env: prd
   serviceName: httpbin
+
+ingressGateway:
+  pod:
+    listenPort: 50004
+
+service:
+  listenPort: 30004

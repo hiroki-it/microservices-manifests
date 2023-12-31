@@ -13,12 +13,10 @@ spec:
   gateways:
     - mesh
   http:
-    - name: account-route
-      match:
-        - uri:
-            prefix: /account/
+    - match:
+        - port: {{ .Values.ingressGateway.pod.listenPort }}
       route:
         - destination:
-            host: account-app-service.services.svc.cluster.local
+            host: account-app-service.services
             port:
-              number: 8080
+              number: {{ .Values.service.listenPort }}

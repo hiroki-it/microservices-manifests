@@ -17,4 +17,4 @@ spec:
         - destination:
             host: {{ .Values.global.serviceName }}
             port:
-              number: 30004
+              number: {{ .Values.service.listenPort }}

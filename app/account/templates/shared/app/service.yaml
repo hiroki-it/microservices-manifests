@@ -13,7 +13,7 @@ spec:
     app: account
     component: app
   ports:
-    - name: http-account
+    - name: http-{{ .Values.global.serviceName }}
       appProtocol: http
-      port: 50000
+      port: {{ .Values.service.listenPort }}
       targetPort: 8080

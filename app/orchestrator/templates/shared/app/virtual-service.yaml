@@ -19,6 +19,6 @@ spec:
             prefix: /checkout/
       route:
         - destination:
-            host: orchestrator-service.services.svc.cluster.local
+            host: orchestrator-app-service
             port:
-              number: 50002
+              number: {{ .Values.service.listenPort }}

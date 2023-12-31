@@ -1,3 +1,10 @@
 global:
   env: dev
   serviceName: httpbin
+
+ingressGateway:
+  pod:
+    listenPort: 30004
+
+service:
+  listenPort: 50004

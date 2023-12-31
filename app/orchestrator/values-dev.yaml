@@ -3,3 +3,10 @@ global:
 aws:
   accountId: null
   region: null
+
+ingressGateway:
+  pod:
+    listenPort: 50004
+
+service:
+  listenPort: 30004

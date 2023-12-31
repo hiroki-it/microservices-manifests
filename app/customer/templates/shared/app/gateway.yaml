@@ -10,8 +10,8 @@ spec:
     istio: ingressgateway
   servers:
     - port:
-        name: http-customer
+        name: http-{{ .Values.global.serviceName }}
         protocol: HTTP
-        number: 30001
+        number: {{ .Values.ingressGateway.pod.listenPort }}
       hosts:
         - "*"

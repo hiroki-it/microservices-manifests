@@ -11,5 +11,5 @@ spec:
   ports:
     - name: http-{{ .Values.global.serviceName }}
       protocol: TCP
-      port: {{ .Values.service.port }}
+      port: {{ .Values.service.listenPort }}
       targetPort: {{ .Values.deployment.containerPort }}

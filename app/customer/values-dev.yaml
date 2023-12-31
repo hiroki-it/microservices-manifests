@@ -1,5 +1,14 @@
 global:
   env: dev
+  serviceName: customer
+
 aws:
   accountId: null
   region: null
+
+ingressGateway:
+  pod:
+    listenPort: 30001
+
+service:
+  listenPort: 50001

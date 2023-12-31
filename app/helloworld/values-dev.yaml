@@ -5,8 +5,9 @@ global:
 deployment:
   containerPort: 8080
 
-service:
-  port: 30003
-
 ingressGateway:
-  port: 50003
+  pod:
+    listenPort: 30003
+
+service:
+  listenPort: 50003

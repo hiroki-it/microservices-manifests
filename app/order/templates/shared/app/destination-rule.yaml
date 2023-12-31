@@ -8,4 +8,4 @@ metadata:
 spec:
   exportTo:
     - "."
-  host: order-app-service.services.svc.cluster.local
+  host: order-app-service

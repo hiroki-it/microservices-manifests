@@ -1,11 +1,20 @@
 global:
   env: prd
+
 aws:
   accountId: null
   region: null
   user:
     accessKeyId: null
     secretAccessKey: null
+
 image:
   orchestrator:
     fastapi: 00690e9
+
+ingressGateway:
+  pod:
+    listenPort: 30004
+
+service:
+  listenPort: 50004
