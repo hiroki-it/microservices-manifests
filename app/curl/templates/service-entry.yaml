@@ -11,6 +11,6 @@ spec:
   location: MESH_EXTERNAL
   ports:
     - number: 80
-      name: http
+      name: http-{{ .Values.global.serviceName }}
       protocol: HTTP
   resolution: DNS
