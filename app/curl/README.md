@@ -16,6 +16,7 @@
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| egressGateway.pod.listenPort | int | `80` |  |
 | global.env | string | `"prd"` |  |
 | global.serviceName | string | `"curl"` |  |
 
