@@ -2,6 +2,9 @@ global:
   env: dev
   serviceName: curl
 
+externalMesh:
+  listenPort: 80
+
 egressGateway:
   pod:
     listenPort: 80

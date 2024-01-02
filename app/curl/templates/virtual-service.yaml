@@ -16,10 +16,19 @@ spec:
   http:
     - match:
         - gateways:
+            - mesh
+          port: {{ .Values.externalMesh.listenPort }}
+      route:
+        - destination:
+            host: istio-egressgateway.istio-system.svc.cluster.local
+            port:
+              number: {{ .Values.egressGateway.pod.listenPort }}
+    - match:
+        - gateways:
             - {{ .Values.global.serviceName }}-app-gateway
           port: {{ .Values.egressGateway.pod.listenPort }}
       route:
         - destination:
             host: httpbin.org
             port:
-              number: {{ .Values.egressGateway.pod.listenPort }}
+              number: {{ .Values.externalMesh.listenPort }}
