@@ -20,7 +20,7 @@ spec:
           port: {{ .Values.externalMesh.listenPort }}
       route:
         - destination:
-            host: istio-egressgateway.istio-system.svc.cluster.local
+            host: istio-egressgateway.istio-egress.svc.cluster.local
             port:
               number: {{ .Values.egressGateway.pod.listenPort }}
     - match:
