@@ -27,6 +27,7 @@ spec:
         meshConfig:
           outboundTrafficPolicy:
             mode: REGISTRY_ONLY
+          accessLogFile: /dev/stdout
         global:
           proxy:
             {{- /* Jaegerを使用するが、オプション名はZipkinである */}}
