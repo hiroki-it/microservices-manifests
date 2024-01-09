@@ -96,6 +96,15 @@ spec:
   http:
     - match:
         - gateways:
+            - mesh
+          port: 80
+      route:
+        - destination:
+            host: istio-egressgateway.istio-egress.svc.cluster.local
+            port:
+              number: 80
+    - match:
+        - gateways:
             - curl-app-gateway
           port: 80
       route:
