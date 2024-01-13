@@ -19,4 +19,4 @@ metadata:
     env: prd
 spec:
   mtls:
-    mode: DISABLE
+    mode: STRICT
