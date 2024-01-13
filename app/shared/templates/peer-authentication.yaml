@@ -7,4 +7,4 @@ metadata:
     env: {{ .Values.global.env }}
 spec:
   mtls:
-    mode: DISABLE
+    mode: STRICT
