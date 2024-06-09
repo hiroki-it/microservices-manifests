@@ -69,18 +69,17 @@ repository/
 
 インフラ領域を構成する使用技術の一覧です。
 
-
-| 役割                | ツール             |      導入の状況       |
-|-------------------|-----------------|:----------------:|
-| 仮想化               | Containerd      |        ⭕         |
-| コンテナオーケストレーション    | Kubernetes      |        ⭕         |
-| マイクロサービス間通信の管理    | Istio           |        ⭕         |
-| プロキシコンテナ          | Envoy、Nginx     |        ⭕         |
-| テンプレート管理          | Helm            |        ⭕         |
-| SagaパターンのためのQueue | AWS SQS         |  coming soon...  |
-| API Gateway       | AWS API Gateway |  coming soon...  |
-| Kubernetesの開発環境   | Minikube        |        ⭕         |
-| Kubernetesの本番環境   | AWS EKS         |  coming soon...  |
+| 役割                  | ツール        |      導入の状況       |
+|---------------------|------------|:----------------:|
+| 仮想化                 | Containerd |        ⭕         |
+| コンテナオーケストレーション      | Kubernetes |        ⭕         |
+| マイクロサービス間通信の管理      | Istio      |        ⭕         |
+| プロキシコンテナ            | Envoy |        ⭕         |
+| テンプレート管理            | Helm       |        ⭕         |
+| Sagaサービスのメッセージブローカー | RabbitMQ   |  coming soon...  |
+| API Gateway         | Nginx      |  coming soon...  |
+| Kubernetesの開発環境     | Minikube   |        ⭕         |
+| Kubernetesの本番環境     | AWS EKS    |  coming soon...  |
 
 マイクロサービス間通信の管理方法は、リクエストリプライ方式に基づくサービスメッシュを実現するIstioを採用します。
 
