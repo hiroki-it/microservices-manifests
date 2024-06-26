@@ -1,5 +1,5 @@
-helmfile 0.160.0
+helmfile 0.166.0
 helm-docs 1.12.0
 istioctl 1.19.5
-kubectl 1.28.5
-minikube 1.32.0
+kubectl 1.30.2
+minikube 1.33.1
