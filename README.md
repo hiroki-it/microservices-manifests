@@ -209,10 +209,10 @@ node affinityのために、ワーカーNodeの```metadata.labels```キー配下
 
 ```bash
 # minikube-m01はコントロールプレーンNodeのため、ラベルを付与しない。
-$ kubectl label node minikube-m02 node.kubernetes.io/nodegroup=app \
-  && kubectl label node minikube-m03 node.kubernetes.io/nodegroup=deploy \
-  && kubectl label node minikube-m04 node.kubernetes.io/nodegroup=ingress \
-  && kubectl label node minikube-m05 node.kubernetes.io/nodegroup=system
+$ kubectl label node minikube-m02 node.kubernetes.io/nodegroup=app --overwrite \
+  && kubectl label node minikube-m03 node.kubernetes.io/nodegroup=deploy --overwrite \
+  && kubectl label node minikube-m04 node.kubernetes.io/nodegroup=ingress --overwrite \
+  && kubectl label node minikube-m05 node.kubernetes.io/nodegroup=system --overwrite
 ```
 
 #### ▼ ネットワークツールの導入
