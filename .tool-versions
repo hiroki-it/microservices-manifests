@@ -1,4 +1,4 @@
-helmfile 0.160.0
+helmfile 1.7.4
 helm-docs 1.12.0
 istioctl 1.19.5
 kubectl 1.28.5
