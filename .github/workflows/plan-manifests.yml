@@ -22,7 +22,7 @@ jobs:
       - name: Setup Helm
         uses: azure/setup-helm@v3
         with:
-          version: v3.10.1
+          version: v3.21.4
       # チャートの静的解析を実行します。
       - name: Helm lint
         run: |
