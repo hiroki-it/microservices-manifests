@@ -6,7 +6,7 @@ releases:
   - name: argocd
     namespace: argocd
     chart: argo-helm/argo-cd
-    version: 5.51.6
+    version: 5.55.0
     atomic: true
     values:
       - ../charts/argocd/values.yaml.gotmpl
